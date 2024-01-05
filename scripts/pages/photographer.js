@@ -1,4 +1,4 @@
-//Mettre le code JavaScript lié à la page photographer.html
+// This JavaScript code is linked to the photographer.html page
 
 const testPhotographer = document.querySelector("header");
 console.log(testPhotographer);
