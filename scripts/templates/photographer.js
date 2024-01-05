@@ -9,27 +9,32 @@ function photographerTemplate(data) {
         articlePhotographer.setAttribute("aria-label", name);
         
         // Création des éléments à inclure dans l'article
-        const portraitPhotographer = document.createElement("div");
-        portraitPhotographer.setAttribute("aria-label", `Lien vers la page de ${name}`);
+        const linkPhotographerPage = document.createElement("a");
+        linkPhotographerPage.setAttribute("href", "");
+        linkPhotographerPage.setAttribute("role", "button");
+        linkPhotographerPage.setAttribute("aria-label", `Lien vers la page de ${name}`);
 
+        const portraitPhotographer = document.createElement("div");
+        
         const imagePhotographer = document.createElement("img");
         imagePhotographer.setAttribute("src", picture);
-        imagePhotographer.setAttribute("alt", name);
+        imagePhotographer.setAttribute("alt", "");
 
         const namePhotographer = document.createElement("h2");
         namePhotographer.textContent = name;
 
-        const locationText = document.createElement("p");
+        const locationText = document.createElement("h3");
         locationText.textContent = `${city}, ${country}`;
 
-        const sloganText = document.createElement("p");
+        const sloganText = document.createElement("h4");
         sloganText.textContent = tagline;
 
         const priceText = document.createElement("p");
         priceText.textContent =  `${price}€/jour`;
 
         // Intégrer les éléments articles dans la div
-        articlePhotographer.appendChild(portraitPhotographer);
+        articlePhotographer.appendChild(linkPhotographerPage);
+        linkPhotographerPage.appendChild(portraitPhotographer);
         portraitPhotographer.appendChild(imagePhotographer);
         portraitPhotographer.appendChild(namePhotographer);
         articlePhotographer.appendChild(locationText);
