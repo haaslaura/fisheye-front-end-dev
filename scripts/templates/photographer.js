@@ -4,17 +4,17 @@ function photographerTemplate(data) {
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
-        // Création de l'élément article
+        // Creating the 'article' item
         const articlePhotographer = document.createElement('article');
-        articlePhotographer.setAttribute("aria-label", name);
         
-        // Création des éléments à inclure dans l'article
+        // Creating elements to include in 'article'
         const linkPhotographerPage = document.createElement("a");
         linkPhotographerPage.setAttribute("href", "");
         linkPhotographerPage.setAttribute("role", "button");
         linkPhotographerPage.setAttribute("aria-label", `Lien vers la page de ${name}`);
 
         const portraitPhotographer = document.createElement("div");
+        portraitPhotographer.setAttribute("aria-labelledby", "photographer-name");
         
         const imagePhotographer = document.createElement("img");
         imagePhotographer.setAttribute("src", picture);
@@ -22,6 +22,7 @@ function photographerTemplate(data) {
 
         const namePhotographer = document.createElement("h2");
         namePhotographer.textContent = name;
+        namePhotographer.setAttribute("id", "photographer-name")
 
         const locationText = document.createElement("h3");
         locationText.textContent = `${city}, ${country}`;
@@ -32,7 +33,7 @@ function photographerTemplate(data) {
         const priceText = document.createElement("p");
         priceText.textContent =  `${price}€/jour`;
 
-        // Intégrer les éléments articles dans la div
+        // Integrating elements
         articlePhotographer.appendChild(linkPhotographerPage);
         linkPhotographerPage.appendChild(portraitPhotographer);
         portraitPhotographer.appendChild(imagePhotographer);
