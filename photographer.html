@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -23,10 +23,10 @@
       </div>
 
       <!-- Contact modal -->
-      <div id="contact_modal">
+      <div id="contact_modal" role="contact" aria-describedby="modal-title">
         <div class="modal">
           <header>
-            <h2>Contactez-moi</h2>
+            <h2 id="modal-title">Contactez-moi</h2>
             <img src="assets/icons/close.svg" onclick="closeModal()" />
           </header>
           <form>
@@ -40,23 +40,24 @@
       </div>
 
       <!-- Filter menu -->
-      <section class="filtres">
+      <section class="filtres" role="search"> <!-- ajouter aria-haspopup et aria-expanded + aria-controls ? -->>
         <h3>Trier par</h3>
-        <button class="btn-trier">Popularité</button>
+        <button class="btn filter-popularity">Popularité</button>
         <br>
-        <button class="btn-filtrer">Date</button>
+        <button class="btn filter-date">Date</button>
         <br>
-        <button class="btn-filtrer">Titre</button>
+        <button class="btn filter-title">Titre</button>
       </section>
 
       <!-- Pictures -->
-      <section class="fiches">
+      <section class="pictures">
       </section>
 
     </main>
 
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/filterButtons.js"></script>
 
   </body>
 </html>
