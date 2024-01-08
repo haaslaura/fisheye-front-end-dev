@@ -13,20 +13,20 @@
             }
 
             // Retrieving JSON data from the response
-            let photographers = await response.json();
+            let data = await response.json();
+            let photographersArray = data.photographers;
+            return photographersArray;
             
-            return photographers; // Return the photographers array
-        
         } catch (error) {
             console.error('Erreur :', error); // Seeing what type of error
         }
     }
         
-    async function displayData(photographers) {
-        // Récupération de la div des photographes
+    async function displayData(photographersArray) {
+        // Recovery of the photographers' divide
         const photographersSection = document.querySelector(".photographer_section");
 
-        photographers.forEach((photographer) => {
+        photographersArray.forEach((photographer) => {
             const photographerModel = photographerTemplate(photographer);
             const userCardDOM = photographerModel.getUserCardDOM();
             photographersSection.appendChild(userCardDOM);
@@ -34,9 +34,9 @@
     }
 
     async function init() {
-        // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
-        displayData(photographers);
+        // Recovers data from photographers
+        const photographersArray = await getPhotographers();
+        displayData(photographersArray);
     }
     
     init();

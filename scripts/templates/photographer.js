@@ -1,5 +1,5 @@
-function photographerTemplate(data) {
-    const { name, id, portrait, city, country, tagline, price } = data;
+function photographerTemplate(photographersData) {
+    const { name, id, portrait, city, country, tagline, price } = photographersData;
 
     const picture = `assets/photographers/${portrait}`;
 
@@ -14,7 +14,6 @@ function photographerTemplate(data) {
         linkPhotographerPage.setAttribute("aria-label", `Lien vers la page de ${name}`);
 
         const portraitPhotographer = document.createElement("div");
-        portraitPhotographer.setAttribute("aria-labelledby", "photographer-name");
         
         const imagePhotographer = document.createElement("img");
         imagePhotographer.setAttribute("src", picture);
@@ -22,7 +21,6 @@ function photographerTemplate(data) {
 
         const namePhotographer = document.createElement("h2");
         namePhotographer.textContent = name;
-        namePhotographer.setAttribute("id", "photographer-name")
 
         const locationText = document.createElement("h3");
         locationText.textContent = `${city}, ${country}`;
@@ -31,7 +29,7 @@ function photographerTemplate(data) {
         sloganText.textContent = tagline;
 
         const priceText = document.createElement("p");
-        priceText.textContent =  `${price}€/jour`;
+        priceText.textContent = `${price}€/jour`;
 
         // Integrating elements
         articlePhotographer.appendChild(linkPhotographerPage);
