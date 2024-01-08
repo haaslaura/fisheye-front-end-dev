@@ -1,5 +1,5 @@
 function photographerTemplate(data) {
-    const { name, portrait, city, country, tagline, price } = data;
+    const { name, id, portrait, city, country, tagline, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
@@ -9,7 +9,7 @@ function photographerTemplate(data) {
         
         // Creating elements to include in 'article'
         const linkPhotographerPage = document.createElement("a");
-        linkPhotographerPage.setAttribute("href", "");
+        linkPhotographerPage.setAttribute("href", `/photographer.html?id=${id}`);
         linkPhotographerPage.setAttribute("role", "button");
         linkPhotographerPage.setAttribute("aria-label", `Lien vers la page de ${name}`);
 
@@ -46,7 +46,3 @@ function photographerTemplate(data) {
     }
     return { name, picture, getUserCardDOM }
 }
-
-// A PENSER
-/* fournir une valeur par défaut avec l'opérateur nullish
-si jamais une donnée est vide */
