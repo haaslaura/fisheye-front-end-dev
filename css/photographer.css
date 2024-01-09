@@ -2,12 +2,25 @@
 
 #contact_modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 2vh;
+    width: 100%;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-grey);
     height: 300px;
     margin: 0 100px;
+}
+
+.photograph-header-coll {
+ /* peut-être pas utile ?*/
 }
 
 .btn {
@@ -18,8 +31,13 @@
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: var(--color-main);
     cursor: pointer;
+}
+
+.btn:hover, .btn:focus {
+    background-color: #DB8876;
+    color: black;
 }
 
 .contact_button {
@@ -30,21 +48,21 @@
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: var(--color-main);
     border-radius: 5px;
     cursor: pointer;
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 64%;
 }
 
 .modal header {
@@ -57,9 +75,9 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: normal;
-    text-align: center;
+    text-align: left;
 }
 
 form {
@@ -69,22 +87,51 @@ form {
     align-items: flex-start;
 }
 
-form label {
-    color: #312E2E;
-    font-size: 36px;
-}
-
-form div {
+fieldset {
     display: flex;
     flex-direction: column;
+    padding: 0;
+    margin: 0;
     width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+    border-width: 0;
+}
+
+legend {
+    opacity: 0;
+}
+
+form label {
+    color: #000;
+    font-size: 2rem;
 }
 
 form input {
     width: 100%;
-    height: 68px;
+    padding: 0;
+    height: 58px;
     border: none;
     border-radius: 5px;
 }
+
+form textarea {
+    resize: none;
+    border: none;
+    height: 150px;
+    border-radius: 5px;
+}
+
+form input:focus, form textarea:focus {
+    outline: 4px var(--color-main) solid;
+    border-radius: 5px;
+}
+
+form .contact_button {
+    margin-top: 20px;
+}
+
+form .contact_button:focus {
+    outline: 4px #000 solid
+}
+
+/* attention à contact_button :
+dans le formulaire ce n'est pas le même */ 

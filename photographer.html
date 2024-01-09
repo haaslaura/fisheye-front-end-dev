@@ -18,24 +18,63 @@
     <main id="main" role="main" >
 
       <!-- Photographer's identity -->
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+      <section class="photograph-header">
+        <div class="photograph-header-coll"></div>
+        <div class="photograph-header-coll">
+          <button class="btn contact_button" onclick="displayModal()">Contactez-moi</button>
+        </div>
+        <div class="photograph-header-coll"></div>
+      </section>
 
       <!-- Contact modal -->
-      <div id="contact_modal" role="contact" aria-describedby="modal-title">
+      <div id="contact_modal" role="contact" aria-labelledby="modal-title">
         <div class="modal">
           <header>
             <h2 id="modal-title">Contactez-moi</h2>
             <img src="assets/icons/close.svg" onclick="closeModal()" />
           </header>
-          <form>
-            <div>
-              <label>Prénom</label>
-              <input />
-            </div>
-            <button class="contact_button">Envoyer</button>
+
+          <form action="" method="get">
+            <fieldset>
+              <legend>Vos coordonnées</legend>
+
+                <label id="???" for="firstname">Prénom</label>
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  aria-labelledby="???"
+                  required
+                  aria-required="true">
+
+                <label id="????" for="name">Nom</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  aria-labelledby="????"
+                  required
+                  aria-required="true">
+
+                <label id="?????" for="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  aria-labelledby="????"
+                  required
+                  aria-required="true">
+            </fieldset>
+            
+            <fieldset>
+              <legend>Votre message</legend>
+              <label for="message">Votre message</label>
+              <textarea id="message" name="message"></textarea>
+            </fieldset>
+              
+            <button type="submit" class="contact_button">Envoyer</button>
           </form>
+
         </div>
       </div>
 
