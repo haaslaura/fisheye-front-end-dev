@@ -72,25 +72,44 @@
               <textarea id="message" name="message"></textarea>
             </fieldset>
               
-            <button type="submit" class="contact_button">Envoyer</button>
+            <button type="submit" class="btn contact_button">Envoyer</button>
           </form>
 
         </div>
       </div>
 
       <!-- Filter menu -->
-      <section class="filtres" role="search"> <!-- ajouter aria-haspopup et aria-expanded + aria-controls ? -->>
-        <h3>Trier par</h3>
-        <button class="btn filter-popularity">Popularité</button>
-        <br>
-        <button class="btn filter-date">Date</button>
-        <br>
-        <button class="btn filter-title">Titre</button>
+      <section class="pictures">
+        
+        <div class="dropdown" role="filter" aria-label="filter">
+          <h3 id="title3">Trier par</h3>
+          <!-- TEST1 -->
+          <div class="dropdown">
+            <button class="dropbtn">Popularité</button>
+            <ul class="btn dropdown-content">
+              <li role="separator" class="dropdown-divider"></li>
+              <li><a href="#">Date</a></li>
+              <li role="separator" class="dropdown-divider"></li>
+              <li><a href="#">Titre</a></li>
+            </ul>
+          </div>
+        </div>
+
+          <!-- TEST2 -->
+          <ul aria-labelledby="title3"><!-- ajouter aria-haspopup et aria-expanded + aria-controls ? -->
+            <li class="btn" id="filter-popularity">Popularité ^</li>
+            <li class="btn" id="filter-date">Date</li>
+            <li class="btn" id="filter-title">Titre</li>
+          </ul>
+        </div>
+
+        <!-- Pictures -->
+        <div class="pictures">
+        </div>
+
       </section>
 
-      <!-- Pictures -->
-      <section class="pictures">
-      </section>
+
 
     </main>
 
