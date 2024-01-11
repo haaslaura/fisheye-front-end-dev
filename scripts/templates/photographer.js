@@ -29,7 +29,7 @@ function photographerTemplate(photographersData) {
         sloganText.textContent = tagline;
 
         const priceText = document.createElement("p");
-        priceText.textContent = `${price}€/jour`;
+        priceText.textContent = `${price}€/jour` ?? "Aucune information pour le moment";
 
         // Integrating elements
         articlePhotographer.appendChild(linkPhotographerPage);
