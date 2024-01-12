@@ -14,10 +14,6 @@
     margin: 0 100px;
 }
 
-.photograph-header-coll {
- /* peut-être pas utile ?*/
-}
-
 .btn {
     font-weight: bold;
     color: white;
@@ -49,13 +45,15 @@
     position: fixed;
     z-index: 1;
     left: 0;
-    top: 2vh;
+    top: 0;
     width: 100%;
+    height: 100%;
+    background-color: rgba(196, 196, 196, 0.4);
 }
 
-
-
 .modal {
+    position: relative;
+    top: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,6 +63,7 @@
     border-radius: 5px;
     background-color: #DB8876;
     width: 64%;
+
 }
 
 .modal header {
@@ -77,7 +76,7 @@
 }
 
 .modal header h2 {
-    font-size: 4rem;
+    font-size: 3.6rem;
     font-weight: normal;
     text-align: left;
 }
@@ -104,13 +103,13 @@ legend {
 
 form label {
     color: #000;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 form input {
     width: 100%;
     padding: 0;
-    height: 58px;
+    height: 50px;
     border: none;
     border-radius: 5px;
 }
@@ -118,7 +117,7 @@ form input {
 form textarea {
     resize: none;
     border: none;
-    height: 150px;
+    height: 120px;
     border-radius: 5px;
 }
 
@@ -143,91 +142,110 @@ form .contact_button:focus {
 }
 
 
+/* In case of error **/
+form input[data-error] {
+    outline: 2px solid black;
+    position: relative;
+}
+
+form input[data-error]::after {
+    content: attr(data-error);
+    font-size: 0.63em;
+    color: black;
+    display: block;
+    margin-top: 7px;
+    text-align: left;
+    line-height: 0.8;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+  }
+/* ATTENTION NE FONCTIONNE PAS */
+
 /**********************/
 /* FILTERS & PICTURES */
 /**********************/
 
 .pictures {
-    margin: 0px 100px 0px 100px;
+    margin: 20px 100px 0px 100px;
 }
 
-.pictures h3 {
-    font-size: 1.13rem;
-    margin-right: 25px;
-}
-
-.pictures .dropdown {
+.menu-dropdown {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    
-    border: 1px red solid;
 }
 
-.pictures ul {
-    font-size: 1.12rem;
-    list-style-type: none;
-    padding: 0;
-
-    border-radius: 5px;
-    /*
-    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.2.5);
-    animation: shadowOpacity 0.3s ease;
-    */
+#title3 {
+    font-size: 1.13rem;
+    margin-right: 25px;
 }
 
-#filter-popularity, #filter-date {
-    border-bottom: 1px white solid;
-}
-
-/**** TEST1 ****/
-.dropdown {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Style de base pour le bouton fermé */
 .dropbtn {
-    background-color: #901C1C;
+    border-radius: 5px 5px 0 0;
+}
+
+button#dropdown-menu1.btn.dropbtn {
+    font-family: "DM Sans", sans-serif;
+    font-size: 1.13rem;
+}
+
+.dropbtn-content { /*ul list*/
+    list-style-type: none;
+    margin: 0;
+    font-size: 1.13rem;
+    padding: 0;
+    font-weight: bold;
     color: white;
-    padding: 10px;
-    border: 5px solid #901C1C; /* Ajout d'un border */
-    cursor: pointer;
-  }
-  
-  /* Style des boutons Date et Titre lorsqu'ils sont déroulés */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #D3573C;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  }
-  
-  /* Afficher les boutons Date et Titre lors du survol ou du focus */
-  .dropdown:hover .dropdown-content,
-  .dropdown:focus .dropdown-content {
-    display: block;
-  }
-  
-  /* Style des éléments de la liste */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
+    background-color: var(--color-main);
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+}
+
+
+
+.drop-divider {
+    border-bottom: 1px white solid;
+    margin: 0 11px;
+}
+
+.dropbtn-content li {
+    list-style-type: none;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.dropbtn-content li a {
     text-decoration: none;
-    display: block;
-  }
-  
-  /* Changer la couleur du texte lorsque survolé ou focus sur les boutons Date et Titre */
-  .dropdown-content a:hover,
-  .dropdown-content a:focus {
-    background-color: #f9f9f9;
+    color: white;
+    margin: 0 11px; 
+}
+
+.dropbtn-content li:hover a {
     color: black;
-  }
-  
-  /* Afficher les boutons l'un en dessous de l'autre */
-  .dropdown-content a {
-    display: block;
-  }
-  
+}
+
+#dropdown-menu2 {
+    padding: 11px 0px 11px 0px;
+}
+
+#dropdown-menu2:hover {
+    padding: 11px 0px 11px 0px;
+    background-color: #DB8876;
+    cursor: pointer;
+}
+
+#dropdown-menu3 {
+    padding: 11px 0px 11px 0px;
+}
+
+#dropdown-menu3:hover {
+    padding: 11px 0px 11px 0px;
+    border-radius: 0 0 5px 5px;
+    background-color: #DB8876;
+    cursor: pointer;
+}
