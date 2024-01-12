@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3d631d5da7.js" crossorigin="anonymous"></script>
     <title>Fisheye</title>
   </head>
 
@@ -31,38 +32,38 @@
         <div class="modal">
           <header>
             <h2 id="modal-title">Contactez-moi</h2>
-            <img src="assets/icons/close.svg" onclick="closeModal()" />
+            <img class="closeBtn" src="assets/icons/close.svg" onclick="closeModal()" />
           </header>
 
           <form action="" method="get">
             <fieldset>
               <legend>Vos coordonnées</legend>
 
-                <label id="???" for="firstname">Prénom</label>
+                <label id="labelFirstname" for="firstname">Prénom</label>
                 <input
                   type="text"
                   name="firstname"
                   id="firstname"
-                  aria-labelledby="???"
-                  required
+                  aria-labelledby="labelFirstname"
+
                   aria-required="true">
 
-                <label id="????" for="name">Nom</label>
+                <label id="labelLastname" for="lastname">Nom</label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
-                  aria-labelledby="????"
-                  required
+                  name="lastname"
+                  id="lastname"
+                  aria-labelledby="labelLastname"
+                  
                   aria-required="true">
 
-                <label id="?????" for="email">Email</label>
+                <label id="labelEmail" for="email">Email</label>
                 <input
                   type="email"
                   name="email"
                   id="email"
-                  aria-labelledby="????"
-                  required
+                  aria-labelledby="labelEmail"
+                  
                   aria-required="true">
             </fieldset>
             
@@ -79,28 +80,32 @@
       </div>
 
       <!-- Filter menu -->
-      <section class="pictures">
+      <section class="pictures" aria-label="photographerspictures">
         
-        <div class="dropdown" role="filter" aria-label="filter">
+        <div class="menu-dropdown" role="filter" aria-label="dropdown-menu">
           <h3 id="title3">Trier par</h3>
-          <!-- TEST1 -->
+
+          <!-- Dropdown menu -->
           <div class="dropdown">
-            <button class="dropbtn">Popularité</button>
-            <ul class="btn dropdown-content">
-              <li role="separator" class="dropdown-divider"></li>
-              <li><a href="#">Date</a></li>
-              <li role="separator" class="dropdown-divider"></li>
-              <li><a href="#">Titre</a></li>
+
+            <button class="btn dropbtn" type="button" id="dropdown-menu1">
+              Popularité <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <ul class="dropbtn-content">
+
+              <li role="separator" class="drop-divider"></li>
+
+              <li id="dropdown-menu2">
+                <a href="#">Date</a> 
+              </li>
+
+              <li role="separator" class="drop-divider"></li>
+
+              <li id="dropdown-menu3">
+                <a href="#">Titre</a>
+              </li>
             </ul>
           </div>
-        </div>
-
-          <!-- TEST2 -->
-          <ul aria-labelledby="title3"><!-- ajouter aria-haspopup et aria-expanded + aria-controls ? -->
-            <li class="btn" id="filter-popularity">Popularité ^</li>
-            <li class="btn" id="filter-date">Date</li>
-            <li class="btn" id="filter-title">Titre</li>
-          </ul>
         </div>
 
         <!-- Pictures -->
@@ -108,8 +113,6 @@
         </div>
 
       </section>
-
-
 
     </main>
 

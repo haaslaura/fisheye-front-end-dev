@@ -1,3 +1,10 @@
+/*******************************************************
+
+This file contains the functions for the filters buttons
+
+*******************************************************/
+
+
 // 1 - Récupérer les éléments depuis le fichier Json
 
 // 2 - Préparer une boucle for pour générer toutes les images
@@ -14,7 +21,7 @@ const dateBtn = document.querySelector(".filter-date");
 const titleBtn = document.querySelector(".filter-title");
 
 // pour pouvoir utiliser la fonction dans photographer.js, j'utilise 'export'
-export function filter() {
+function filter() {
 
     popularityBtn.addEventListener("click", function () {
         const arrayOrdonne = Array.from(data.media); // (sortir ce bloc) copie du tableau pour conserver inchangé l'original
