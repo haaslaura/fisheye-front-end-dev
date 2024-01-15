@@ -7,7 +7,8 @@ This file contains the functions for the modal
 // Global variable
 const modal = document.getElementById("contact_modal");
 const form = document.querySelector("form");
-console.log(form);
+const formData = document.querySelectorAll("form input");
+const messageArea = document.querySelector("textarea");
 
 // Regular expression to check the email
 let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i");
@@ -68,57 +69,64 @@ document.addEventListener('keydown', handleKeyDown);
 /*********************/
 
 // Function to display error message
-function displayErrorMessages(test) {
+function displayErrorMessages() {
 
-    const formData = document.querySelectorAll("form input");
+    // Function to add error message
+    function addErrorMessage(input, errorMessage) {
+        input.classList.add("data-error");
 
-    for (i = 0; i < formData.length; i++) {
+        const messageError = document.createElement("p");
+        messageError.classList.add("data-tag");
+        messageError.setAttribute("aria-live", "assertive");
+        messageError.textContent = errorMessage;
 
-        let idInput = formData[i].id;
-        let valueInput = formData[i].value.trim();
+        input.parentNode.insertBefore(messageError, input.nextSibling);
+    }
+
+    // Fonction pour remove error message
+    function removeErrorMessages() {
+        const errorElements = document.querySelectorAll(".data-tag");
+        errorElements.forEach((error) => error.remove());
+
+        const inputs = document.querySelectorAll(".data-error");
+        inputs.forEach((input) => input.classList.remove("data-error"));
+    }
+
+    removeErrorMessages();
+
+    // Browse input fields
+    formData.forEach((input) => {
+        let idInput = input.id;
+        let valueInput = input.value.trim();
 
         switch (idInput) {
             case 'firstname':
-                if (!valueInput){
-                    formData[i].setAttribute("data-error", "Merci de remplir votre prénom.");
-                }else if (valueInput.length < 2){
-                    formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
-                } else {
-                    formData[i].removeAttribute("data-error");
-                }
-                break;
-            
             case 'lastname':
-                if (!valueInput){
-                    formData[i].setAttribute("data-error", "Merci de remplir votre nom.");
-                }else if (valueInput.length < 2){
-                    formData[i].setAttribute("data-error", "Veuillez entrer 2 caractères ou plus.");
-                } else {
-                    formData[i].removeAttribute("data-error");
+                if (!valueInput) {
+                    addErrorMessage(input, `Merci de remplir votre ${idInput === 'firstname' ? 'prénom' : 'nom'}.`);
                 }
                 break;
-            
-            case 'email':
-                if (!valueInput){
-                    formData[i].setAttribute("data-error", "Merci de remplir votre email.");
-                } else if (!regexMail.test(valueInput)) {
-                    formData[i].setAttribute("data-error", "Merci de nous indiquer un email valide.");
-                } else {
-                    formData[i].removeAttribute("data-error");
-                }
-                break;
-        }
-    }
-    
-    const messageArea = document.querySelector("textarea");
-    console.log(messageArea);
-    let valueMessage = messageArea.value.trim();
-    if (!valueMessage){
-        messageArea.setAttribute("data-error", "Votre message est vide.");
-    } else {
-        messageArea.removeAttribute("data-error");
-    }
 
+            case 'email':
+                if (!valueInput) {
+                    addErrorMessage(input, "Merci de remplir votre email.");
+                } else if (!regexMail.test(valueInput)) {
+                    addErrorMessage(input, "Merci de remplir un email correct.");
+                }
+                break;
+
+            default:
+                alert("Il y a une erreur dans le formulaire.");
+                console.log("Un champ du formulaire n'est peut-être pas pris en compte.");
+        }
+    });
+
+    // Check the text field
+    let valueMessage = messageArea.value.trim();
+
+    if (!valueMessage) {
+        addErrorMessage(messageArea, "Votre message est vide.");
+    }
 }
 
 
@@ -129,9 +137,10 @@ function displayErrorMessages(test) {
 form.addEventListener("submit", (event) => { 
     event.preventDefault();
     displayErrorMessages();
+    
+    formData.forEach(input => { 
+        console.log(input.value.trim());
+    });
 
+    console.log(messageArea.value.trim());
 });
-
-/*Plus tard, le bouton de contact enverra un message au
-photographe. Pour l'instant, seulement afficher le contenu des
-trois champs dans les logs de la console.*/

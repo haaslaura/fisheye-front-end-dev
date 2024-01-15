@@ -76,7 +76,7 @@
 }
 
 .modal header h2 {
-    font-size: 3.6rem;
+    font-size: 260%;
     font-weight: normal;
     text-align: left;
 }
@@ -103,21 +103,22 @@ legend {
 
 form label {
     color: #000;
-    font-size: 1.8rem;
+    font-size: 160%;
 }
 
 form input {
-    width: 100%;
-    padding: 0;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
+    height: 40px; 
 }
 
 form textarea {
     resize: none;
+    height: 100px;
+}
+
+form input, form textarea {
     border: none;
-    height: 120px;
+    width: 100%;
+    padding: 0;
     border-radius: 5px;
 }
 
@@ -128,7 +129,7 @@ form input:focus, form textarea:focus {
 
 form .contact_button {
     margin-top: 20px;
-    font-size: 1.25rem;
+    font-size: 100%;
 }
 
 form .contact_button:hover {
@@ -142,26 +143,30 @@ form .contact_button:focus {
 }
 
 
-/* In case of error **/
-form input[data-error] {
+/*** In case of error ***/
+.data-error {
+    outline: 2px solid black;
+
+}
+.data-tag {
+    font-size: 90%;
+    color: black;
+    margin: 10px 0 16px 0;
+    animation : message-appears 0.3s ease;
+}
+.data-tag::before {
+    content: url(../assets/icons/circle-exclamation-solid.svg);
+}
+p.data-tag::before {
+    margin-right: 5px;
+}
+
+
+form textarea[data-error] {
     outline: 2px solid black;
     position: relative;
 }
 
-form input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.63em;
-    color: black;
-    display: block;
-    margin-top: 7px;
-    text-align: left;
-    line-height: 0.8;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-  }
-/* ATTENTION NE FONCTIONNE PAS */
 
 /**********************/
 /* FILTERS & PICTURES */
@@ -203,8 +208,6 @@ button#dropdown-menu1.btn.dropbtn {
     border-radius: 0 0 5px 5px;
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
 }
-
-
 
 .drop-divider {
     border-bottom: 1px white solid;
@@ -248,4 +251,17 @@ button#dropdown-menu1.btn.dropbtn {
     border-radius: 0 0 5px 5px;
     background-color: #DB8876;
     cursor: pointer;
+}
+
+
+/*********************/
+/***** ANIMATIONS ****/
+/*********************/
+@keyframes message-appears {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
