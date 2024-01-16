@@ -7,11 +7,27 @@
 .photograph-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--color-grey);
     height: 300px;
     margin: 0 100px;
+
+    border: solid 1px red;
+}
+
+#photograph-header-coll1 {
+    border: solid 1px green;
+}
+
+#photograph-header-coll2 {
+    display: flex;
+    justify-content: center;
+    border: solid 1px green;
+}
+
+#photograph-header-coll3 {
+    border: solid 1px green;
 }
 
 .btn {
@@ -99,6 +115,7 @@ fieldset {
 
 legend {
     opacity: 0;
+    font-size: 1%;
 }
 
 form label {
@@ -159,12 +176,6 @@ form .contact_button:focus {
 }
 p.data-tag::before {
     margin-right: 5px;
-}
-
-
-form textarea[data-error] {
-    outline: 2px solid black;
-    position: relative;
 }
 
 
