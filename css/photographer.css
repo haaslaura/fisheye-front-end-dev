@@ -16,17 +16,17 @@
     border: solid 1px red;
 }
 
-#photograph-header-coll1 {
+#photograph-header-col1 {
     border: solid 1px green;
 }
 
-#photograph-header-coll2 {
+#photograph-header-col2 {
     display: flex;
     justify-content: center;
     border: solid 1px green;
 }
 
-#photograph-header-coll3 {
+#photograph-header-col3 {
     border: solid 1px green;
 }
 

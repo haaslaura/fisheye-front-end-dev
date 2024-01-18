@@ -36,20 +36,20 @@ h1,
 
 .photographer_section article h3 {
     color: var(--color-main);
-    font-size: 0.81rem;
+    font-size: 1.1rem;
     line-height: 1.06rem;
 }
 
 .photographer_section article h4 {
     color: #000;
-    font-size: 0.63rem;
-    line-height: 0.81rem;
+    font-size: 0.85rem;
+    line-height: 1rem;
 }
 
 .photographer_section article p {
     color: #757575;
-    font-size: 0.56rem;
-    line-height: 0.73rem;
+    font-size: 0.8rem;
+    line-height: 0.9rem;
 }
 
 .photographer_section article h3,
