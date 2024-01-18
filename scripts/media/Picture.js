@@ -1,9 +1,9 @@
-import { Media } from './Media.js'
+/*import { Media } from "./Media.js";*/
 
 export class Picture extends Media {
-    constructor (data) {
-        super(data)
+	constructor (data) {
+		super(data);
 
-        this.image = data.image
-    }
+		this.image = data.image;
+	}
 }

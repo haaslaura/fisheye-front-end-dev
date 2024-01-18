@@ -7,27 +7,62 @@
 .photograph-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    justify-content: space-between;
     align-items: center;
+    align-content: center;
+    border-radius: 5px;
     background-color: var(--color-grey);
     height: 300px;
-    margin: 0 100px;
-
-    border: solid 1px red;
+    margin: 20px 0;
 }
 
 #photograph-header-col1 {
-    border: solid 1px green;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 10%;
+}
+
+#photograph-header-col1 h2 {
+    font-size: 3.6rem;
+    font-weight: 400;
+    color: var(--color-second);
+    line-height: 5rem;
+    margin: 10px 0
+}
+
+#photograph-header-col1 h3 {
+    font-weight: 400;
+    color: var(--color-main);
+    font-size: 1.5rem;
+    line-height: 1.95rem;
+    margin: 10px 0
+}
+
+#photograph-header-col1 h4 {
+    font-weight: 400;
+    color: var(--color-dark-grey);
+    font-size: 1.25rem;
+    line-height: 1.4rem;
+    margin: 10px 0;
 }
 
 #photograph-header-col2 {
     display: flex;
     justify-content: center;
-    border: solid 1px green;
 }
 
 #photograph-header-col3 {
-    border: solid 1px green;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10%;
+}
+
+#photograph-header-col3 img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
 }
 
 .btn {
@@ -78,8 +113,8 @@
     margin: auto;
     border-radius: 5px;
     background-color: #DB8876;
-    width: 64%;
-
+    width: 60%;
+    
 }
 
 .modal header {
@@ -163,7 +198,7 @@ form .contact_button:focus {
 /*** In case of error ***/
 .data-error {
     outline: 2px solid black;
-
+    
 }
 .data-tag {
     font-size: 90%;
@@ -192,6 +227,7 @@ p.data-tag::before {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    align-items: center;
 }
 
 #title3 {
@@ -200,6 +236,10 @@ p.data-tag::before {
 }
 
 .dropbtn {
+    border-radius: 5px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
     border-radius: 5px 5px 0 0;
 }
 
@@ -208,17 +248,36 @@ button#dropdown-menu1.btn.dropbtn {
     font-size: 1.13rem;
 }
 
-.dropbtn-content { /*ul list*/
-    list-style-type: none;
+.dropdown {
+    position: relative;
+}
+
+.dropbtn-content { /*ul list*/ /* element à cacher puis afficher*/
+    display: none;
+}
+
+.dropdown:hover > .dropbtn-content,
+.dropdown:focus > .dropbtn-content {
+    display: block;
+    z-index: 2;
+    position: absolute;
+    top: 46px;
+
+    background-color: var(--color-main);
+    width: 100%;
+    border-radius: 0 0 5px 5px;
     margin: 0;
-    font-size: 1.13rem;
     padding: 0;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    
+    list-style-type: none;
+    font-size: 1.13rem;
     font-weight: bold;
     color: white;
-    background-color: var(--color-main);
-    border-radius: 0 0 5px 5px;
-    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
 }
+
+/* Lorsque le contenu est hover ou focus,
+il faut que btn change de radius */
 
 .drop-divider {
     border-bottom: 1px white solid;
@@ -239,7 +298,8 @@ button#dropdown-menu1.btn.dropbtn {
     margin: 0 11px; 
 }
 
-.dropbtn-content li:hover a {
+.dropbtn-content li:hover a,
+.dropbtn-content li:focus a {
     color: black;
 }
 
@@ -247,21 +307,54 @@ button#dropdown-menu1.btn.dropbtn {
     padding: 11px 0px 11px 0px;
 }
 
-#dropdown-menu2:hover {
-    padding: 11px 0px 11px 0px;
+/* Pour le focus, ça ne fonctionne pas,
+ajouter une classe avec JS ?
+*/
+
+#dropdown-menu2:hover,
+#dropdown-menu2:focus {
+    /*padding: 11px 0px 11px 0px;*/
     background-color: #DB8876;
     cursor: pointer;
 }
 
 #dropdown-menu3 {
     padding: 11px 0px 11px 0px;
+    border-radius: 0 0 5px 5px;
 }
 
-#dropdown-menu3:hover {
-    padding: 11px 0px 11px 0px;
-    border-radius: 0 0 5px 5px;
+#dropdown-menu3:hover,
+#dropdown-menu3:focus {
+    /*padding: 11px 0px 11px 0px;*/
+    
     background-color: #DB8876;
     cursor: pointer;
+}
+
+
+/*********************/
+/*** PRICE INSERT ****/
+/*********************/
+
+#photographer-price {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right:8%;
+    z-index: 2;
+    padding: 20px 25px 15px 25px;
+    border-radius: 5px 5px 0 0;
+    background-color: #DB8876;
+}
+
+#photographer-price p {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 500;
 }
 
 

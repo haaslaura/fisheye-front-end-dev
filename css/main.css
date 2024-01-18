@@ -18,11 +18,11 @@
 /*********************/
 body {
     font-family: "DM Sans", sans-serif;
-    margin: 0;
-}
-
-main {
-    padding-bottom: 60px;
+    max-width: 1240px;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 60px;
 }
 
 header {
@@ -31,9 +31,10 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 90px;
+    margin-bottom: 0;
+    
 }
 
 .logo {
     height: 50px;
-    margin-left: 100px;
 }

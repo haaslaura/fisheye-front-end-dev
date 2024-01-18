@@ -1,6 +1,6 @@
 # Code en cours pour le projet P6 - Parcours Front-end
 
-## Démarrer le projet
+## Thématiques
 
-Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
+Accessibilité, gestion des données Json et design patterns en JavaScript
 
