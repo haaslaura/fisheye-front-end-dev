@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3d631d5da7.js" crossorigin="anonymous"></script>
     <title>Fisheye</title>
+    <script type="module" src="/scripts/pages/photographer.js"></script>
   </head>
 
   <body>
@@ -20,11 +21,11 @@
 
       <!-- Photographer's identity -->
       <section class="photograph-header">
-        <div id="photograph-header-coll1">Test</div>
-        <div id="photograph-header-coll2">
+        <div id="photograph-header-col1"></div>
+        <div id="photograph-header-col2">
           <button class="btn contact_button" onclick="displayModal()">Contactez-moi</button>
         </div>
-        <div id="photograph-header-coll3">Test</div>
+        <div id="photograph-header-col3"></div>
       </section>
 
       <!-- Contact modal -->
@@ -88,7 +89,7 @@
           <!-- Dropdown menu -->
           <div class="dropdown">
 
-            <button class="btn dropbtn" type="button" id="dropdown-menu1" oneclick="">
+            <button class="btn dropbtn" type="button" id="dropdown-menu1">
               Popularité <i class="fa-solid fa-chevron-down"></i>
             </button>
             <ul class="dropbtn-content">
@@ -116,7 +117,7 @@
 
     </main>
 
-    <script src="/scripts/pages/photographer.js"></script>
+    <!-- Utils -->
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/utils/filterButtons.js"></script>
 
