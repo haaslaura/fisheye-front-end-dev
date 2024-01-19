@@ -1,5 +1,5 @@
-@import url("index.css");
-@import url("photographer.css");
+@import url("../pages/index.css");
+@import url("../pages/photographer.css");
 
 /*********************/
 /***** VARIABLES *****/
@@ -38,3 +38,9 @@ header {
 .logo {
     height: 50px;
 }
+
+/*
+main {
+    position: relative;
+}
+*/

@@ -1,0 +1,47 @@
+/* CSS for displaying media and the lightbox */
+
+.media-section__media-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 2%;
+    column-gap: 10%;
+    margin-top: 20px;
+    
+    border: 1px salmon solid;
+}
+
+.media-section__media-card article {
+    border: 1px green solid;
+}
+
+.media-section__media-card article a {
+    cursor: pointer;
+    
+}
+
+.media-section__media-card img {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    display: block;
+    object-fit: cover;
+}
+
+.info-media {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    
+    color: var(--color-main);
+    font-size: 1.4rem;
+}
+
+.info-media h5 {
+    font-weight: 400;
+}
+
+.info-media p {
+    font-weight: 500;
+}

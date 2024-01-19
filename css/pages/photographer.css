@@ -1,5 +1,8 @@
 /* CSS for the page photographer.html */
 
+@import url("../components/media.css");
+@import url("../components/modal.css");
+
 /*********************/
 /****** HEADER *******/
 /*********************/
@@ -87,139 +90,12 @@
 }
 
 
-/*********************/
-/******* MODAL *******/
-/*********************/
-
-#contact_modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(196, 196, 196, 0.4);
-}
-
-.modal {
-    position: relative;
-    top: 2vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 60%;
-    
-}
-
-.modal header {
-    justify-content: space-between;
-    width: 100%;
-}
-
-.modal header img {
-    cursor: pointer;
-}
-
-.modal header h2 {
-    font-size: 260%;
-    font-weight: normal;
-    text-align: left;
-}
-
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-fieldset {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    border-width: 0;
-}
-
-legend {
-    opacity: 0;
-    font-size: 1%;
-}
-
-form label {
-    color: #000;
-    font-size: 160%;
-}
-
-form input {
-    height: 40px; 
-}
-
-form textarea {
-    resize: none;
-    height: 100px;
-}
-
-form input, form textarea {
-    border: none;
-    width: 100%;
-    padding: 0;
-    border-radius: 5px;
-}
-
-form input:focus, form textarea:focus {
-    outline: 4px var(--color-main) solid;
-    border-radius: 5px;
-}
-
-form .contact_button {
-    margin-top: 20px;
-    font-size: 100%;
-}
-
-form .contact_button:hover {
-    background-color: var(--color-main);
-    color: white;
-}
-form .contact_button:focus {
-    background-color: var(--color-main);
-    color: white;
-    outline: 4px #000 solid;
-}
-
-
-/*** In case of error ***/
-.data-error {
-    outline: 2px solid black;
-    
-}
-.data-tag {
-    font-size: 90%;
-    color: black;
-    margin: 10px 0 16px 0;
-    animation : message-appears 0.3s ease;
-}
-.data-tag::before {
-    content: url(../assets/icons/circle-exclamation-solid.svg);
-}
-p.data-tag::before {
-    margin-right: 5px;
-}
-
-
 /**********************/
 /* FILTERS & PICTURES */
 /**********************/
 
-.pictures {
-    margin: 20px 100px 0px 100px;
+.media-section {
+    margin: 20px 0 0 0;
 }
 
 .menu-dropdown {
@@ -235,15 +111,15 @@ p.data-tag::before {
     margin-right: 25px;
 }
 
-.dropbtn {
+.dropdown__btn {
     border-radius: 5px;
 }
 
-.dropbtn:hover, .dropbtn:focus {
+.dropdown__btn:hover, .dropdown__btn:focus {
     border-radius: 5px 5px 0 0;
 }
 
-button#dropdown-menu1.btn.dropbtn {
+button#dropdown__menu1.btn.dropdown__btn {
     font-family: "DM Sans", sans-serif;
     font-size: 1.13rem;
 }
@@ -252,12 +128,12 @@ button#dropdown-menu1.btn.dropbtn {
     position: relative;
 }
 
-.dropbtn-content { /*ul list*/ /* element à cacher puis afficher*/
+.dropdown__content { /*ul list*/ /* element à cacher puis afficher*/
     display: none;
 }
 
-.dropdown:hover > .dropbtn-content,
-.dropdown:focus > .dropbtn-content {
+.dropdown:hover > .dropdown__content,
+.dropdown:focus > .dropdown__content {
     display: block;
     z-index: 2;
     position: absolute;
@@ -284,7 +160,7 @@ il faut que btn change de radius */
     margin: 0 11px;
 }
 
-.dropbtn-content li {
+.dropdown__content li {
     list-style-type: none;
     font-weight: 700;
     margin: 0;
@@ -292,18 +168,18 @@ il faut que btn change de radius */
     width: 100%;
 }
 
-.dropbtn-content li a {
+.dropdown__content li a {
     text-decoration: none;
     color: white;
     margin: 0 11px; 
 }
 
-.dropbtn-content li:hover a,
-.dropbtn-content li:focus a {
+.dropdown__content li:hover a,
+.dropdown__content li:focus a {
     color: black;
 }
 
-#dropdown-menu2 {
+#dropdown__menu2 {
     padding: 11px 0px 11px 0px;
 }
 
@@ -311,20 +187,20 @@ il faut que btn change de radius */
 ajouter une classe avec JS ?
 */
 
-#dropdown-menu2:hover,
-#dropdown-menu2:focus {
+#dropdown__menu2:hover,
+#dropdown__menu2:focus {
     /*padding: 11px 0px 11px 0px;*/
     background-color: #DB8876;
     cursor: pointer;
 }
 
-#dropdown-menu3 {
+#dropdown__menu3 {
     padding: 11px 0px 11px 0px;
     border-radius: 0 0 5px 5px;
 }
 
-#dropdown-menu3:hover,
-#dropdown-menu3:focus {
+#dropdown__menu3:hover,
+#dropdown__menu3:focus {
     /*padding: 11px 0px 11px 0px;*/
     
     background-color: #DB8876;
@@ -337,15 +213,17 @@ ajouter une classe avec JS ?
 /*********************/
 
 #photographer-price {
+    position: sticky;
+    bottom: 0;
+    width: auto;
+    z-index: 2;
+
     display: flex;
     flex-direction: row;
     gap: 60px;
     justify-content: space-around;
     align-items: center;
-    position: absolute;
-    bottom: 0;
-    right:8%;
-    z-index: 2;
+      
     padding: 20px 25px 15px 25px;
     border-radius: 5px 5px 0 0;
     background-color: #DB8876;
