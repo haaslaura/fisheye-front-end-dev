@@ -18,6 +18,7 @@ export async function getData() {
 		// Retrieving JSON data from the response
 		// let data = await response.json();
 		return await response.json();
+		
 	} catch (error) {
 		console.error("Erreur :", error); // Seeing error
 	}
