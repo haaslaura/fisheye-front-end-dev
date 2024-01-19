@@ -12,8 +12,4 @@ export class Video extends Media {
         
         this.video = data.video;
     }
-
-    get video() {
-		return `assets/images/photographersmedia/${this.video}`;
-	}
 }

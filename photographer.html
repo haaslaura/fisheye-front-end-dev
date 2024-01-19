@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <link href="css/main.css" rel="stylesheet" type="text/css" />
+  <link href="css/base/main.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -80,37 +80,38 @@
       </div>
     </div>
     
-    <!-- Filter menu -->
-    <section class="pictures" aria-label="photographerspictures">
-      
+    <!-- Media display section -->
+    <section class="media-section" aria-label="photographerspictures">
+
+      <!-- Filter -->
       <div class="menu-dropdown" role="filter" aria-label="dropdown-menu">
         <h3 id="title3">Trier par</h3>
         
         <!-- Dropdown menu -->
         <div class="dropdown">
           
-          <button class="btn dropbtn" type="button" id="dropdown-menu1">
+          <button id="dropdown__menu1" class="btn dropdown__btn" type="button" >
             Popularité <i class="fa-solid fa-chevron-down"></i>
           </button>
-          <ul class="dropbtn-content" id="dropdownContent">
+          <ul class="dropdown__content" id="dropdownContent">
             
-            <li role="separator" class="drop-divider"></li>
+            <li class="drop-divider" role="separator"></li>
             
-            <li id="dropdown-menu2">
+            <li id="dropdown__menu2">
               <a href="#">Date</a> 
             </li>
             
-            <li role="separator" class="drop-divider"></li>
+            <li class="drop-divider" role="separator"></li>
             
-            <li id="dropdown-menu3">
+            <li id="dropdown__menu3">
               <a href="#">Titre</a>
             </li>
           </ul>
         </div>
       </div>
       
-      <!-- Pictures -->
-      <div class="pictures">
+      <!-- Pictures & Videos -->
+      <div class="media-section__media-card">
       </div>
       
     </section>

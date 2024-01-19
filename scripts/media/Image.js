@@ -9,11 +9,7 @@ import { Media } from "./Media.js";
 export class Image extends Media {
 	constructor (data) {
 		super(data); // Super, c'est pour passer des paramètres à la class Media, ici les data
-
+		
 		this.image = data.image;
-	}
-
-	get image() {
-		return `assets/images/photographersmedia/${this.image}`;
 	}
 }

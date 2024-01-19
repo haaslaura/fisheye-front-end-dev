@@ -3,9 +3,6 @@ export function mediaCard(mediaData) {
 	// Déstructure l'objet mediaData et crée autant de constante que nécessaire
 	const { id, photographerId, title, image, video, likes, date, price } = mediaData;
 	
-	// Crée la constante picture => pour ajouter le chemin du dossier où se trouve les photos au nom de la photo
-	// const picture = `assets/photographers/${portrait}`;
-	
 	function createMediaCard() {
 
 		// Creating the 'media' item
@@ -18,12 +15,12 @@ export function mediaCard(mediaData) {
 		lightboxLink.setAttribute("aria-label", "Ouvre la vue lightbox");
 
 		const imageMedia = document.createElement("img");
-		imageMedia.setAttribute("src", `asset/images/photographersmedia/${name}/${image}`); // ERREUR ici, je n'ai pas le nom du photographe :(
+		imageMedia.setAttribute("src", `./assets/images/photographersmedia/${photographerId}/${image}`);
 		imageMedia.setAttribute("alt", title);
 		
 		// Or
 		const videoMedia = document.createElement("video");
-		videoMedia.setAttribute("source", `asset/images/photographersmedia/${name}/${video}`);
+		videoMedia.setAttribute("source", `./asset/images/photographersmedia/${photographerId}/${video}`);
 		videoMedia.setAttribute("type", "video/mp4");
 		
 		// And
@@ -31,11 +28,12 @@ export function mediaCard(mediaData) {
 		infoMediaInsert.className = "info-media";
 
 		const titleMedia = document.createElement("h5");
-		const likeMedia = document.createElement("p");
-
-		// Intègre les éléments ensemble
-		contenant.appendChild(contenu)
+		titleMedia.innerHTML = title;
 		
+		const likeMedia = document.createElement("p");
+		likeMedia.innerHTML = `${likes} <i aria-label=\"likes\" class=\"fa-solid fa-heart\"></i>`;
+
+		// Intègre les éléments ensemble		
 		articleMedia.appendChild(lightboxLink);
 		lightboxLink.appendChild(imageMedia);
 		lightboxLink.appendChild(videoMedia);
@@ -47,5 +45,5 @@ export function mediaCard(mediaData) {
 		return (articleMedia);
 	}
 	
-	return { createMediaCard };
+	return { id, date, price, createMediaCard };
 }
