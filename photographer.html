@@ -29,7 +29,7 @@
     </section>
     
     <!-- Contact modal -->
-    <div id="contact_modal" role="contact" aria-labelledby="modal-title">
+    <div id="contact_modal" role="dialog" aria-labelledby="modal-title">
       <div class="modal">
         <header>
           <h2 id="modal-title">Contactez-moi</h2>
@@ -114,6 +114,19 @@
       <div class="media-section__media-card">
       </div>
       
+      <!-- Lightbox -->
+      <div class="lightbox" role="dialog">
+        <button class="lightbox__close" role="button" aria-label="Close dialog">Fermer</button>
+        <button class="lightbox__next" role="button" aria-label="Next image">Suivant</button>
+        <button class="lightbox__prev" role="button" aria-label="Previous image">Précédent</button>
+        <div class="lightbox__container">
+          <!-- POUR TEST -->
+          <img src="assets/photographersmedia/195/Architecture_Corner_Room.jpg">
+          <!-- TITRE IMAGE A AJOUTER -->
+          <h5>Titre image test</h5>
+        </div>
+      </div>
+
     </section>
     
     <!-- Photographer price -->
@@ -125,6 +138,7 @@
   
   <!-- Utils -->
   <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/utils/galleryLightbox.js"></script>
   <script src="/scripts/utils/filterButtons.js"></script>
   
 </body>

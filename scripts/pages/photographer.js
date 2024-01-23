@@ -3,9 +3,9 @@
 
 // 0 - Importing data and functions
 import { photographerTemplate } from "../templates/photographerInfo.js";
-import { mediaCard } from "../templates/mediaCard.js";
 import { getData } from "../utils/getData.js";
-import { MediaFactory } from "../media/MediaFactory.js";
+import { MediaFactory } from "../classes/MediaFactory.js";
+
 
 
 // Get the photographer's id from the URL
@@ -97,23 +97,22 @@ async function displayAllMedia() {
 	mediaArray.forEach(media => {
 		
 		const mediaSection = document.querySelector(".media-section__media-card");
-		const template = new mediaCard(media);
-		mediaSection.appendChild(template.createMediaCard());
-		
+		mediaSection.appendChild(media.getMediaDOM());
 
-		
-		/*
-		console.log(allMedia._likes);
-		const test = allMedia._likes.reduce(
-			(accumulateur, valeurCourante) => accumulateur + valeurCourante
-			);
-			console.log(test);
-			*/
-			
-		})
-	}
+	});
+
 	
-	displayAllMedia();
+	/*
+	console.log(allMedia._likes);
+	const test = allMedia._likes.reduce(
+		(accumulateur, valeurCourante) => accumulateur + valeurCourante
+		);
+		console.log(test);
+		*/
+	
+}
+	
+displayAllMedia();
 	
 	
 	// 6 - Additionner les likes
@@ -128,5 +127,7 @@ async function displayAllMedia() {
 	
 	
 	// 7 - Trier les médias
-	
+
+
+	// 8 - Mettre en place une lightbox
 	

@@ -1,0 +1,112 @@
+/**
+ * <div class="lightbox">
+        <button class="lightbox__close" role="button" aria-label="Close dialog">Fermer</button>
+        <button class="lightbox__next" role="button" aria-label="Next image">Suivant</button>
+        <button class="lightbox__prev" role="button" aria-label="Previous image">Précédent</button>
+        <div class="lightbox__container">
+          <!-- POUR TEST -->
+          <img src="assets/photographersmedia/195/Architecture_Corner_Room.jpg">
+          <!-- TITRE IMAGE A AJOUTER -->
+          <h5>Titre image test</h5>
+        </div>
+      </div>
+ */
+
+
+const lightbox = document.querySelector(".lightbox");
+console.log(lightbox);
+
+const links = document.querySelector("article");
+console.log(links);
+
+
+
+
+/*********************/
+/** OPENING LIGHTBOX */
+/*********************/
+
+/*
+Récupérer l'élément à cliquer
+Ajouter un évènement sur l'élément
+
+Récupérer l'endroit où s'ajoute l'image
+L'évènement va ajouter l'image dans la lightbox au bon endroit
+
+Modifier les paramètre aria
+*/
+
+
+
+
+function displayLightbox() {
+	
+    lightbox.style.display = "block";
+
+	// Passer le reste du site à aria-hidden true
+	const otherContent = document.querySelectorAll("body > *:not(.lightbox)");
+	otherContent.forEach(element => {
+		element.setAttribute("aria-hidden", "true");
+	});
+	
+	// Passer la modale à aria-hidden false
+	lightbox.setAttribute("aria-hidden", "false");
+	
+	// Gestion du focus
+	const currentFocusedElement = document.querySelector(".lightbox");
+	if (!currentFocusedElement) {
+		currentFocusedElement.focus();
+	}
+}
+
+
+
+
+/*********************/
+/** CLOSE LIGHTBOX ***/
+/*********************/
+
+
+
+function closeLightbox() {
+
+    const closeBtn = document.querySelector(".lightbox__close");
+    console.log(closeBtn);
+
+    // Passer le reste du site à aria-hidden false
+    const otherContent = document.querySelectorAll("body > *:not(.lightbox)");
+    otherContent.forEach(element => {
+        element.setAttribute("aria-hidden", "false");
+    });
+
+    // Passer la lightbox à aria-hidden true
+    lightbox.setAttribute("aria-hidden", "true");
+
+
+    closeBtn.addEventListener("click", function() {
+        lightbox.style.display = "none";
+        console.log("Le bouton clic bien");
+    })
+
+}
+
+
+// Close lightbox when escape key is pressed
+function handleKeyDown(event) {
+	if (event.key === "Escape" && lightbox.style.display !== "none") {
+        console.log("Echap fonctionne bien");
+		closeLightbox();
+	}
+}
+document.addEventListener("keydown", handleKeyDown);
+
+/*
+dialog.addEventListener('keydown', (event) => {
+    if (event.which === keyCodes.escape) {
+        closeLightbox();
+    }
+  });
+  */
+
+
+closeLightbox();
