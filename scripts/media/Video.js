@@ -1,15 +1,16 @@
 import { Media } from "./Media.js";
 
-
-// 1 - Créer deux classes : une classe image et une classe vidéo (ici)
-
-// 4 - J'ai étendu le code existant pour que la classe Video
-// puisse se servir de la classe Media
-
 export class Video extends Media {
     constructor (data) {
-        super(data); // Super, c'est pour passer des paramètres à la class Media, ici les data
+        super(data); // pass parameters to the Media class
         
-        this.video = data.video;
+        this._video = data.video;
+    }
+    
+    getMediaDOM() {
+        const element = document.createElement("video");
+        element.setAttribute("src", `./assets/photographersmedia/${this._photographerId}/${this._video}`);
+        element.setAttribute("type", "video/mp4");
+        return element;
     }
 }

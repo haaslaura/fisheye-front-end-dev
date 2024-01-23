@@ -1,16 +1,21 @@
 // This JavaScript code is linked to the photographer.html page
 
 
-// 1 - Importing data and functions
-
+// 0 - Importing data and functions
 import { photographerTemplate } from "../templates/photographerInfo.js";
 import { mediaCard } from "../templates/mediaCard.js";
 import { getData } from "../utils/getData.js";
 import { MediaFactory } from "../media/MediaFactory.js";
 
 
-// 2a - Only retrieve photographer from his id (étape 2b en bas de la page)
+// Get the photographer's id from the URL
+let params = new URLSearchParams(document.location.search);
+let idItem = parseInt(params.get("id"));
+
+
+// Only retrieve photographer information from his id
 async function getPhotographerById(id) {
+	
 	try {
 		// Retrieve data
 		const data = await getData();
@@ -28,8 +33,7 @@ async function getPhotographerById(id) {
 }
 
 
-// 3- Afficher les info du photographe dont c'est l'id
-
+// Show info for the photographer whose id this is
 function displayData(photographer) {
 	
 	// Recovering info divs from the photographer
@@ -46,21 +50,11 @@ function displayData(photographer) {
 	headerCol1.appendChild(items.locationText);
 	headerCol1.appendChild(items.sloganText);
 	headerCol3.appendChild(items.imagePhotographer);
-	
-	/* Reste à ajouter le nombre de likes */
 	priceInsert.appendChild(items.priceText);
-	
 }
 
-// A CORRIGER ////////////////////////////////
-// Répété deux fois/sorti de la fonction, pour le test
-let params = new URLSearchParams(document.location.search);
-let idItem = parseInt(params.get("id"));
 
 async function initPage() {
-	// 2b - Récupérer les informations du photographe uniquement avec son id
-	let params = new URLSearchParams(document.location.search);
-	let idItem = parseInt(params.get("id"));
 	
 	// Recovers data from photographer
 	const photographer = await getPhotographerById(idItem);
@@ -70,11 +64,9 @@ async function initPage() {
 initPage();
 
 
-// 4 - Récupérer les infos média du photographe dont c'est l'id
-
-// 5 - Afficher les médias
-
+// Retrieve media info from the photographer whose id it is
 async function getMediaById(id) {
+	
 	try {
 		// Retrieve data
 		const data = await getData();
@@ -91,29 +83,50 @@ async function getMediaById(id) {
 	}
 }
 
+
+// Show media gallery
 async function displayAllMedia() {
 	
-	// Récupérer les données dans une variable
+	// Retrieve the photographer's media array
 	const mediaData = await getMediaById(idItem);
 	
-	// Passer les données à la moulinette du factory
-	const imageArray = mediaData.map(media => new MediaFactory(media, 'image'));
-	const videoArray = mediaData.map(media => new MediaFactory(media, 'video'));
+	// Sorting data using the factory
+	const mediaArray = mediaData.map(media => new MediaFactory(media));
 	
-	const allMedia = imageArray.concat(videoArray);
-	
-	// Afficher les infos via le template
-	allMedia.forEach(media => {
+	// Displaying the gallery using the template
+	mediaArray.forEach(media => {
 		
-		// >> Créer un autre fichier dans Template pour gérer l'affichage
 		const mediaSection = document.querySelector(".media-section__media-card");
 		const template = new mediaCard(media);
 		mediaSection.appendChild(template.createMediaCard());
-	})
-}
+		
 
-displayAllMedia();
-
-
-// 6 - Trier les médias
-
+		
+		/*
+		console.log(allMedia._likes);
+		const test = allMedia._likes.reduce(
+			(accumulateur, valeurCourante) => accumulateur + valeurCourante
+			);
+			console.log(test);
+			*/
+			
+		})
+	}
+	
+	displayAllMedia();
+	
+	
+	// 6 - Additionner les likes
+	
+	// 0 - englober dans une fonction
+	
+	// Prendre chaque média
+	
+	// Prendre chaque like de ces médias
+	// Les additionner / reduce() ?
+	// Afficher la valeur
+	
+	
+	// 7 - Trier les médias
+	
+	

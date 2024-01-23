@@ -2,14 +2,12 @@ import { Video } from "./Video.js";
 import { Image } from "./Image.js";
 
 export class MediaFactory {
-    constructor(data, type) {
+    constructor(data) {
         
-        // Si type correspond à image, retourner format image
-        if (type === 'image') {
+        if (data.image) {
             return new Image(data);
             
-            // Si type correspond à video, retourner format video
-        } else if (type === 'video') {
+        } else if (data.video) {
             return new Video(data);
             
         } else {

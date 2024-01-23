@@ -1,6 +1,6 @@
 /* CSS for the page photographer.html */
 
-@import url("../components/media.css");
+@import url("../components/gallery.css");
 @import url("../components/modal.css");
 
 /*********************/
@@ -213,8 +213,9 @@ ajouter une classe avec JS ?
 /*********************/
 
 #photographer-price {
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    right: 10%;
     width: auto;
     z-index: 2;
 

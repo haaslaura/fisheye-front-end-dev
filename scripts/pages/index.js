@@ -1,7 +1,7 @@
 // This JavaScript code is linked to the index.html page
 
 
-// 0 - Import function to retrieve data
+// 0 - Importing data and functions
 import { photographerTemplate } from "../templates/photographerInfo.js";
 import { getData } from "../utils/getData.js";
 
