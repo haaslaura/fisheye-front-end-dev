@@ -16,7 +16,7 @@
 const lightbox = document.querySelector(".lightbox");
 console.log(lightbox);
 
-const links = document.querySelector("article");
+const links = document.querySelectorAll("article");
 console.log(links);
 
 
