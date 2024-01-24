@@ -93,41 +93,38 @@ async function displayAllMedia() {
 	// Sorting data using the factory
 	const mediaArray = mediaData.map(media => new MediaFactory(media));
 	
+	// Prepare to add up the likes
+	const emptyLikesArray = [];
+
 	// Displaying the gallery using the template
 	mediaArray.forEach(media => {
 		
 		const mediaSection = document.querySelector(".media-section__media-card");
 		mediaSection.appendChild(media.getMediaDOM());
 
-	});
+		// d- Take each like of these media and put them in a table
+		emptyLikesArray.push(media._likes);
+	})
 
-	
-	/*
-	console.log(allMedia._likes);
-	const test = allMedia._likes.reduce(
-		(accumulateur, valeurCourante) => accumulateur + valeurCourante
-		);
-		console.log(test);
-		*/
-	
+	// Add likes & Install the total in the DOM
+	const totalLikes = emptyLikesArray.reduce(function(accumulator, currentValue) {
+		return accumulator + currentValue;
+	});
+		
+	const insertPrice = document.getElementById("photographer-price");
+	const priceLikes = document.createElement("p");
+	priceLikes.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
+	insertPrice.appendChild(priceLikes);
 }
-	
+
 displayAllMedia();
-	
-	
-	// 6 - Additionner les likes
-	
-	// 0 - englober dans une fonction
-	
-	// Prendre chaque média
-	
-	// Prendre chaque like de ces médias
-	// Les additionner / reduce() ?
-	// Afficher la valeur
-	
+
+
+
 	
 	// 7 - Trier les médias
 
-
 	// 8 - Mettre en place une lightbox
+
+	// 9 - Additionner les likes qui s'ajoutent
 	

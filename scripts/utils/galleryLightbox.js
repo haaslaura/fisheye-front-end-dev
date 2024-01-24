@@ -1,25 +1,21 @@
-/**
- * <div class="lightbox">
-        <button class="lightbox__close" role="button" aria-label="Close dialog">Fermer</button>
-        <button class="lightbox__next" role="button" aria-label="Next image">Suivant</button>
-        <button class="lightbox__prev" role="button" aria-label="Previous image">Précédent</button>
-        <div class="lightbox__container">
-          <!-- POUR TEST -->
-          <img src="assets/photographersmedia/195/Architecture_Corner_Room.jpg">
-          <!-- TITRE IMAGE A AJOUTER -->
-          <h5>Titre image test</h5>
-        </div>
-      </div>
- */
+
 
 
 const lightbox = document.querySelector(".lightbox");
 console.log(lightbox);
 
-const links = document.querySelectorAll("article");
-console.log(links);
+const infoMedia = document.querySelector(".info-media");
+console.log(infoMedia);
 
 
+async function pouet() {
+document.addEventListener("DOMContentLoaded", function(){
+    const links = document.querySelectorAll("article");
+    console.log(links);
+});
+
+}
+pouet();
 
 
 /*********************/
@@ -35,9 +31,6 @@ L'évènement va ajouter l'image dans la lightbox au bon endroit
 
 Modifier les paramètre aria
 */
-
-
-
 
 function displayLightbox() {
 	

@@ -132,6 +132,39 @@
 }
 
 /*********************/
+/*** HEART CHECKBOX **/
+/*********************/
+
+.heart-checkbox {
+    position: relative;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.heart-checkbox input {
+    opacity: 0;
+    margin: 5px;
+}
+
+.heart-checkbox .fa-heart {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    width: 24px;
+    height: 22px;
+}
+
+.heart-checkbox .checkbox:not(:checked) + .heart-empty,
+.heart-checkbox .checkbox:checked + .heart-empty + .heart-full {
+  visibility: visible;
+}
+.heart-checkbox .checkbox:checked + .heart-empty,
+.heart-checkbox .checkbox:not(:checked) + .heart-empty + .heart-full {
+  visibility: hidden;
+}
+
+
+/*********************/
 /***** ANIMATIONS ****/
 /*********************/
 @keyframes lightboxIn {
