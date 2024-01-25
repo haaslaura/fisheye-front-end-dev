@@ -1,3 +1,9 @@
+/**********************************************************************
+
+This file contains the template function for display photographer's informations
+
+**********************************************************************/
+
 export function photographerTemplate(photographersData) {
 	// Déstructure l'objet photographersData et crée autant de constante que nécessaire
 	const { name, id, portrait, city, country, tagline, price } = photographersData;

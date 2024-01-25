@@ -29,10 +29,10 @@ export class Video extends Media {
         
         const likeMedia = document.createElement("p");
         likeMedia.innerHTML = `${this._likes} <label class="heart-checkbox">
-			<input class="checkbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
-			<i class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
-			<i class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
-		</label>`;
+			<input tabindex="0" id="heartbox-id_${this._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
+			<i id="heart-empty-id_${this._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
+			<i id="heart-full-id_${this._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
+		</label>`       
         
         const priceText = document.createElement("p");
         priceText.textContent = this._price ? `${this._price}€/jour` : "Aucune information pour le moment";

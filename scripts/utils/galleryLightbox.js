@@ -1,17 +1,21 @@
+/**********************************************************************
 
+This file contains the functions for the gallery Lightbox
+
+**********************************************************************/
 
 
 const lightbox = document.querySelector(".lightbox");
-console.log(lightbox);
+
 
 const infoMedia = document.querySelector(".info-media");
-console.log(infoMedia);
+
 
 
 async function pouet() {
 document.addEventListener("DOMContentLoaded", function(){
     const links = document.querySelectorAll("article");
-    console.log(links);
+
 });
 
 }
@@ -64,7 +68,6 @@ function displayLightbox() {
 function closeLightbox() {
 
     const closeBtn = document.querySelector(".lightbox__close");
-    console.log(closeBtn);
 
     // Passer le reste du site à aria-hidden false
     const otherContent = document.querySelectorAll("body > *:not(.lightbox)");

@@ -1,5 +1,8 @@
-// This JavaScript code is linked to the index.html page
+/**********************************************************************
 
+This JavaScript code is linked to the index.html page
+
+**********************************************************************/
 
 // 0 - Importing data and functions
 import { photographerTemplate } from "../templates/photographerInfo.js";

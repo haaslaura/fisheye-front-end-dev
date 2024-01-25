@@ -1,7 +1,10 @@
-// This JavaScript code is linked to the photographer.html page
+/**********************************************************************
 
+This JavaScript code is linked to the photographer.html page
 
-// 0 - Importing data and functions
+**********************************************************************/
+
+// Importing data, functions & classes
 import { photographerTemplate } from "../templates/photographerInfo.js";
 import { getData } from "../utils/getData.js";
 import { MediaFactory } from "../classes/MediaFactory.js";
@@ -95,22 +98,22 @@ async function displayAllMedia() {
 	
 	// Prepare to add up the likes
 	const emptyLikesArray = [];
-
+	
 	// Displaying the gallery using the template
 	mediaArray.forEach(media => {
 		
 		const mediaSection = document.querySelector(".media-section__media-card");
 		mediaSection.appendChild(media.getMediaDOM());
-
-		// d- Take each like of these media and put them in a table
+		
+		// Take each like of these media and put them in a table
 		emptyLikesArray.push(media._likes);
 	})
-
+	
 	// Add likes & Install the total in the DOM
 	const totalLikes = emptyLikesArray.reduce(function(accumulator, currentValue) {
 		return accumulator + currentValue;
 	});
-		
+	
 	const insertPrice = document.getElementById("photographer-price");
 	const priceLikes = document.createElement("p");
 	priceLikes.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
@@ -121,10 +124,71 @@ displayAllMedia();
 
 
 
-	
-	// 7 - Trier les médias
+// 7 - Trier les médias
 
-	// 8 - Mettre en place une lightbox
+// 8 - Mettre en place une lightbox
 
-	// 9 - Additionner les likes qui s'ajoutent
+
+
+// Liker the media on the photographer's page and increase/decrease the number of likes
+async function addNewLike() {
 	
+	const mediaData = await getMediaById(idItem);
+	const mediaArray = mediaData.map(media => new MediaFactory(media));
+	
+	// Browse media and retrieve the checkbox via the media id
+	mediaArray.forEach(media => {
+		
+		const inputHeartBox = document.getElementById(`heartbox-id_${media._id}`);
+		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
+		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
+		
+		// Add an event to the checkbox click
+		inputHeartBox.addEventListener("click", () => handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn));
+		
+		// Add an event for the Enter key
+		inputHeartBox.addEventListener("keypress", (event) => {
+			if (event.code === "Enter") {
+				if (!inputHeartBox.checked) {
+					inputHeartBox.checked = true;	
+				} else {
+					inputHeartBox.checked = false;
+				}
+				handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn);
+			}
+		});
+	});
+}
+
+function handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn) {
+	// V2
+	if (inputHeartBox.checked) {
+		
+		media._likes++;
+		
+		// Modify the visibility of heart buttons and the ARIA attribute
+		emptyHeartBtn.style.visibility = "hidden";
+		emptyHeartBtn.setAttribute("aria-hidden", "true");
+		
+		fullHeartBtn.style.visibility = "visible";
+		fullHeartBtn.setAttribute("aria-hidden", "false");
+		
+	} else {
+		
+		media._likes--;
+		
+		// Modify the visibility of heart buttons and the ARIA attribute
+		emptyHeartBtn.style.visibility = "visible";
+		emptyHeartBtn.setAttribute("aria-hidden", "false");
+		
+		fullHeartBtn.style.visibility = "hidden";
+		fullHeartBtn.setAttribute("aria-hidden", "true");	
+	}
+	
+	// Vérifier le résultat
+	console.log(media._likes);
+	console.log("pouet");
+	
+};
+
+addNewLike();
