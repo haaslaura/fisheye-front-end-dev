@@ -28,7 +28,7 @@
 .lightbox__prev {
     background: url(../../assets/icons/arrow-next.svg) center center / 100% 100% no-repeat;
     width: 48px;
-    height: 80%; /* Pour rendre clicable plus facilement */
+    height: 80%; /* To make it easier to click */
     z-index: 4;
     top: 0;
     right: 2%;
@@ -99,6 +99,7 @@
     cursor: pointer;    
 }
 
+
 .media-section__media-card img,
 .media-section__media-card video {
     width: 100%;
@@ -140,6 +141,12 @@
     cursor: pointer;
     margin-left: 5px;
 }
+.heart-checkbox span {
+    overflow: hidden;
+    position: absolute;
+    top: -9999px;
+}
+
 
 .heart-checkbox input {
     width: 0px;

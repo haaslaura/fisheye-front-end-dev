@@ -20,16 +20,16 @@ let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i")
 function displayModal() {
 	modal.style.display = "block";
 	
-	// Passer le reste du site à aria-hidden true
+	// Switch the rest of the site to aria-hidden true
 	const otherContent = document.querySelectorAll("body > *:not(#contact_modal)");
 	otherContent.forEach(element => {
 		element.setAttribute("aria-hidden", "true");
 	});
 	
-	// Passer la modale à aria-hidden false
+	// Switch the modal to aria-hidden false
 	modal.setAttribute("aria-hidden", "false");
 	
-	// Gestion du focus
+	// Focus management
 	const currentFocusedElement = document.querySelector(".modal");
 	if (!currentFocusedElement) {
 		currentFocusedElement.focus();
@@ -42,13 +42,13 @@ function displayModal() {
 
 function closeModal() {
 	
-	// Passer le reste du site à aria-hidden false
+	// Switch the rest of the site to aria-hidden false
 	const otherContent = document.querySelectorAll("body > *:not(#contact_modal)");
 	otherContent.forEach(element => {
 		element.setAttribute("aria-hidden", "false");
 	});
 	
-	// Passer la modale à aria-hidden true
+	// Switch the modal to aria-hidden true
 	modal.setAttribute("aria-hidden", "true");
 	
 	modal.style.display = "none";
@@ -100,14 +100,14 @@ function displayErrorMessages() {
 		let valueInput = input.value.trim();
 		
 		switch (idInput) {
-		case "firstname":
-		case "lastname":
+			case "firstname":
+			case "lastname":
 			if (!valueInput) {
 				addErrorMessage(input, `Merci de remplir votre ${idInput === "firstname" ? "prénom" : "nom"}.`);
 			}
 			break;
 			
-		case "email":
+			case "email":
 			if (!valueInput) {
 				addErrorMessage(input, "Merci de remplir votre email.");
 			} else if (!regexMail.test(valueInput)) {
@@ -115,7 +115,7 @@ function displayErrorMessages() {
 			}
 			break;
 			
-		default:
+			default:
 			alert("Il y a une erreur dans le formulaire.");
 			console.log("Un champ du formulaire n'est peut-être pas pris en compte.");
 		}
