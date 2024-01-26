@@ -5,6 +5,59 @@ This file contains the functions for the filters buttons
 *******************************************************/
 
 
+// 1 - Récupérer
+	// a - les boutons :
+		/*
+		Popularité
+		Date
+		Titre
+		*/
+	// b - Les article de la galery .media-section__media-card
+
+// 2 - Savoir quelle fonction display toute la galerie une première fois
+
+// 3- Si "Popularité" est séléctionné
+	// Ajouter un évènement sur le bouton
+		// Quand le bouton est clické ou tapper 'Entré' au clavier
+
+		// La liste des médias est reprise
+		// Il faut que ça repasse par media factory ?
+		// Une fonction sort() est appliqué en fonction du nombre de like de chaque media
+			/**
+			 * EXEMPLE
+			 * boutonTrier.addEventListener("click", function () {
+			 * const piecesOrdonnees = Array.from(pieces)
+			 * piecesOrdonnees.sort(function (a, b) {
+			 * return b.prix - a.prix;
+			 * });
+			 */
+		// On efface la partie de l'écran où se trouve la galery
+			// EXEMPLE : document.querySelector(".fiches").innerHTML = "";
+		// On rappelle la fonction display de la galerie pour tout ré afficher
+
+// 3 - Si "Date" est séléctionné
+	// Ajouter un évènement sur le bouton
+		// Quand le bouton est clické ou tapper 'Entré' au clavier
+
+// 3 - Si "Titre" est séléctionné
+	// Ajouter un évènement sur le bouton
+		// Quand le bouton est clické ou tapper 'Entré' au clavier
+
+
+/**
+ * note :
+ * map() copie en créant un autre tableau pour chaque élément du tableau existant
+ */
+
+
+
+
+
+
+
+
+
+
 // 1 - Selectionner le bouton dropbtn
 const dropbtn = document.querySelector(".dropbtn");
 console.log(dropbtn);
@@ -16,13 +69,6 @@ console.log(dropbtn);
 // 4 - Selectionner les autres boutons (pour ajouter un évènement au click)
 
 // 5 - Ajouter un évènement au clic pour utiliser .sort()
-
-
-
-
-
-
-
 
 
 
