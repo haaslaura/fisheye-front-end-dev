@@ -140,11 +140,11 @@ async function addNewLike() {
 	mediaArray.forEach(media => {
 		
 		const inputHeartBox = document.getElementById(`heartbox-id_${media._id}`);
-		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
-		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
+		//const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
+		//const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
 		
 		// Add an event to the checkbox click
-		inputHeartBox.addEventListener("click", () => handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn));
+		inputHeartBox.addEventListener("click", () => handleLikeToggle(media, inputHeartBox/*, emptyHeartBtn, fullHeartBtn*/));
 		
 		// Add an event for the Enter key
 		inputHeartBox.addEventListener("keypress", (event) => {
@@ -154,19 +154,40 @@ async function addNewLike() {
 				} else {
 					inputHeartBox.checked = false;
 				}
-				handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn);
+				handleLikeToggle(media, inputHeartBox/*, emptyHeartBtn, fullHeartBtn*/);
 			}
 		});
 	});
 }
 
-function handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn) {
-	// V2
+/* V2 */
+function handleLikeToggle(media, inputHeartBox/*, emptyHeartBtn, fullHeartBtn*/) {
+	
+	const infoMedia = document.getElementById(`info-media_${media._id}`);
+
 	if (inputHeartBox.checked) {
-		
+
 		media._likes++;
-		
+
+		// Ici il faut vider le bloc puis ré afficher
+		document.getElementById(`likes-number_${media._id}`).innerHTML = "";
+
+		// Ré afficher
+		// fonction pour afficher dans le cours, ici en détail :
+
+		const newLikeNumber = document.createElement("p");
+		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
+		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
+			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
+			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
+			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
+		</label>`;
+		infoMedia.appendChild(newLikeNumber);
+
 		// Modify the visibility of heart buttons and the ARIA attribute
+		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
+		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
+
 		emptyHeartBtn.style.visibility = "hidden";
 		emptyHeartBtn.setAttribute("aria-hidden", "true");
 		
@@ -176,8 +197,27 @@ function handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn) {
 	} else {
 		
 		media._likes--;
+
+		// Ici il faut vider le bloc puis ré afficher
+		document.getElementById(`likes-number_${media._id}`).innerHTML = "";
+
+		// Ré afficher
+		// fonction pour afficher dans le cours, ici en détail :
+
+		const newLikeNumber = document.createElement("p");
+		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
+		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
+			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
+			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
+			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
+		</label>`;
+		infoMedia.appendChild(newLikeNumber);
 		
 		// Modify the visibility of heart buttons and the ARIA attribute
+
+		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
+		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
+
 		emptyHeartBtn.style.visibility = "visible";
 		emptyHeartBtn.setAttribute("aria-hidden", "false");
 		
@@ -186,9 +226,75 @@ function handleLikeToggle(media, inputHeartBox, emptyHeartBtn, fullHeartBtn) {
 	}
 	
 	// Vérifier le résultat
-	console.log(media._likes);
 	console.log("pouet");
 	
 };
+
+
+/* V1 - avant modification
+function handleLikeToggle(media, inputHeartBox*//*, emptyHeartBtn, fullHeartBtn*//*) {
+	
+	const likesNumber = document.getElementById(`likes-number_${media._id}`);
+	const infoMedia = document.getElementById(`info-media_${media._id}`);
+
+	if (inputHeartBox.checked) {
+
+		media._likes++;
+
+		// Remove and replace the number of like
+		likesNumber.remove();
+
+		const newLikeNumber = document.createElement("p");
+		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
+		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
+			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
+			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
+			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
+		</label>`;
+		infoMedia.appendChild(newLikeNumber);
+
+		// Modify the visibility of heart buttons and the ARIA attribute
+		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
+		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
+
+		emptyHeartBtn.style.visibility = "hidden";
+		emptyHeartBtn.setAttribute("aria-hidden", "true");
+		
+		fullHeartBtn.style.visibility = "visible";
+		fullHeartBtn.setAttribute("aria-hidden", "false");
+		
+	} else {
+		
+		media._likes--;
+
+		// Remove and replace the number of like
+		likesNumber.remove();
+
+		const newLikeNumber = document.createElement("p");
+		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
+		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
+			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
+			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
+			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
+		</label>`;
+		infoMedia.appendChild(newLikeNumber);
+		
+		// Modify the visibility of heart buttons and the ARIA attribute
+
+		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
+		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
+
+		emptyHeartBtn.style.visibility = "visible";
+		emptyHeartBtn.setAttribute("aria-hidden", "false");
+		
+		fullHeartBtn.style.visibility = "hidden";
+		fullHeartBtn.setAttribute("aria-hidden", "true");	
+	}
+	
+	// Vérifier le résultat
+	console.log("pouet");
+	
+};
+*/
 
 addNewLike();

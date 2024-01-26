@@ -23,12 +23,14 @@ export class Image extends Media {
 
 		const infoMediaInsert = document.createElement("div");
 		infoMediaInsert.className = "info-media";
+		infoMediaInsert.setAttribute("id", `info-media_${this._id}`);
 		
 		const titleMedia = document.createElement("h5");
 		titleMedia.innerHTML = this._title;
 		
 		const likeMedia = document.createElement("p");
-		likeMedia.innerHTML = `${this._likes} <label class="heart-checkbox">
+		likeMedia.setAttribute("id", `likes-number_${this._id}`);
+		likeMedia.innerHTML = `${this._likes} <label class="heart-checkbox"><span>Liker cette image</span>
 			<input tabindex="0" id="heartbox-id_${this._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
 			<i id="heart-empty-id_${this._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
 			<i id="heart-full-id_${this._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
