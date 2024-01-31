@@ -5,7 +5,6 @@
 /*********************/
 
 .lightbox {
-    display: none;
     position: fixed;
     z-index: 3;
     top: 0;
@@ -14,6 +13,17 @@
     height: 100%;
     background-color: rgba(250, 250, 250, 0.9);
     animation: lightboxIn 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    transition: opacity .3s;
+}
+
+.lightbox.fadeOut {
+    opacity: 0;
 }
 
 .lightbox button {
@@ -61,14 +71,19 @@
 }
 
 .lightbox__container {
-    margin-top: 8%;
     margin-left: 8%;
     margin-right: 8%;
+    width: 60%;
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
 }
 
 .lightbox__container img {
     max-width: 100%;
-    height: auto;
+    max-height: 60%;
     border-radius: 5px;
     animation: lightboxIn 0.5s;
 }
@@ -79,6 +94,14 @@
     font-weight: 400;
     margin-top: 20px;
     margin-bottom: 0;
+}
+
+.lightbox__loader {
+    width: auto;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(../../assets/icons/loader.svg) center center no-repeat;
 }
 
 
@@ -109,6 +132,10 @@
     object-fit: cover;
 }
 
+
+/*********************/
+/*** HEART CHECKBOX **/
+/*********************/
 .info-media {
     display: flex;
     flex-direction: row;
@@ -125,6 +152,10 @@
 }
 
 .info-media p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
     font-weight: 500;
 }
 
@@ -132,46 +163,10 @@
     margin: 10px 0 5px 0;
 }
 
-/*********************/
-/*** HEART CHECKBOX **/
-/*********************/
+.fa-heart{margin-left: 5px;}
 
-.heart-checkbox {
-    position: relative;
-    cursor: pointer;
-    margin-left: 5px;
-}
-.heart-checkbox span {
-    overflow: hidden;
-    position: absolute;
-    top: -9999px;
-}
-
-
-.heart-checkbox input {
-    width: 0px;
-    height: 0px;
-    margin: 12px;
-}
-
-.heart-checkbox .fa-heart {
-    position: absolute;
-    top: 4px;
-    right: 0;
-    width: 24px;
-    height: 22px;
-}
-
-
-.heart-checkbox .heartbox:not(:checked) + .heart-empty,
-.heart-checkbox .heartbox:checked + .heart-empty + .heart-full {
-  visibility: visible;
-}
-
-.heart-checkbox .heartbox:checked + .heart-empty,
-.heart-checkbox .heartbox:not(:checked) + .heart-empty + .heart-full {
-  visibility: hidden;
-}
+#heart-empty {display: block;}
+#heart-full {display: none;}
 
 
 /*********************/

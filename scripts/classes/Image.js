@@ -29,12 +29,11 @@ export class Image extends Media {
 		titleMedia.innerHTML = this._title;
 		
 		const likeMedia = document.createElement("p");
-		likeMedia.setAttribute("id", `likes-number_${this._id}`);
-		likeMedia.innerHTML = `${this._likes} <label class="heart-checkbox"><span>Liker cette image</span>
-			<input tabindex="0" id="heartbox-id_${this._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
-			<i id="heart-empty-id_${this._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
-			<i id="heart-full-id_${this._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
-		</label>`;
+		likeMedia.innerHTML = `<span id="like-number">${this._likes}</span>
+		<span>
+			<i tabindex="0" id="heart-empty" class="fa-regular fa-heart heart-empty" aria-label="Like this media" aria-hidden="false"></i>
+			<i tabindex="0" id="heart-full" class="fa-solid fa-heart heart-full" aria-label="Dislike this media" aria-hidden="true"></i>
+		</span>`;
 
 		const priceText = document.createElement("p");
 		priceText.textContent = this._price ? `${this._price}€/jour` : "Aucune information pour le moment";

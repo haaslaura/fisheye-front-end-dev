@@ -6,14 +6,19 @@ This JavaScript code is linked to the photographer.html page
 
 // Importing data, functions & classes
 import { photographerTemplate } from "../templates/photographerInfo.js";
+
 import { getData } from "../utils/getData.js";
+import { addNewLike } from "../utils/addNewLike.js";
+
 import { MediaFactory } from "../classes/MediaFactory.js";
+import { Lightbox } from "../classes/GalleryLightbox.js";
 
 
 
 // Get the photographer's id from the URL
 let params = new URLSearchParams(document.location.search);
 let idItem = parseInt(params.get("id"));
+initPage();
 
 
 // Only retrieve photographer information from his id
@@ -56,15 +61,21 @@ function displayData(photographer) {
 	priceInsert.appendChild(items.priceText);
 }
 
-
+// Initialise the page
 async function initPage() {
 	
 	// Recovers data from photographer
 	const photographer = await getPhotographerById(idItem);
 	displayData(photographer);
-}
 
-initPage();
+	// Retrieve the photographer's media array
+	const mediaData = await getMediaById(idItem);
+	displayGallery(mediaData);
+	addNewLike();
+
+	// Initialise the lightbox
+	Lightbox.init(mediaData);
+}
 
 
 // Retrieve media info from the photographer whose id it is
@@ -86,12 +97,11 @@ async function getMediaById(id) {
 	}
 }
 
-
 // Show media gallery
-async function displayAllMedia() {
-	
-	// Retrieve the photographer's media array
-	const mediaData = await getMediaById(idItem);
+async function displayGallery(mediaData) {
+
+	// Vider le bloc avec tous les média
+	// Pour pouvoir faire un ré appel de cette fonction dans le filtre
 	
 	// Sorting data using the factory
 	const mediaArray = mediaData.map(media => new MediaFactory(media));
@@ -116,185 +126,7 @@ async function displayAllMedia() {
 	
 	const insertPrice = document.getElementById("photographer-price");
 	const priceLikes = document.createElement("p");
-	priceLikes.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
+	priceLikes.innerHTML = `<span id="total-likes">${totalLikes}</span><span><i class="fa-solid fa-heart"></i></span>`;
 	insertPrice.appendChild(priceLikes);
+
 }
-
-displayAllMedia();
-
-
-
-// 7 - Trier les médias
-
-// 8 - Mettre en place une lightbox
-
-
-
-// Liker the media on the photographer's page and increase/decrease the number of likes
-async function addNewLike() {
-	
-	const mediaData = await getMediaById(idItem);
-	const mediaArray = mediaData.map(media => new MediaFactory(media));
-	
-	// Browse media and retrieve the checkbox via the media id
-	mediaArray.forEach(media => {
-		
-		const inputHeartBox = document.getElementById(`heartbox-id_${media._id}`);
-		//const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
-		//const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
-		
-		// Add an event to the checkbox click
-		inputHeartBox.addEventListener("click", () => handleLikeToggle(media, inputHeartBox/*, emptyHeartBtn, fullHeartBtn*/));
-		
-		// Add an event for the Enter key
-		inputHeartBox.addEventListener("keypress", (event) => {
-			if (event.code === "Enter") {
-				if (!inputHeartBox.checked) {
-					inputHeartBox.checked = true;	
-				} else {
-					inputHeartBox.checked = false;
-				}
-				handleLikeToggle(media, inputHeartBox/*, emptyHeartBtn, fullHeartBtn*/);
-			}
-		});
-	});
-}
-
-/* V2 */
-function handleLikeToggle(media, inputHeartBox/*, emptyHeartBtn, fullHeartBtn*/) {
-	
-	const infoMedia = document.getElementById(`info-media_${media._id}`);
-
-	if (inputHeartBox.checked) {
-
-		media._likes++;
-
-		// Ici il faut vider le bloc puis ré afficher
-		document.getElementById(`likes-number_${media._id}`).innerHTML = "";
-
-		// Ré afficher
-		// fonction pour afficher dans le cours, ici en détail :
-
-		const newLikeNumber = document.createElement("p");
-		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
-		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
-			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
-			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
-			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
-		</label>`;
-		infoMedia.appendChild(newLikeNumber);
-
-		// Modify the visibility of heart buttons and the ARIA attribute
-		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
-		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
-
-		emptyHeartBtn.style.visibility = "hidden";
-		emptyHeartBtn.setAttribute("aria-hidden", "true");
-		
-		fullHeartBtn.style.visibility = "visible";
-		fullHeartBtn.setAttribute("aria-hidden", "false");
-		
-	} else {
-		
-		media._likes--;
-
-		// Ici il faut vider le bloc puis ré afficher
-		document.getElementById(`likes-number_${media._id}`).innerHTML = "";
-
-		// Ré afficher
-		// fonction pour afficher dans le cours, ici en détail :
-
-		const newLikeNumber = document.createElement("p");
-		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
-		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
-			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
-			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
-			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
-		</label>`;
-		infoMedia.appendChild(newLikeNumber);
-		
-		// Modify the visibility of heart buttons and the ARIA attribute
-
-		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
-		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
-
-		emptyHeartBtn.style.visibility = "visible";
-		emptyHeartBtn.setAttribute("aria-hidden", "false");
-		
-		fullHeartBtn.style.visibility = "hidden";
-		fullHeartBtn.setAttribute("aria-hidden", "true");	
-	}
-	
-	// Vérifier le résultat
-	console.log("pouet");
-	
-};
-
-
-/* V1 - avant modification
-function handleLikeToggle(media, inputHeartBox*//*, emptyHeartBtn, fullHeartBtn*//*) {
-	
-	const likesNumber = document.getElementById(`likes-number_${media._id}`);
-	const infoMedia = document.getElementById(`info-media_${media._id}`);
-
-	if (inputHeartBox.checked) {
-
-		media._likes++;
-
-		// Remove and replace the number of like
-		likesNumber.remove();
-
-		const newLikeNumber = document.createElement("p");
-		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
-		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
-			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
-			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
-			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
-		</label>`;
-		infoMedia.appendChild(newLikeNumber);
-
-		// Modify the visibility of heart buttons and the ARIA attribute
-		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
-		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
-
-		emptyHeartBtn.style.visibility = "hidden";
-		emptyHeartBtn.setAttribute("aria-hidden", "true");
-		
-		fullHeartBtn.style.visibility = "visible";
-		fullHeartBtn.setAttribute("aria-hidden", "false");
-		
-	} else {
-		
-		media._likes--;
-
-		// Remove and replace the number of like
-		likesNumber.remove();
-
-		const newLikeNumber = document.createElement("p");
-		newLikeNumber.setAttribute("id", `likes-number_${media._id}`);
-		newLikeNumber.innerHTML = `${media._likes} <label class="heart-checkbox">
-			<input tabindex="0" id="heartbox-id_${media._id}" class="heartbox" name="heartbox" type="checkbox" aria-label="Liker cette image">
-			<i id="heart-empty-id_${media._id}" class="fa-regular fa-heart heart-empty" aria-label="Dislike"></i>
-			<i id="heart-full-id_${media._id}" class="fa-solid fa-heart heart-full" aria-label="Like"></i>		
-		</label>`;
-		infoMedia.appendChild(newLikeNumber);
-		
-		// Modify the visibility of heart buttons and the ARIA attribute
-
-		const emptyHeartBtn = document.getElementById(`heart-empty-id_${media._id}`);
-		const fullHeartBtn = document.getElementById(`heart-full-id_${media._id}`);
-
-		emptyHeartBtn.style.visibility = "visible";
-		emptyHeartBtn.setAttribute("aria-hidden", "false");
-		
-		fullHeartBtn.style.visibility = "hidden";
-		fullHeartBtn.setAttribute("aria-hidden", "true");	
-	}
-	
-	// Vérifier le résultat
-	console.log("pouet");
-	
-};
-*/
-
-addNewLike();
