@@ -5,25 +5,44 @@ This file contains the functions for the gallery Lightbox
 **********************************************************************/
 
 
-const lightbox = document.querySelector(".lightbox");
+/* NOTE */
+// CONSIGNE : éviter 'onclick'
+
+// Etape 1 - Récupérer les éléments
+
+const lightbox = document.querySelector(".lightbox"); // La lightbox à afficher. Ok dans la console
 console.log(lightbox);
+
+function testFonction() {
+
+    const links = document.querySelectorAll("article a"); 
+    console.log(links);
+    links.forEach(link => link.addEventListener("click", event =>
+        event.preventDefault();
+        link.getAttribute("href");
+        console.log(link);
+
+    ))
+
+    
+}
+
+
+// Etape 2 - Ajouter un évènement sur l'élément
+
+// Récupérer l'endroit où s'ajoute l'image
+// L'évènement va ajouter l'image dans la lightbox au bon endroit
+
+// /!\ Penser à modifier les paramètre aria
+
+
+
+
 
 
 /*********************/
 /** OPENING LIGHTBOX */
 /*********************/
-
-/*
-Eviter onclick
-
-Récupérer l'élément à cliquer
->> Ajouter un évènement sur l'élément
-
-Récupérer l'endroit où s'ajoute l'image
->> L'évènement va ajouter l'image dans la lightbox au bon endroit
-
-/!\Modifier les paramètre aria
-*/
 
 function displayLightbox() {
     
