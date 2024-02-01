@@ -4,101 +4,113 @@ This file contains the functions for the gallery Lightbox
 
 **********************************************************************/
 
-
-/* NOTE */
-// CONSIGNE : éviter 'onclick'
-
-// Etape 1 - Récupérer les éléments
-
-const lightbox = document.querySelector(".lightbox"); // La lightbox à afficher. Ok dans la console
-console.log(lightbox);
-
-function testFonction() {
-
-    const links = document.querySelectorAll("article a"); 
-    console.log(links);
-    links.forEach(link => link.addEventListener("click", event =>
-        event.preventDefault();
-        link.getAttribute("href");
-        console.log(link);
-
-    ))
-
-    
-}
+const lightbox = document.querySelector(".lightbox");
 
 
-// Etape 2 - Ajouter un évènement sur l'élément
+export function initLightbox(mediaData) {
+    addEventOpeningLightbox(mediaData);
+    addEventCloseLightbox();
 
-// Récupérer l'endroit où s'ajoute l'image
-// L'évènement va ajouter l'image dans la lightbox au bon endroit
-
-// /!\ Penser à modifier les paramètre aria
-
-
-
-
-
-
-/*********************/
-/** OPENING LIGHTBOX */
-/*********************/
-
-function displayLightbox() {
-    
-    lightbox.style.display = "block";
-    
-    // Switch the rest of the site to aria-hidden true
-    const otherContent = document.querySelectorAll("body > *:not(.lightbox)");
-    otherContent.forEach(element => {
-        element.setAttribute("aria-hidden", "true");
+    // Close lightbox when escape key is pressed
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && lightbox.style.display !== "none") {
+            closeLightbox();
+        }
     });
-    
-    // Switch the modal to aria-hidden false
-    lightbox.setAttribute("aria-hidden", "false");
-    
-    // Focus management
-    const currentFocusedElement = document.querySelector(".lightbox");
-    if (!currentFocusedElement) {
-        currentFocusedElement.focus();
-    }
 }
 
 
-/*********************/
-/** CLOSE LIGHTBOX ***/
-/*********************/
+function addEventOpeningLightbox(mediaData) {
+    
+    // Récupérer tous les boutons pour ouvrir la lightbox
+    const links = document.querySelectorAll("article a");
 
+    // Pour chaque bouton, ajouter des évènements d'ouverture
+    links.forEach(link => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault();
+            openingLightbox(mediaData);
+        });
+        link.addEventListener("keypress", event => {
+            event.preventDefault();
+            openingLightbox(mediaData);
+        });
+    })
+}
+
+
+// Fonction pour ouvrir la galerie
+function openingLightbox(mediaData) {
+
+    // Modify the attributes of the lightbox
+    lightbox.style.display = "block";
+    lightbox.setAttribute("aria-hidden", "false");
+
+    // Display the media and its title
+    displayMedia(mediaData);
+    
+    // Modify the attributes of the rest of the site
+	const otherContent = document.querySelectorAll("body > *:not(.lightbox)");
+	otherContent.forEach(element => {
+		element.setAttribute("aria-hidden", "true");
+	});
+
+    // Focus management
+	const currentFocusedElement = document.querySelector(".lightbox");
+	if (!currentFocusedElement) {
+		currentFocusedElement.focus();
+	}
+}
+
+function displayMedia(mediaData) {
+
+    // Il faudrait parcourir le tableau des média, ouvrir le média réellement en cours (et son titre)
+    
+    // Récupérer le container pour l'affichage
+    const mediaContainer = document.querySelector(".lightbox__container");
+
+    // test
+    console.log(mediaContainer);
+    console.log(mediaData);
+
+    mediaContainer.innerHTML = `
+        <img src="${mediaData.url}" alt="${mediaData.title}">
+        <h5>${mediaData.title}</h5>
+    `;
+
+}
+
+
+function addEventCloseLightbox() {
+    
+    // Récupérer le bouton de fermeture
+    const closeBtnLightbox = document.querySelector(".lightbox__close");
+
+    // Ajout d'un évènement sur le bouton
+    closeBtnLightbox.addEventListener("click", () => {
+        closeLightbox();
+    });
+    closeBtnLightbox.addEventListener("keypress", event => {
+        closeLightbox();
+    });
+}
+
+// Fonction pour fermer la galerie
 function closeLightbox() {
     
-    const closeBtn = document.querySelector(".lightbox__close");
-    
-    // Switch the rest of the site to aria-hidden false
+    // Modify the attributes of the rest of the site
     const otherContent = document.querySelectorAll("body > *:not(.lightbox)");
     otherContent.forEach(element => {
         element.setAttribute("aria-hidden", "false");
     });
-    
-    // Set lightbox to aria-hidden true
+
+    // Modify the attributes of the lightbox
     lightbox.setAttribute("aria-hidden", "true");
-    
-    
-    closeBtn.addEventListener("click", function() {
-        lightbox.style.display = "none";
-        console.log("Le bouton clic bien");
-    })
-    
+    lightbox.style.display = "none";
 }
 
 
-// Close lightbox when escape key is pressed
-function handleKeyDown(event) {
-    if (event.key === "Escape" && lightbox.style.display !== "none") {
-        console.log("Echap fonctionne bien");
-        closeLightbox();
-    }
-}
-document.addEventListener("keydown", handleKeyDown);
 
+// Une fonction pour contruire le DOM
 
-closeLightbox();
+// Fonction(s) flèche gauche et flèche droite
