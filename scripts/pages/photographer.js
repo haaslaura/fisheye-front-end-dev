@@ -9,9 +9,10 @@ import { photographerTemplate } from "../templates/photographerInfo.js";
 
 import { getData } from "../utils/getData.js";
 import { addNewLike } from "../utils/addNewLike.js";
+import { initLightbox } from "../utils/galleryLightbox.js"
+import { displayFilter } from "../utils/filterButtons.js";
 
 import { MediaFactory } from "../classes/MediaFactory.js";
-import { Lightbox } from "../classes/GalleryLightbox.js";
 
 
 
@@ -70,11 +71,11 @@ async function initPage() {
 
 	// Retrieve the photographer's media array
 	const mediaData = await getMediaById(idItem);
+	
 	displayGallery(mediaData);
-	addNewLike();
-
-	// Initialise the lightbox
-	Lightbox.init(mediaData);
+	displayFilter();
+	addNewLike();	
+	initLightbox(mediaData);
 }
 
 
@@ -102,6 +103,8 @@ async function displayGallery(mediaData) {
 
 	// Vider le bloc avec tous les média
 	// Pour pouvoir faire un ré appel de cette fonction dans le filtre
+	document.querySelector(".media-section__media-card").innerHTML = "";
+	
 	
 	// Sorting data using the factory
 	const mediaArray = mediaData.map(media => new MediaFactory(media));

@@ -63,6 +63,13 @@ function handleKeyDown(event) {
 }
 document.addEventListener("keydown", handleKeyDown);
 
+// Close modal at click outside the modal
+modal.addEventListener("click", (event) => {
+	if (event.target === modal) {
+	  closeModal();
+	}
+  });
+
 
 /*********************/
 /** ERROR MESSAGES ***/
