@@ -39,6 +39,10 @@ header {
     height: 50px;
 }
 
+dialog {
+    border: none;
+}
+
 /*
 main {
     position: relative;

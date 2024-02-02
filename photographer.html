@@ -8,82 +8,54 @@
   <script src="https://kit.fontawesome.com/3d631d5da7.js" crossorigin="anonymous"></script>
   <title>Fisheye</title>
   <script type="module" src="/scripts/pages/photographer.js"></script>
-  <script type="module" src="/scripts/classes/GalleryLightbox.js"></script>
+  
+  <!--script type="module">
+    setTimeout(() => {
+      const element = document.querySelector(".heart-empty")
+      console.log(element);
+      if (element) {
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === "attributes") {
+              console.log("attributes changed");
+              
+              // Example of accessing the element for which 
+              // event was triggered
+            }
+            
+            console.log(mutation.target, mutation);
+          });
+        });
+        
+        observer.observe(element, {
+          attributes: true //configure it to listen to attribute changes,
+        });
+      }
+    }, 1000)
+  </script-->
 </head>
 
 <body>
-  <header role="banner">
+  <header>
     <a href="index.html" aria-label="Accueil">
       <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
     </a>
   </header>
   
-  <main id="main" role="main" >
+  <main>
     
     <!-- Photographer's identity -->
     <section class="photograph-header">
       <div id="photograph-header-col1"></div>
       <div id="photograph-header-col2">
-        <button class="btn contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button id="open-modal-btn" class="btn contact_button">Contactez-moi</button>
       </div>
       <div id="photograph-header-col3"></div>
     </section>
     
-    <!-- Contact modal -->
-    <div id="contact_modal" role="dialog" aria-labelledby="modal-title">
-      <div class="modal">
-        <header>
-          <h2 id="modal-title">Contactez-moi</h2>
-          <img class="closeBtn" src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        
-        <form action="" method="get">
-          <fieldset>
-            <legend>Vos coordonnées</legend>
-            
-            <label id="labelFirstname" for="firstname">Prénom</label>
-            <input
-            type="text"
-            name="firstname"
-            id="firstname"
-            aria-labelledby="labelFirstname"
-            
-            aria-required="true">
-            
-            <label id="labelLastname" for="lastname">Nom</label>
-            <input
-            type="text"
-            name="lastname"
-            id="lastname"
-            aria-labelledby="labelLastname"
-            
-            aria-required="true">
-            
-            <label id="labelEmail" for="email">Email</label>
-            <input
-            type="email"
-            name="email"
-            id="email"
-            aria-labelledby="labelEmail"
-            
-            aria-required="true">
-          </fieldset>
-          
-          <fieldset>
-            <legend>Votre message</legend>
-            <label for="message">Votre message</label>
-            <textarea id="message" name="message"></textarea>
-          </fieldset>
-          
-          <button type="submit" class="btn contact_button">Envoyer</button>
-        </form>
-        
-      </div>
-    </div>
-    
     <!-- Media display section -->
-    <section class="media-section" aria-label="photographerspictures">
-
+    <section class="media-section" aria-label="The photographer's work">
+      
       <!-- Filter -->
       <div class="menu-dropdown" role="filter" aria-label="dropdown-menu">
         <h3 id="title3">Trier par</h3>
@@ -91,25 +63,25 @@
         <!-- Dropdown menu -->
         <div class="filter_section">
           <div class="dropdown">
-            <button class="btn btn_drop" type="button" role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="filter options" aria-label="Sort by">
+            <button class="btn btn_drop" aria-haspopup="listbox" aria-expanded="false" aria-controls="filter-list" aria-label="Sort by">
               <span id="current_filter">Popularité</span>
               <span class="fa-solid fa-chevron-up"></span>
             </button>
-
-            <ul class="dropdown_content" tabindex="0" aria-hidden="true">
-                <li role="option">
-                    <button id="btnPopularity" type="button" tabindex="0" aria-label="Sort by popularity">Popularité</button>
-                    <span></span>
-                </li>
-                <li role="option">
-                    <button id="btnDate" type="button" tabindex="1" aria-label="Sort by date">Date</button>
-                    <span></span>
-                </li>
-                <li role="option">
-                    <button id="btnTitle" type="button" tabindex="2" aria-label="Sort by title">Title</button>
-                </li>
+            
+            <ul id="filter-list" class="dropdown_content" tabindex="0" aria-hidden="true">
+              <li role="option">
+                <button id="btnPopularity" type="button" tabindex="0" aria-label="Sort by popularity">Popularité</button>
+                <span></span>
+              </li>
+              <li role="option">
+                <button id="btnDate" type="button" tabindex="1" aria-label="Sort by date">Date</button>
+                <span></span>
+              </li>
+              <li role="option">
+                <button id="btnTitle" type="button" tabindex="2" aria-label="Sort by title">Title</button>
+              </li>
             </ul>
-
+            
           </div>
         </div>
       </div>
@@ -119,32 +91,85 @@
       </div>
       
       <!-- Lightbox -->
-      <div class="lightbox" role="dialog" aria-hidden="true" aria-label="image closeup view">
+      <dialog class="lightbox" aria-hidden="true" aria-label="image closeup view">
         <button class="lightbox__close" role="button" aria-label="Close dialog">Fermer</button>
         <button class="lightbox__next" role="button" aria-label="Next image">Suivant</button>
         <button class="lightbox__prev" role="button" aria-label="Previous image">Précédent</button>
         <div class="lightbox__container">
-
+          
           <!-- IMAGE A AJOUTER -->
           <img src="assets/photographersmedia/243/Animals_Rainbow.jpg" alt="">
-
+          
           <!-- TITRE IMAGE A AJOUTER -->
           <h5>Titre test</h5>
         </div>
-      </div>
-
+      </dialog>
+      
     </section>
     
     <!-- Photographer price -->
-    <div id="photographer-price" aria-label="photographerprice">
-      
+    <div id="photographer-price" aria-label="Photographer's price">
     </div>
+    
+    <!-- Contact modal -->
+    <dialog id="contact_modal" aria-label="Contact me">
+      <header>
+        <h2 id="modal-title">Contactez-moi</h2>
+      </header>
+      
+      <form action="" method="get">
+        <fieldset>
+          <legend>Vos coordonnées</legend>
+          
+          <label id="labelFirstname" for="firstname">Prénom</label>
+          <input
+          type="text"
+          name="firstname"
+          id="firstname"
+          class="focusable"
+          aria-labelledby="labelFirstname"
+          
+          aria-required="true">
+          
+          <label id="labelLastname" for="lastname">Nom</label>
+          <input
+          type="text"
+          name="lastname"
+          id="lastname"
+          class="focusable"
+          aria-labelledby="labelLastname"
+          
+          aria-required="true">
+          
+          <label id="labelEmail" for="email">Email</label>
+          <input
+          type="email"
+          name="email"
+          id="email"
+          class="focusable"
+          aria-labelledby="labelEmail"
+          
+          aria-required="true">
+        </fieldset>
+        
+        <fieldset>
+          <legend>Votre message</legend>
+          <label for="message">Votre message</label>
+          <textarea id="message" class="focusable" name="message"></textarea>
+        </fieldset>
+        
+        <button type="submit" class="btn contact_button focusable">Envoyer</button>
+        
+        <img tabindex="0" role="button" id="close-modal-btn" class="focusable" src="assets/icons/close.svg" />   
+      </form>
+      
+    </dialog>
     
   </main>
   
   <!-- Utils -->
   <script src="/scripts/utils/contactForm.js"></script>
   <script src="/scripts/utils/filterButtons.js"></script>
-    
+  
 </body>
 </html>

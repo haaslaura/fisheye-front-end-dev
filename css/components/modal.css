@@ -1,41 +1,31 @@
 /* CSS for the modal */
 
 #contact_modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(196, 196, 196, 0.4);
-}
-
-.modal {
     position: relative;
-    top: 2vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     padding: 35px;
     margin: auto;
     border-radius: 5px;
     background-color: #DB8876;
     width: 60%;
-    
 }
 
-.modal header {
+#contact_modal::backdrop {
+    background-color: rgba(196, 196, 196, 0.4);
+}
+
+#contact_modal header {
     justify-content: space-between;
     width: 100%;
 }
 
-.modal header img {
+#close-modal-btn {
     cursor: pointer;
+    position: absolute;
+    top: 3%;
+    right: 3%;
 }
 
-.modal header h2 {
+#contact_modal header h2 {
     font-size: 260%;
     font-weight: normal;
     text-align: left;
@@ -83,11 +73,6 @@ form input, form textarea {
     border-radius: 5px;
 }
 
-form input:focus, form textarea:focus {
-    outline: 4px var(--color-main) solid;
-    border-radius: 5px;
-}
-
 form .contact_button {
     margin-top: 20px;
     font-size: 100%;
@@ -97,6 +82,13 @@ form .contact_button:hover {
     background-color: var(--color-main);
     color: white;
 }
+
+/*** Focus CSS   ***/
+form input:focus, form textarea:focus, #close-modal-btn:focus {
+    outline: 4px var(--color-main) solid;
+    border-radius: 5px;
+}
+
 form .contact_button:focus {
     background-color: var(--color-main);
     color: white;
@@ -116,7 +108,8 @@ form .contact_button:focus {
     animation : message-appears 0.3s ease;
 }
 .data-tag::before {
-    content: url(../assets/icons/circle-exclamation-solid.svg);
+    content: url("../../assets/icons/circle-exclamation-solid.svg")
+    
 }
 p.data-tag::before {
     margin-right: 5px;

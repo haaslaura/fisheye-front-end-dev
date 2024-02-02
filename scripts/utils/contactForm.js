@@ -4,8 +4,16 @@ This file contains the functions for the modal
 
 *******************************************************/
 
-// Global variable
-const modal = document.getElementById("contact_modal");
+/***********************/
+/** GLOABAL VARIABLES **/
+/***********************/
+
+// For the modal
+const modalDialog = document.getElementById("contact_modal");
+const openModalBtn = document.getElementById("open-modal-btn");
+const closeModalBtn = document.getElementById("close-modal-btn");
+
+// For the form
 const form = document.querySelector("form");
 const formData = document.querySelectorAll("form input");
 const messageArea = document.querySelector("textarea");
@@ -13,62 +21,66 @@ const messageArea = document.querySelector("textarea");
 // Regular expression to check the email
 let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i");
 
+
 /*********************/
 /*** OPENING MODAL ***/
 /*********************/
 
-function displayModal() {
-	modal.style.display = "block";
-	
-	// Switch the rest of the site to aria-hidden true
-	const otherContent = document.querySelectorAll("body > *:not(#contact_modal)");
-	otherContent.forEach(element => {
-		element.setAttribute("aria-hidden", "true");
-	});
-	
-	// Switch the modal to aria-hidden false
-	modal.setAttribute("aria-hidden", "false");
-	
-	// Focus management
-	const currentFocusedElement = document.querySelector(".modal");
-	if (!currentFocusedElement) {
-		currentFocusedElement.focus();
-	}
-}
+openModalBtn.addEventListener("click", () => {
+	modalDialog.showModal();
+	trapFocusIn(modalDialog);
+});
+
 
 /*********************/
 /**** CLOSE MODAL ****/
 /*********************/
 
-function closeModal() {
-	
-	// Switch the rest of the site to aria-hidden false
-	const otherContent = document.querySelectorAll("body > *:not(#contact_modal)");
-	otherContent.forEach(element => {
-		element.setAttribute("aria-hidden", "false");
-	});
-	
-	// Switch the modal to aria-hidden true
-	modal.setAttribute("aria-hidden", "true");
-	
-	modal.style.display = "none";
-}
+// Le bouton "Fermer" ferme le dialogue
+closeModalBtn.addEventListener("click", () => {
+	modalDialog.close();
+});
 
-
-// Close modal when escape key is pressed
-function handleKeyDown(event) {
-	if (event.key === "Escape" && modal.style.display !== "none") {
-		closeModal();
-	}
-}
-document.addEventListener("keydown", handleKeyDown);
+closeModalBtn.addEventListener("keypress", () => {
+	modalDialog.close();
+});
 
 // Close modal at click outside the modal
-modal.addEventListener("click", (event) => {
-	if (event.target === modal) {
-	  closeModal();
+modalDialog.addEventListener("click", (event) => {
+	if (event.target === modalDialog) {
+		modalDialog.close();
 	}
-  });
+});
+
+/*********************/
+/**** TRAP FOCUS *****/
+/*********************/
+
+function trapFocusIn(modal) {
+	modal.addEventListener("keydown", function(e) {
+		
+		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
+		if (!isTabPressed) return;
+		
+		let focusableElement = modal.querySelectorAll(".focusable");
+		let firstFocusableElement = focusableElement[0];
+		let lastFocusableElement = focusableElement[focusableElement.length - 1];
+		
+		if (e.shiftKey) {
+			// If the Shift key is held down, moves the focus to the previous element
+			if (document.activeElement === firstFocusableElement) {
+				lastFocusableElement.focus();
+				e.preventDefault();
+			}
+		} else {
+			// Otherwise, moves the focus to the next element
+			if (document.activeElement === lastFocusableElement) {
+				firstFocusableElement.focus();
+				e.preventDefault();
+			}
+		}
+	});
+}
 
 
 /*********************/
@@ -78,7 +90,9 @@ modal.addEventListener("click", (event) => {
 // Function to display error message
 function displayErrorMessages() {
 	
-	// Function to add error message
+	// Prepare to return a booleen
+	let correct = true;
+	
 	function addErrorMessage(input, errorMessage) {
 		input.classList.add("data-error");
 		
@@ -90,7 +104,6 @@ function displayErrorMessages() {
 		input.parentNode.insertBefore(messageError, input.nextSibling);
 	}
 	
-	// Fonction pour remove error message
 	function removeErrorMessages() {
 		const errorElements = document.querySelectorAll(".data-tag");
 		errorElements.forEach((error) => error.remove());
@@ -110,19 +123,23 @@ function displayErrorMessages() {
 			case "firstname":
 			case "lastname":
 			if (!valueInput) {
+				correct = false;
 				addErrorMessage(input, `Merci de remplir votre ${idInput === "firstname" ? "prénom" : "nom"}.`);
 			}
 			break;
 			
 			case "email":
 			if (!valueInput) {
+				correct = false;
 				addErrorMessage(input, "Merci de remplir votre email.");
 			} else if (!regexMail.test(valueInput)) {
+				correct = false;
 				addErrorMessage(input, "Merci de remplir un email correct.");
 			}
 			break;
 			
 			default:
+			correct = false;
 			alert("Il y a une erreur dans le formulaire.");
 			console.log("Un champ du formulaire n'est peut-être pas pris en compte.");
 		}
@@ -130,10 +147,13 @@ function displayErrorMessages() {
 	
 	// Check the text field
 	let valueMessage = messageArea.value.trim();
-	
 	if (!valueMessage) {
+		correct = false;
 		addErrorMessage(messageArea, "Votre message est vide.");
 	}
+	
+	// Return booleen
+	return correct;
 }
 
 
@@ -145,9 +165,15 @@ form.addEventListener("submit", (event) => {
 	event.preventDefault();
 	displayErrorMessages();
 	
-	formData.forEach(input => { 
-		console.log(input.value.trim());
-	});
-	
-	console.log(messageArea.value.trim());
+	if (displayErrorMessages()) {
+		
+		// Display value in the console
+		formData.forEach(input => { 
+			console.log(input.value.trim());
+		});
+		
+		console.log(messageArea.value.trim());
+		
+		modalDialog.innerHTML = "Merci pour votre message !</br>Le photographe reviendra vers vous sous peu."
+	}
 });
