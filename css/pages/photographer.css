@@ -140,7 +140,7 @@
     width: 150px;
 }
 
-.dropdown_content li span {
+.dropdown_content li .line {
     display: block;
     margin: 0 auto 0 auto;
     width: 85%;
@@ -167,6 +167,11 @@
     align-items: center;
     width: 150px;
     background-color: var(--color-main);
+}
+
+#btnPopularity {
+    display: flex;
+    justify-content: space-between;
 }
 
 .dropdown_content li button {
