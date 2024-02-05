@@ -68,17 +68,17 @@
               <span class="fa-solid fa-chevron-up"></span>
             </button>
             
-            <ul id="filter-list" class="dropdown_content" tabindex="0" aria-hidden="true">
+            <ul id="filter-list" class="dropdown_content" aria-hidden="true">
               <li role="option">
-                <button id="btnPopularity" type="button" tabindex="0" aria-label="Sort by popularity">Popularité</button>
+                <button id="btnPopularity" aria-label="Sort by popularity">Popularité</button>
                 <span></span>
               </li>
               <li role="option">
-                <button id="btnDate" type="button" tabindex="1" aria-label="Sort by date">Date</button>
+                <button id="btnDate" aria-label="Sort by date">Date</button>
                 <span></span>
               </li>
               <li role="option">
-                <button id="btnTitle" type="button" tabindex="2" aria-label="Sort by title">Title</button>
+                <button id="btnTitle" aria-label="Sort by title">Title</button>
               </li>
             </ul>
             
@@ -91,18 +91,17 @@
       </div>
       
       <!-- Lightbox -->
-      <dialog class="lightbox" aria-hidden="true" aria-label="image closeup view">
+      <dialog id="lightbox" aria-label="Image closeup view">
         <button class="lightbox__close" role="button" aria-label="Close dialog">Fermer</button>
         <button class="lightbox__next" role="button" aria-label="Next image">Suivant</button>
         <button class="lightbox__prev" role="button" aria-label="Previous image">Précédent</button>
-        <div class="lightbox__container">
+        
+        <!-- IMAGE A AJOUTER -->
+        <img src="assets/photographersmedia/243/Animals_Rainbow.jpg" alt="">
           
-          <!-- IMAGE A AJOUTER -->
-          <img src="assets/photographersmedia/243/Animals_Rainbow.jpg" alt="">
-          
-          <!-- TITRE IMAGE A AJOUTER -->
-          <h5>Titre test</h5>
-        </div>
+        <!-- TITRE IMAGE A AJOUTER -->
+        <h5>Titre test</h5>
+        
       </dialog>
       
     </section>
@@ -169,7 +168,6 @@
   
   <!-- Utils -->
   <script src="/scripts/utils/contactForm.js"></script>
-  <script src="/scripts/utils/filterButtons.js"></script>
   
 </body>
 </html>

@@ -4,66 +4,75 @@ This file contains the functions for increment or decrement like on media
 
 ************************************************************/
 
+
 export function addNewLike() {
-        
-    // Retrieve hearts items & number element
-    const heartEmptyBtn = document.querySelectorAll("#heart-empty");
-    const heartFullBtn = document.querySelectorAll("#heart-full");
-    let numberElement = document.querySelectorAll("#like-number");
 
-    // Add event on buttons
-    for(let i = 0; i < heartEmptyBtn.length; i++) {
-    
-        heartEmptyBtn[i].addEventListener("click", () => increment(i));
-        heartEmptyBtn[i].addEventListener("keypress", event => {
-            event.preventDefault();
-            increment(i);
+    // Retrieve heart item & number element
+    const heartBtn = document.querySelectorAll(".info-media .fa-heart");
+        
+    // Browse buttons
+    for(let i = 0; i < heartBtn.length; i++) {
+
+        heartBtn[i].addEventListener("click", () => {
+
+            if (heartBtn[i].classList.contains('heart-empty')) {
+                increment(i, heartBtn);
+            } else {
+                decrement(i, heartBtn);
+            }
         });
-    };
 
-    for(let i = 0; i < heartFullBtn.length; i++) {
-        heartFullBtn[i].addEventListener("click", () => decrement(i));
-        heartFullBtn[i].addEventListener("keypress", event => {
-            event.preventDefault();
-            decrement(i);
+        heartBtn[i].addEventListener("keypress", event => {
+
+            if (heartBtn[i].classList.contains('heart-empty')) {
+                event.preventDefault();
+                increment(i, heartBtn);
+            } else {
+                event.preventDefault();
+                decrement(i, heartBtn);
+            }
         });
-    };
-
-
-    function increment(i) {
-       
-        // Increment the short numberElement by 1
-        let numberLike = parseInt(numberElement[i].innerText);
-        numberElement[i].innerText = numberLike + 1;
-
-        // Modifying attributes
-        heartEmptyBtn[i].style.display = "none";
-        heartFullBtn[i].style.display = "block";
-        heartEmptyBtn[i].setAttribute("aria-hidden", "true");
-        heartFullBtn[i].setAttribute("aria-hidden", "false");
-
-        // Modify total page likes
-        let pageTotalLike = document.getElementById("total-likes");
-        let numberPageTotalLike = parseInt(pageTotalLike.innerText);
-        pageTotalLike.innerHTML = numberPageTotalLike + 1;
     }
+}
+
+
+function increment(i, heartBtn) {
+
+    // Retrieve heart item & number element
+    let numberElement = document.querySelectorAll(".like-number");
+    
+    // Increment the short numberElement by 1
+    let numberLike = parseInt(numberElement[i].innerText);
+    numberElement[i].innerText = numberLike + 1;
+    
+    // Modifying attributes
+    heartBtn[i].classList.remove("fa-regular", "heart-empty");
+    heartBtn[i].classList.add("fa-solid", "heart-full");
+    heartBtn[i].setAttribute("aria-label", "Dislike this media");
+
+    // Modify total page likes
+    let pageTotalLike = document.getElementById("total-likes");
+    let numberPageTotalLike = parseInt(pageTotalLike.innerText);
+    pageTotalLike.innerHTML = numberPageTotalLike + 1;
+}
     
     
-    function decrement(i) {
-        
-        // Decrement the short numberElement by 1
-        let numberLike = parseInt(numberElement[i].innerText);
-        numberElement[i].innerText = numberLike - 1;
-        
-        // Modifying attributes
-        heartEmptyBtn[i].style.display = "block";
-        heartFullBtn[i].style.display = "none";
-        heartEmptyBtn[i].setAttribute("aria-hidden", "false");
-        heartFullBtn[i].setAttribute("aria-hidden", "true");
+function decrement(i, heartBtn) {
 
-        // Modify total page likes
-        let pageTotalLike = document.getElementById("total-likes");
-        let numberPageTotalLike = parseInt(pageTotalLike.innerText);
-        pageTotalLike.innerHTML = numberPageTotalLike - 1;
-    }
+    // Retrieve heart item & number element
+    let numberElement = document.querySelectorAll(".like-number");
+
+    // Decrement the short numberElement by 1
+    let numberLike = parseInt(numberElement[i].innerText);
+    numberElement[i].innerText = numberLike - 1;
+    
+    // Modifying attributes
+    heartBtn[i].classList.remove("fa-solid", "heart-full");
+    heartBtn[i].classList.add("fa-regular", "heart-empty");
+    heartBtn[i].setAttribute("aria-label", "Like this media");
+
+    // Modify total page likes
+    let pageTotalLike = document.getElementById("total-likes");
+    let numberPageTotalLike = parseInt(pageTotalLike.innerText);
+    pageTotalLike.innerHTML = numberPageTotalLike - 1;
 }

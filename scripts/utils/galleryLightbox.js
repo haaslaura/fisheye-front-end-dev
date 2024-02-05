@@ -4,113 +4,158 @@ This file contains the functions for the gallery Lightbox
 
 **********************************************************************/
 
-const lightbox = document.querySelector(".lightbox");
+import { MediaFactory } from "../classes/MediaFactory.js";
+
+/***********************/
+/** GLOABAL VARIABLES **/
+/***********************/
+const lightbox = document.getElementById("lightbox");
+const closeLightBoxBtn = document.querySelector(".lightbox__close");
+const nextLightBoxBtn = document.querySelector(".lightbox__next");
+const prevLightBoxBtn = document.querySelector(".lightbox__prev");
 
 
+/*********************/
+/*** INIT LIGHTBOX ***/
+/*********************/
 export function initLightbox(mediaData) {
-    addEventOpeningLightbox(mediaData);
-    addEventCloseLightbox();
+    openingLightbox(mediaData);
+    closeLightbox();
+}
 
-    // Close lightbox when escape key is pressed
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && lightbox.style.display !== "none") {
-            closeLightbox();
+
+/**********************/
+/** OPENING LIGHTBOX **/
+/**********************/
+function openingLightbox(mediaData) {
+    
+    // Récupérer tous les boutons pour ouvrir la lightbox
+    const openLightboxLinks = document.querySelectorAll("article a");
+
+    openLightboxLinks.forEach(link => {
+
+        // Pour chaque lien, récupérer son id
+        let idLink = link.dataset.id;
+
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            lightbox.showModal();
+            displayMedia(mediaData, idLink);
+            trapFocusIn(lightbox);
+        });
+    });
+}
+
+
+/*********************/
+/*** DISPLAY MEDIA ***/
+/*********************/
+
+
+// Afficher le bon média et le bon titre
+function displayMedia(mediaData, idLink) {
+
+    console.log("pouet");
+    console.log(mediaData);
+    
+    // Sorting data using the factory
+	const mediaArray = mediaData.map(media => new MediaFactory(media));
+    console.log(mediaArray);
+    
+    // Récupérer l'id du lien en cours,
+    // donc récupérer tous les liens et les parcourir
+    
+    console.log(idLink); // donne bien l'id du lien cliqué
+
+    for (let i = 0; i < mediaArray.length; i++) {
+        
+        if (mediaArray[i]._id === idLink) {
+            // construire le dom
+            console.log("c'est le bon média");
+
+        } else {
+            console.log("Erreur, média indisponible");
+            console.log(mediaArray[i]._id);
+        }
+    }
+
+    /*
+    mediaArray.forEach(media => {
+
+        if (media._id === idLink) {
+            // construire le dom
+            console.log("pouet");
+
+        } else {
+            console.log("Erreur, média indisponible");
+        }
+    });
+    */
+}
+
+
+
+/*********************/
+/**** TRAP FOCUS *****/
+/*********************/
+
+function trapFocusIn(lightbox) {
+	lightbox.addEventListener("keydown", function(e) {
+		
+		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
+		if (!isTabPressed) return;
+		
+		let focusableElement = lightbox.querySelectorAll("button");
+		let firstFocusableElement = focusableElement[0];
+		let lastFocusableElement = focusableElement[focusableElement.length - 1];
+		
+		if (e.shiftKey) {
+			// If the Shift key is held down, moves the focus to the previous element
+			if (document.activeElement === firstFocusableElement) {
+				lastFocusableElement.focus();
+				e.preventDefault();
+			}
+		} else {
+			// Otherwise, moves the focus to the next element
+			if (document.activeElement === lastFocusableElement) {
+				firstFocusableElement.focus();
+				e.preventDefault();
+			}
+		}
+	});
+}
+
+
+/*
+    // Pour chaque bouton, ajouter des évènements d'ouverture
+    links.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            openingLightbox(mediaData, this.dataset.id);
+        });
+        link.addEventListener("keypress", function (event) {
+            event.preventDefault();
+            openingLightbox(mediaData, this.dataset.id);
+        });
+    })
+*/
+
+
+/********************/
+/** CLOSE LIGHTBOX **/
+/********************/
+
+function closeLightbox() {
+
+    // Le bouton "Fermer" ferme le dialogue
+    closeLightBoxBtn.addEventListener("click", () => {
+        lightbox.close();
+    });
+
+    // Close modal at click outside the modal
+    closeLightBoxBtn.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+            lightbox.close();
         }
     });
 }
-
-
-function addEventOpeningLightbox(mediaData) {
-    
-    // Récupérer tous les boutons pour ouvrir la lightbox
-    const links = document.querySelectorAll("article a");
-
-    // Pour chaque bouton, ajouter des évènements d'ouverture
-    links.forEach(link => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            openingLightbox(mediaData);
-        });
-        link.addEventListener("keypress", event => {
-            event.preventDefault();
-            openingLightbox(mediaData);
-        });
-    })
-}
-
-
-// Fonction pour ouvrir la galerie
-function openingLightbox(mediaData) {
-
-    // Modify the attributes of the lightbox
-    lightbox.style.display = "block";
-    lightbox.setAttribute("aria-hidden", "false");
-
-    // Display the media and its title
-    displayMedia(mediaData);
-    
-    // Modify the attributes of the rest of the site
-	const otherContent = document.querySelectorAll("body > *:not(.lightbox)");
-	otherContent.forEach(element => {
-		element.setAttribute("aria-hidden", "true");
-	});
-
-    // Focus management
-	const currentFocusedElement = document.querySelector(".lightbox");
-	if (!currentFocusedElement) {
-		currentFocusedElement.focus();
-	}
-}
-
-function displayMedia(mediaData) {
-
-    // Il faudrait parcourir le tableau des média, ouvrir le média réellement en cours (et son titre)
-    
-    // Récupérer le container pour l'affichage
-    const mediaContainer = document.querySelector(".lightbox__container");
-
-    // test
-    console.log(mediaContainer);
-    console.log(mediaData);
-
-    mediaContainer.innerHTML = `
-        <img src="${mediaData.url}" alt="${mediaData.title}">
-        <h5>${mediaData.title}</h5>
-    `;
-
-}
-
-
-function addEventCloseLightbox() {
-    
-    // Récupérer le bouton de fermeture
-    const closeBtnLightbox = document.querySelector(".lightbox__close");
-
-    // Ajout d'un évènement sur le bouton
-    closeBtnLightbox.addEventListener("click", () => {
-        closeLightbox();
-    });
-    closeBtnLightbox.addEventListener("keypress", event => {
-        closeLightbox();
-    });
-}
-
-// Fonction pour fermer la galerie
-function closeLightbox() {
-    
-    // Modify the attributes of the rest of the site
-    const otherContent = document.querySelectorAll("body > *:not(.lightbox)");
-    otherContent.forEach(element => {
-        element.setAttribute("aria-hidden", "false");
-    });
-
-    // Modify the attributes of the lightbox
-    lightbox.setAttribute("aria-hidden", "true");
-    lightbox.style.display = "none";
-}
-
-
-
-// Une fonction pour contruire le DOM
-
-// Fonction(s) flèche gauche et flèche droite

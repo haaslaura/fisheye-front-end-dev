@@ -215,6 +215,10 @@
     font-weight: 500;
 }
 
+#photographer-price p .fa-heart {
+    margin-left: 5px;
+}
+
 
 /*********************/
 /***** ANIMATIONS ****/

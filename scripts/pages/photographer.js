@@ -73,7 +73,8 @@ async function initPage() {
 	const mediaData = await getMediaById(idItem);
 	
 	displayGallery(mediaData);
-	displayFilter();
+	displayFilter(mediaData);
+
 	addNewLike();	
 	initLightbox(mediaData);
 }
@@ -98,13 +99,16 @@ async function getMediaById(id) {
 	}
 }
 
+
+// Sortir la média factory pour utiliser le tableau
+// directement en paramètre ?
+
 // Show media gallery
-async function displayGallery(mediaData) {
+export async function displayGallery(mediaData) {
 
 	// Vider le bloc avec tous les média
 	// Pour pouvoir faire un ré appel de cette fonction dans le filtre
 	document.querySelector(".media-section__media-card").innerHTML = "";
-	
 	
 	// Sorting data using the factory
 	const mediaArray = mediaData.map(media => new MediaFactory(media));

@@ -15,8 +15,9 @@ export class Video extends Media {
         const lightboxLink = document.createElement("a");
         lightboxLink.setAttribute("href", `../../assets/photographersmedia/${this._photographerId}/${this._video}`);
         lightboxLink.setAttribute("role", "button");
-        lightboxLink.setAttribute("aria-label", "Ouvre la vue lightbox");
-        
+        lightboxLink.setAttribute("aria-label", "Opens the lightbox view");
+        lightboxLink.dataset.id = `${this._id}`;
+
         const elementMedia = document.createElement("video");
         elementMedia.setAttribute("src", `./assets/photographersmedia/${this._photographerId}/${this._video}`);
         elementMedia.setAttribute("type", "video/mp4");
@@ -29,10 +30,9 @@ export class Video extends Media {
         titleMedia.innerHTML = this._title;
         
         const likeMedia = document.createElement("p");
-		likeMedia.innerHTML = `<span id="like-number">${this._likes}</span>
-		<span tabindex="0">
-            <i tabindex="0" id="heart-empty" class="fa-regular fa-heart heart-empty" aria-label="Like this media" aria-hidden="false"></i>
-            <i tabindex="0" id="heart-full" class="fa-solid fa-heart heart-full" aria-label="Dislike this media" aria-hidden="true"></i>
+		likeMedia.innerHTML = `<span class="like-number">${this._likes}</span>
+		<span>
+            <i tabindex="0" role="button" class="fa-regular fa-heart heart-empty" aria-label="Like this media"></i>
 		</span>`;
         
         const priceText = document.createElement("p");

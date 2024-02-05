@@ -4,15 +4,21 @@ This file contains the functions for the filters buttons
 
 *******************************************************/
 
-const btnDrop = document.querySelector(".btn_drop");
-const dropdown = document.querySelector(".dropdown");
-const dropdownContent = document.querySelector(".dropdown_content");
+import { MediaFactory } from "../classes/MediaFactory.js";
+import { displayGallery } from "../pages/photographer.js";
+
+/***********************/
+/** GLOABAL VARIABLES **/
+/***********************/
+const dropBtn = document.querySelector(".btn_drop"); // btn principal
+const dropdown = document.querySelector(".dropdown"); // tout le menu, btn + ul
+const dropdownContent = document.querySelector(".dropdown_content"); // liste ul
+const filterBtns = document.querySelectorAll("ul button"); // Tous les boutons de la liste ul
 
 
-export function displayFilter() {
-    
-    btnDrop.addEventListener("click", () => openDropdownContent());
-    btnDrop.addEventListener("keypress", () => openDropdownContent());
+export function displayFilter(mediaData) {
+   
+    dropBtn.addEventListener("click", () => openDropdownContent(mediaData));
 
     // Close filter at click outside
     document.addEventListener("click", (event) => {
@@ -30,68 +36,127 @@ export function displayFilter() {
 }
 
 
-function openDropdownContent() {
-    
-    // Faire disparaitre le bouton et apparaitre le menu
-    btnDrop.style.display = "none";
-    btnDrop.setAttribute("aria-hidden", "true");
+/**********************/
+/** OPENING & CLOSE ***/
+/**********************/
+
+// Faire disparaitre le bouton et apparaitre le menu
+function openDropdownContent(mediaData) {   
+    dropBtn.style.display = "none";
+    dropBtn.setAttribute("aria-hidden", "true");
     dropdownContent.style.maxHeight = "100%";
+    dropdownContent.setAttribute("aria-hidden", "false");
     dropdownContent.setAttribute("aria-expanded", "true");
     
-    // Récupérer les boutons
-    const btnPopularity = document.getElementById("btnPopularity");
-    const btnDate = document.getElementById("btnDate");
-    const btnTitle = document.getElementById("btnTitle");
-    
-    btnPopularity.addEventListener("click", () => sortByPopularity());
-    btnPopularity.addEventListener("keypress", event => {
-        sortByPopularity();
-    });
-    
-    btnDate.addEventListener("click", () => sortByDate());
-    btnDate.addEventListener("keypress", event => {
-        sortByDate();
-    });
-    
-    btnTitle.addEventListener("click", () => sortByTitle());
-    btnTitle.addEventListener("keypress", event => {
-        sortByTitle();
-    });
+    trapFocusIn();
+    addFilterEvent(mediaData);
 }
 
-
-function sortByPopularity() {
-    console.log("trie par popularité"); // Print trop de fois
-    closeFilterMenu();
-    pressEscapeButton();
-}
-
-function sortByDate() {
-    console.log("trie par date"); // Print trop de fois
-    closeFilterMenu();
-    pressEscapeButton();
-}
-
-function sortByTitle() {
-    console.log("trie par titre"); // Print trop de fois
-    closeFilterMenu();
-    pressEscapeButton();
-}
-
+// Faire disparaitre le menu et remettre le bouton
 function closeFilterMenu() {
-    // Faire disparaitre le menu et remettre le bouton
     dropdownContent.style.maxHeight = "0";
     dropdownContent.setAttribute("aria-hidden", "true");
-    btnDrop.style.display = "flex";
-    btnDrop.setAttribute("aria-hidden", "false");
+    dropBtn.style.display = "flex";
+    dropBtn.setAttribute("aria-hidden", "false");
 }
 
 
+/*********************/
+/**** TRAP FOCUS *****/
+/*********************/
+
+function trapFocusIn() {
+	dropdownContent.addEventListener("keydown", function(e) {
+		
+		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
+		if (!isTabPressed) return;
+		
+		let focusableElement = filterBtns;
+		let firstFocusableElement = focusableElement[0];
+		let lastFocusableElement = focusableElement[focusableElement.length - 1];
+		
+		if (e.shiftKey) {
+			// If the Shift key is held down, moves the focus to the previous element
+			if (document.activeElement === firstFocusableElement) {
+				lastFocusableElement.focus();
+				e.preventDefault();
+			}
+		} else {
+			// Otherwise, moves the focus to the next element
+			if (document.activeElement === lastFocusableElement) {
+				firstFocusableElement.focus();
+				e.preventDefault();
+			}
+		}
+	});
+}
 
 
+/**********************/
+/** FILTER FUNCTIONS **/
+/**********************/
 
-// aria-current ?
-// Comment gérer les tabindex ?
+// Evènement sur les boutons, en fonction de l'id
+function addFilterEvent(mediaData) {
+    filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            switch (btn.id) {
+                case 'btnPopularity':
+                    sortByPopularity(mediaData);
+                    break;
+                case 'btnDate':
+                    sortByDate(mediaData);
+                    break;
+                case 'btnTitle':
+                    sortByTitle(mediaData);
+                    break;
+                default:
+                    console.log("Erreur, aucune fonction trie disponible");
+            }
+        });
+    });
+}
+
+
+function sortByPopularity(mediaData) {
+    console.log("trie par popularité");
+
+    const mediaArray = mediaData.map(media => new MediaFactory(media));
+    console.log(mediaArray);
+}
+
+function sortByDate(mediaData) {
+    console.log("trie par date");
+
+    const mediaArray = mediaData.map(media => new MediaFactory(media));
+    console.log(mediaArray);
+}
+
+function sortByTitle(mediaData) {
+    console.log("trie par titre");
+
+    const mediaArray = mediaData.map(media => new MediaFactory(media));
+    console.log("Tableau avant sort()");
+    console.log(mediaArray);
+
+    mediaArray.sort((a, b) => {
+        if (a._title > b._title) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
+    
+    console.log("Tableau après sort()");
+    console.log(mediaArray);
+
+    const newMediaData = Object.assign({}, mediaArray);
+    console.log(newMediaData);
+
+    displayGallery(newMediaData);
+}
+
+
 
 // Exemple de fonction trie
 /*
