@@ -18,8 +18,8 @@ const prevLightBoxBtn = document.querySelector(".lightbox__prev");
 /*********************/
 /*** INIT LIGHTBOX ***/
 /*********************/
-export function initLightbox(mediaData) {
-    openingLightbox(mediaData);
+export function initLightbox(mediaArray) {
+    openingLightbox(mediaArray);
     closeLightbox();
 }
 
@@ -27,7 +27,7 @@ export function initLightbox(mediaData) {
 /**********************/
 /** OPENING LIGHTBOX **/
 /**********************/
-function openingLightbox(mediaData) {
+function openingLightbox(mediaArray) {
     
     // Récupérer tous les boutons pour ouvrir la lightbox
     const openLightboxLinks = document.querySelectorAll("article a");
@@ -40,7 +40,7 @@ function openingLightbox(mediaData) {
         link.addEventListener("click", (e) => {
             e.preventDefault();
             lightbox.showModal();
-            displayMedia(mediaData, idLink);
+            displayMedia(mediaArray, idLink);
             trapFocusIn(lightbox);
         });
     });
@@ -53,15 +53,11 @@ function openingLightbox(mediaData) {
 
 
 // Afficher le bon média et le bon titre
-function displayMedia(mediaData, idLink) {
+function displayMedia(mediaArray, idLink) {
 
     console.log("pouet");
-    console.log(mediaData);
-    
-    // Sorting data using the factory
-	const mediaArray = mediaData.map(media => new MediaFactory(media));
     console.log(mediaArray);
-    
+        
     // Récupérer l'id du lien en cours,
     // donc récupérer tous les liens et les parcourir
     
@@ -131,11 +127,11 @@ function trapFocusIn(lightbox) {
     links.forEach(link => {
         link.addEventListener("click", function (event) {
             event.preventDefault();
-            openingLightbox(mediaData, this.dataset.id);
+            openingLightbox(mediaArray, this.dataset.id);
         });
         link.addEventListener("keypress", function (event) {
             event.preventDefault();
-            openingLightbox(mediaData, this.dataset.id);
+            openingLightbox(mediaArray, this.dataset.id);
         });
     })
 */

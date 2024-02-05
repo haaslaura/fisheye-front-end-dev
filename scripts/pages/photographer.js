@@ -71,12 +71,14 @@ async function initPage() {
 
 	// Retrieve the photographer's media array
 	const mediaData = await getMediaById(idItem);
-	
-	displayGallery(mediaData);
-	displayFilter(mediaData);
 
-	addNewLike();	
-	initLightbox(mediaData);
+	// Sorting data using the factory
+	const mediaArray = mediaData.map(media => new MediaFactory(media));
+	
+	displayGallery(mediaArray);
+	displayFilter(mediaArray);
+	addNewLike(mediaArray);	
+	initLightbox(mediaArray);
 }
 
 
@@ -100,40 +102,16 @@ async function getMediaById(id) {
 }
 
 
-// Sortir la média factory pour utiliser le tableau
-// directement en paramètre ?
-
 // Show media gallery
-export async function displayGallery(mediaData) {
+export async function displayGallery(mediaArray) {
 
-	// Vider le bloc avec tous les média
-	// Pour pouvoir faire un ré appel de cette fonction dans le filtre
+	// Clean the block call up the filter function
 	document.querySelector(".media-section__media-card").innerHTML = "";
-	
-	// Sorting data using the factory
-	const mediaArray = mediaData.map(media => new MediaFactory(media));
-	
-	// Prepare to add up the likes
-	const emptyLikesArray = [];
 	
 	// Displaying the gallery using the template
 	mediaArray.forEach(media => {
 		
 		const mediaSection = document.querySelector(".media-section__media-card");
 		mediaSection.appendChild(media.getMediaDOM());
-		
-		// Take each like of these media and put them in a table
-		emptyLikesArray.push(media._likes);
-	})
-	
-	// Add likes & Install the total in the DOM
-	const totalLikes = emptyLikesArray.reduce(function(accumulator, currentValue) {
-		return accumulator + currentValue;
 	});
-	
-	const insertPrice = document.getElementById("photographer-price");
-	const priceLikes = document.createElement("p");
-	priceLikes.innerHTML = `<span id="total-likes">${totalLikes}</span><span><i class="fa-solid fa-heart"></i></span>`;
-	insertPrice.appendChild(priceLikes);
-
 }
