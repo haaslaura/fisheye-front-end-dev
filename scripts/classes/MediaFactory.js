@@ -2,16 +2,16 @@ import { Video } from "./Video.js";
 import { Image } from "./Image.js";
 
 export class MediaFactory {
-    constructor(data) {
+	constructor(data) {
         
-        if (data.image) {
-            return new Image(data);
+		if (data.image) {
+			return new Image(data);
             
-        } else if (data.video) {
-            return new Video(data);
+		} else if (data.video) {
+			return new Video(data);
             
-        } else {
-            throw 'Format inconnu';
-        }      
-    }
+		} else {
+			throw "Format inconnu";
+		}      
+	}
 }

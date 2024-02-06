@@ -9,7 +9,8 @@ import { photographerTemplate } from "../templates/photographerInfo.js";
 
 import { getData } from "../utils/getData.js";
 import { addNewLike } from "../utils/addNewLike.js";
-import { initLightbox } from "../utils/galleryLightbox.js"
+import { displayNumberTotalOfLike } from "../utils/totalLike.js";
+import { initLightbox } from "../utils/galleryLightbox.js";
 import { displayFilter } from "../utils/filterButtons.js";
 
 import { MediaFactory } from "../classes/MediaFactory.js";
@@ -68,16 +69,16 @@ async function initPage() {
 	// Recovers data from photographer
 	const photographer = await getPhotographerById(idItem);
 	displayData(photographer);
-
+	
 	// Retrieve the photographer's media array
 	const mediaData = await getMediaById(idItem);
-
+	
 	// Sorting data using the factory
 	const mediaArray = mediaData.map(media => new MediaFactory(media));
 	
 	displayGallery(mediaArray);
+	displayNumberTotalOfLike(mediaArray);
 	displayFilter(mediaArray);
-	addNewLike(mediaArray);	
 	initLightbox(mediaArray);
 }
 
@@ -104,7 +105,7 @@ async function getMediaById(id) {
 
 // Show media gallery
 export async function displayGallery(mediaArray) {
-
+	
 	// Clean the block call up the filter function
 	document.querySelector(".media-section__media-card").innerHTML = "";
 	
@@ -114,4 +115,6 @@ export async function displayGallery(mediaArray) {
 		const mediaSection = document.querySelector(".media-section__media-card");
 		mediaSection.appendChild(media.getMediaDOM());
 	});
+	
+	addNewLike();
 }

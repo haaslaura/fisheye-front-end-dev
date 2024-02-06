@@ -19,8 +19,8 @@ let currentIndex;
 /*** INIT LIGHTBOX ***/
 /*********************/
 export function initLightbox(mediaArray) {
-    openingLightbox(mediaArray);
-    closeLightbox();
+	openingLightbox(mediaArray);
+	closeLightbox();
 }
 
 
@@ -29,36 +29,36 @@ export function initLightbox(mediaArray) {
 /**********************/
 function openingLightbox(mediaArray) {
     
-    document.querySelectorAll("article a")
-    .forEach((link, index, links) => {
+	document.querySelectorAll("article a")
+		.forEach((link, index, links) => {
         
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            currentIndex = index; // Mise à jour de l'indice
+			link.addEventListener("click", (e) => {
+				e.preventDefault();
+				currentIndex = index; // Mise à jour de l'indice
 
-            lightbox.showModal();
-            displayMedia(link.dataset.id, mediaArray);
-            trapFocusIn(lightbox);
+				lightbox.showModal();
+				displayMedia(link.dataset.id, mediaArray);
+				trapFocusIn(lightbox);
             
-            // Ajouter la logique pour les boutons fléchés
-            nextLightBoxBtn.addEventListener("click", () => {
+				// Ajouter la logique pour les boutons fléchés
+				nextLightBoxBtn.addEventListener("click", () => {
                 
-                currentIndex = (currentIndex + 1) % links.length;
-                const nextLink = links[currentIndex];
-                displayMedia(nextLink.dataset.id, mediaArray);
+					currentIndex = (currentIndex + 1) % links.length;
+					const nextLink = links[currentIndex];
+					displayMedia(nextLink.dataset.id, mediaArray);
                 
-            });
+				});
             
-            prevLightBoxBtn.addEventListener("click", () => {
+				prevLightBoxBtn.addEventListener("click", () => {
                 
-                currentIndex = (currentIndex - 1 + links.length) % links.length;
-                const prevLink = links[currentIndex];
-                displayMedia(prevLink.dataset.id, mediaArray);
+					currentIndex = (currentIndex - 1 + links.length) % links.length;
+					const prevLink = links[currentIndex];
+					displayMedia(prevLink.dataset.id, mediaArray);
                 
-            });
+				});
             
-        });
-    });
+			});
+		});
 }
 
 
@@ -68,53 +68,53 @@ function openingLightbox(mediaArray) {
 
 function displayMedia(mediaId, mediaArray) {
     
-    // Retrieve and empty the div to place media elements
-    const mediaInfoInLightbox = document.querySelector("#lightbox div");
-    mediaInfoInLightbox.innerHTML = "";
+	// Retrieve and empty the div to place media elements
+	const mediaInfoInLightbox = document.querySelector("#lightbox div");
+	mediaInfoInLightbox.innerHTML = "";
     
-    // Search for the right media based on the link id
-    const selectedMedia = mediaArray.find(media => media._id === parseInt(mediaId));
+	// Search for the right media based on the link id
+	const selectedMedia = mediaArray.find(media => media._id === parseInt(mediaId));
     
-    // If the id is found, create the DOM elements
-    if (selectedMedia) {
+	// If the id is found, create the DOM elements
+	if (selectedMedia) {
         
-        if (selectedMedia._image) {
-            // Display the image
-            const lightboxMedia = document.createElement("img");
-            lightboxMedia.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._image}`);
-            lightboxMedia.setAttribute("alt", `${selectedMedia._title}`);
+		if (selectedMedia._image) {
+			// Display the image
+			const lightboxMedia = document.createElement("img");
+			lightboxMedia.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._image}`);
+			lightboxMedia.setAttribute("alt", `${selectedMedia._title}`);
             
-            const lightboxMediaTitle = document.createElement("h5");
-            lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
+			const lightboxMediaTitle = document.createElement("h5");
+			lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
             
-            // Integrating elements into the DOM
-            mediaInfoInLightbox.appendChild(lightboxMedia);
-            mediaInfoInLightbox.appendChild(lightboxMediaTitle);
+			// Integrating elements into the DOM
+			mediaInfoInLightbox.appendChild(lightboxMedia);
+			mediaInfoInLightbox.appendChild(lightboxMediaTitle);
             
-            return mediaInfoInLightbox;
+			return mediaInfoInLightbox;
             
-        } else {
-            // Display the video
-            const lightboxMedia = document.createElement("video");
-            lightboxMedia.setAttribute("controls", true);
+		} else {
+			// Display the video
+			const lightboxMedia = document.createElement("video");
+			lightboxMedia.setAttribute("controls", true);
             
-            const sourceElement = document.createElement("source");
-            sourceElement.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._video}`);
-            sourceElement.setAttribute("type", "video/mp4");
-            lightboxMedia.appendChild(sourceElement);
+			const sourceElement = document.createElement("source");
+			sourceElement.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._video}`);
+			sourceElement.setAttribute("type", "video/mp4");
+			lightboxMedia.appendChild(sourceElement);
             
-            const lightboxMediaTitle = document.createElement("h5");
-            lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
+			const lightboxMediaTitle = document.createElement("h5");
+			lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
             
-            // Integrating elements into the DOM
-            mediaInfoInLightbox.appendChild(lightboxMedia);
-            mediaInfoInLightbox.appendChild(lightboxMediaTitle);
+			// Integrating elements into the DOM
+			mediaInfoInLightbox.appendChild(lightboxMedia);
+			mediaInfoInLightbox.appendChild(lightboxMediaTitle);
             
-            return mediaInfoInLightbox;
-        }
-    } else {
-        console.log("Erreur, aucun média trouvé");
-    }
+			return mediaInfoInLightbox;
+		}
+	} else {
+		console.log("Erreur, aucun média trouvé");
+	}
     
 }
 
@@ -125,29 +125,29 @@ function displayMedia(mediaId, mediaArray) {
 /*********************/
 
 function trapFocusIn(lightbox) {
-    lightbox.addEventListener("keydown", function(e) {
+	lightbox.addEventListener("keydown", function(e) {
         
-        let isTabPressed = e.key === "Tab" || e.keyCode === 9;
-        if (!isTabPressed) return;
+		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
+		if (!isTabPressed) return;
         
-        let focusableElement = lightbox.querySelectorAll("button");
-        let firstFocusableElement = focusableElement[0];
-        let lastFocusableElement = focusableElement[focusableElement.length - 1];
+		let focusableElement = lightbox.querySelectorAll("button");
+		let firstFocusableElement = focusableElement[0];
+		let lastFocusableElement = focusableElement[focusableElement.length - 1];
         
-        if (e.shiftKey) {
-            // If the Shift key is held down, moves the focus to the previous element
-            if (document.activeElement === firstFocusableElement) {
-                lastFocusableElement.focus();
-                e.preventDefault();
-            }
-        } else {
-            // Otherwise, moves the focus to the next element
-            if (document.activeElement === lastFocusableElement) {
-                firstFocusableElement.focus();
-                e.preventDefault();
-            }
-        }
-    });
+		if (e.shiftKey) {
+			// If the Shift key is held down, moves the focus to the previous element
+			if (document.activeElement === firstFocusableElement) {
+				lastFocusableElement.focus();
+				e.preventDefault();
+			}
+		} else {
+			// Otherwise, moves the focus to the next element
+			if (document.activeElement === lastFocusableElement) {
+				firstFocusableElement.focus();
+				e.preventDefault();
+			}
+		}
+	});
 }
 
 
@@ -157,16 +157,16 @@ function trapFocusIn(lightbox) {
 
 function closeLightbox() {
     
-    closeLightBoxBtn.addEventListener("click", () => {
-        lightbox.close();
-    });
+	closeLightBoxBtn.addEventListener("click", () => {
+		lightbox.close();
+	});
     
-    // Close modal at click outside the modal
-    closeLightBoxBtn.addEventListener("click", (event) => {
-        if (event.target === lightbox) {
-            lightbox.close();
-        }
-    });
+	// Close modal at click outside the modal
+	closeLightBoxBtn.addEventListener("click", (event) => {
+		if (event.target === lightbox) {
+			lightbox.close();
+		}
+	});
 }
 
 /*********************/

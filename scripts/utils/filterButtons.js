@@ -19,25 +19,25 @@ const filterBtns = document.querySelectorAll("ul button"); // Tous les boutons d
 /**** INIT FILTER ****/
 /*********************/
 export function displayFilter(mediaArray) {
-   
-    dropBtn.addEventListener("click", () => openDropdownContent());
-
-    // Close filter at click outside
-    document.addEventListener("click", (event) => {
-        if (!dropdown.contains(event.target)) {
-            closeFilterMenu();
-        }
-    });
-
-    // Close filter when escape key is pressed
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && dropdownContent.style.maxHeight !== "0") {
-            closeFilterMenu();
-        }
-    });
-
-    trapFocusIn();
-    addFilterEvent(mediaArray);
+    
+	dropBtn.addEventListener("click", () => openDropdownContent());
+    
+	// Close filter at click outside
+	document.addEventListener("click", (event) => {
+		if (!dropdown.contains(event.target)) {
+			closeFilterMenu();
+		}
+	});
+    
+	// Close filter when escape key is pressed
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape" && dropdownContent.style.maxHeight !== "0") {
+			closeFilterMenu();
+		}
+	});
+    
+	trapFocusIn();
+	addFilterEvent(mediaArray);
 }
 
 
@@ -47,19 +47,19 @@ export function displayFilter(mediaArray) {
 
 // Faire disparaitre le bouton et apparaitre le menu
 function openDropdownContent() {   
-    dropBtn.style.display = "none";
-    dropBtn.setAttribute("aria-hidden", "true");
-    dropdownContent.style.maxHeight = "100%";
-    dropdownContent.setAttribute("aria-hidden", "false");
-    dropdownContent.setAttribute("aria-expanded", "true"); 
+	dropBtn.style.display = "none";
+	dropBtn.setAttribute("aria-hidden", "true");
+	dropdownContent.style.maxHeight = "100%";
+	dropdownContent.setAttribute("aria-hidden", "false");
+	dropdownContent.setAttribute("aria-expanded", "true"); 
 }
 
 // Faire disparaitre le menu et remettre le bouton
 function closeFilterMenu() {
-    dropdownContent.style.maxHeight = "0";
-    dropdownContent.setAttribute("aria-hidden", "true");
-    dropBtn.style.display = "flex";
-    dropBtn.setAttribute("aria-hidden", "false");
+	dropdownContent.style.maxHeight = "0";
+	dropdownContent.setAttribute("aria-hidden", "true");
+	dropBtn.style.display = "flex";
+	dropBtn.setAttribute("aria-hidden", "false");
 }
 
 
@@ -69,14 +69,14 @@ function closeFilterMenu() {
 
 function trapFocusIn() {
 	dropdownContent.addEventListener("keydown", function(e) {
-		
+        
 		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
 		if (!isTabPressed) return;
-		
+        
 		let focusableElement = filterBtns;
 		let firstFocusableElement = focusableElement[0];
 		let lastFocusableElement = focusableElement[focusableElement.length - 1];
-		
+        
 		if (e.shiftKey) {
 			// If the Shift key is held down, moves the focus to the previous element
 			if (document.activeElement === firstFocusableElement) {
@@ -100,64 +100,64 @@ function trapFocusIn() {
 
 // Evènement sur les boutons, en fonction de l'id
 function addFilterEvent(mediaArray) {
-    filterBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            switch (btn.id) {
-                case 'btnPopularity':
-                    sortByPopularity(mediaArray);
-                    break;
-                case 'btnDate':
-                    sortByDate(mediaArray);
-                    break;
-                case 'btnTitle':
-                    sortByTitle(mediaArray);
-                    break;
-                default:
-                    console.log("Erreur, aucune fonction trie disponible");
-            }
-        });
-    });
+	filterBtns.forEach(btn => {
+		btn.addEventListener("click", () => {
+			switch (btn.id) {
+			case "btnPopularity":
+				sortByPopularity(mediaArray);
+				break;
+			case "btnDate":
+				sortByDate(mediaArray);
+				break;
+			case "btnTitle":
+				sortByTitle(mediaArray);
+				break;
+			default:
+				console.log("Erreur, aucune fonction trie disponible");
+			}
+		});
+	});
 }
 
 
 function sortByPopularity(mediaArray) {
     
-    mediaArray.sort((a, b) => {
-        if (a._likes > b._likes) {
-            return -1;
-        } else {
-            return 1;
-        }
-    });
+	mediaArray.sort((a, b) => {
+		if (a._likes > b._likes) {
+			return -1;
+		} else {
+			return 1;
+		}
+	});
     
-    displayGallery(mediaArray);
-    closeFilterMenu();
+	displayGallery(mediaArray);
+	closeFilterMenu();
 }
 
 function sortByDate(mediaArray) {
     
-    mediaArray.sort((a, b) => {
-        if (a._date > b._date) {
-            return 1;
-        } else {
-            return -1;
-        }
-    });
-
-    displayGallery(mediaArray);
-    closeFilterMenu();
+	mediaArray.sort((a, b) => {
+		if (a._date > b._date) {
+			return 1;
+		} else {
+			return -1;
+		}
+	});
+    
+	displayGallery(mediaArray);
+	closeFilterMenu();
 }
 
 function sortByTitle(mediaArray) {
-
-    mediaArray.sort((a, b) => {
-        if (a._title > b._title) {
-            return 1;
-        } else {
-            return -1;
-        }
-    });
-
-    displayGallery(mediaArray);
-    closeFilterMenu();
+    
+	mediaArray.sort((a, b) => {
+		if (a._title > b._title) {
+			return 1;
+		} else {
+			return -1;
+		}
+	});
+    
+	displayGallery(mediaArray);
+	closeFilterMenu();
 }
