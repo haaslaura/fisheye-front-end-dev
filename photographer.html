@@ -57,21 +57,21 @@
     <section class="media-section" aria-label="The photographer's work">
       
       <!-- Filter -->
-      <div class="menu-dropdown" role="filter" aria-label="dropdown-menu">
+      <div class="menu-dropdown">
         <h3 id="title3">Trier par</h3>
         
         <!-- Dropdown menu -->
         <div class="filter_section">
           <div class="dropdown">
             <button class="btn btn_drop" aria-haspopup="listbox" aria-expanded="false" aria-controls="filter-list" aria-label="Sort by">
-              <span id="current_filter">Popularité</span>
+              <span>Popularité</span>
               <span class="fa-solid fa-chevron-up"></span>
             </button>
             
-            <ul id="filter-list" class="dropdown_content" aria-hidden="true">
+            <ul id="filter-list" class="dropdown_content" role="listbox" aria-hidden="true">
               <li role="option">
                 <button id="btnPopularity" aria-label="Sort by popularity">
-                  <span id="current_filter">Popularité</span>
+                  <span>Popularité</span>
                   <span class="fa-solid fa-chevron-down"></span>
                 </button>
                 <span class="line"></span>
@@ -95,10 +95,10 @@
       
       <!-- Lightbox -->
       <dialog id="lightbox" aria-label="Image closeup view">
-        <button class="lightbox__close" role="button" aria-label="Close dialog">Fermer</button>
-        <button class="lightbox__next" role="button" aria-label="Next image">Suivant</button>
-        <button class="lightbox__prev" role="button" aria-label="Previous image">Précédent</button>
-        <div></div>
+        <button class="lightbox__close" aria-label="Close dialog">Fermer</button>
+        <button class="lightbox__next" aria-label="Next image">Suivant</button>
+        <button class="lightbox__prev" aria-label="Previous image">Précédent</button>
+        <div aria-label="Media and title"></div>
       </dialog>
       
     </section>
@@ -113,7 +113,7 @@
         <h2 id="modal-title">Contactez-moi</h2>
       </header>
       
-      <form action="" method="get">
+      <form action="#" method="get">
         <fieldset>
           <legend>Vos coordonnées</legend>
           
