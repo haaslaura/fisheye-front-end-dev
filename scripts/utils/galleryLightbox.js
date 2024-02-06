@@ -4,7 +4,6 @@ This file contains the functions for the gallery Lightbox
 
 **********************************************************************/
 
-import { MediaFactory } from "../classes/MediaFactory.js";
 
 /***********************/
 /** GLOABAL VARIABLES **/
@@ -18,8 +17,8 @@ const prevLightBoxBtn = document.querySelector(".lightbox__prev");
 /*********************/
 /*** INIT LIGHTBOX ***/
 /*********************/
-export function initLightbox(mediaData) {
-    openingLightbox(mediaData);
+export function initLightbox(mediaArray) {
+    openingLightbox(mediaArray);
     closeLightbox();
 }
 
@@ -27,20 +26,16 @@ export function initLightbox(mediaData) {
 /**********************/
 /** OPENING LIGHTBOX **/
 /**********************/
-function openingLightbox(mediaData) {
+function openingLightbox(mediaArray) {
     
     // Récupérer tous les boutons pour ouvrir la lightbox
-    const openLightboxLinks = document.querySelectorAll("article a");
-
-    openLightboxLinks.forEach(link => {
-
-        // Pour chaque lien, récupérer son id
-        let idLink = link.dataset.id;
+    document.querySelectorAll("article a")
+    .forEach(link => {
 
         link.addEventListener("click", (e) => {
             e.preventDefault();
             lightbox.showModal();
-            displayMedia(mediaData, idLink);
+            displayMedia(link.dataset.id, mediaArray);
             trapFocusIn(lightbox);
         });
     });
@@ -53,44 +48,55 @@ function openingLightbox(mediaData) {
 
 
 // Afficher le bon média et le bon titre
-function displayMedia(mediaData, idLink) {
+function displayMedia(mediaId, mediaArray) {
 
-    console.log("pouet");
-    console.log(mediaData);
-    
-    // Sorting data using the factory
-	const mediaArray = mediaData.map(media => new MediaFactory(media));
-    console.log(mediaArray);
-    
-    // Récupérer l'id du lien en cours,
-    // donc récupérer tous les liens et les parcourir
-    
-    console.log(idLink); // donne bien l'id du lien cliqué
+    // Récupérer la div pour placer les éléments du média
+    const mediaInfoInLightbox = document.querySelector("#lightbox div");
 
-    for (let i = 0; i < mediaArray.length; i++) {
+    // Vider la div en prévision de l'affichage du média
+    mediaInfoInLightbox.innerHTML = "";
+    
+    // Rechercher le bon média en fonction de l'id du lien
+    const selectedMedia = mediaArray.find(media => media._id === parseInt(mediaId));
+    
+    // Si l'id est trouvé, créer les éléments du DOM
+    if (selectedMedia) {
+
+        if (selectedMedia._image) {
+            // Afficher l'image
+            const lightboxMedia = document.createElement("img");
+            lightboxMedia.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._image}`);
+            lightboxMedia.setAttribute("alt", `${selectedMedia._title}`);
+
+            const lightboxMediaTitle = document.createElement("h5");
+            lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
+
+            // Ajouter les éléments dans le DOM
+            mediaInfoInLightbox.appendChild(lightboxMedia);
+            mediaInfoInLightbox.appendChild(lightboxMediaTitle);
+
+            return mediaInfoInLightbox;
         
-        if (mediaArray[i]._id === idLink) {
-            // construire le dom
-            console.log("c'est le bon média");
-
         } else {
-            console.log("Erreur, média indisponible");
-            console.log(mediaArray[i]._id);
+            // Afficher la vidéo
+            const lightboxMedia = document.createElement("video");
+            lightboxMedia.setAttribute("controls", true);
+
+            const sourceElement = document.createElement("source");
+            sourceElement.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._video}`);
+            sourceElement.setAttribute("type", "video/mp4");
+            lightboxMedia.appendChild(sourceElement);
+
+            const lightboxMediaTitle = document.createElement("h5");
+            lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
+
+            // Ajouter les éléments dans le DOM
+            mediaInfoInLightbox.appendChild(lightboxMedia);
+            mediaInfoInLightbox.appendChild(lightboxMediaTitle);
+
+            return mediaInfoInLightbox;
         }
     }
-
-    /*
-    mediaArray.forEach(media => {
-
-        if (media._id === idLink) {
-            // construire le dom
-            console.log("pouet");
-
-        } else {
-            console.log("Erreur, média indisponible");
-        }
-    });
-    */
 }
 
 
@@ -124,21 +130,6 @@ function trapFocusIn(lightbox) {
 		}
 	});
 }
-
-
-/*
-    // Pour chaque bouton, ajouter des évènements d'ouverture
-    links.forEach(link => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-            openingLightbox(mediaData, this.dataset.id);
-        });
-        link.addEventListener("keypress", function (event) {
-            event.preventDefault();
-            openingLightbox(mediaData, this.dataset.id);
-        });
-    })
-*/
 
 
 /********************/

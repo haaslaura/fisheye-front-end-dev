@@ -4,7 +4,6 @@ This file contains the functions for the filters buttons
 
 *******************************************************/
 
-import { MediaFactory } from "../classes/MediaFactory.js";
 import { displayGallery } from "../pages/photographer.js";
 
 /***********************/
@@ -16,9 +15,12 @@ const dropdownContent = document.querySelector(".dropdown_content"); // liste ul
 const filterBtns = document.querySelectorAll("ul button"); // Tous les boutons de la liste ul
 
 
-export function displayFilter(mediaData) {
+/*********************/
+/**** INIT FILTER ****/
+/*********************/
+export function displayFilter(mediaArray) {
    
-    dropBtn.addEventListener("click", () => openDropdownContent(mediaData));
+    dropBtn.addEventListener("click", () => openDropdownContent());
 
     // Close filter at click outside
     document.addEventListener("click", (event) => {
@@ -33,6 +35,9 @@ export function displayFilter(mediaData) {
             closeFilterMenu();
         }
     });
+
+    trapFocusIn();
+    addFilterEvent(mediaArray);
 }
 
 
@@ -41,15 +46,12 @@ export function displayFilter(mediaData) {
 /**********************/
 
 // Faire disparaitre le bouton et apparaitre le menu
-function openDropdownContent(mediaData) {   
+function openDropdownContent() {   
     dropBtn.style.display = "none";
     dropBtn.setAttribute("aria-hidden", "true");
     dropdownContent.style.maxHeight = "100%";
     dropdownContent.setAttribute("aria-hidden", "false");
-    dropdownContent.setAttribute("aria-expanded", "true");
-    
-    trapFocusIn();
-    addFilterEvent(mediaData);
+    dropdownContent.setAttribute("aria-expanded", "true"); 
 }
 
 // Faire disparaitre le menu et remettre le bouton
@@ -97,18 +99,18 @@ function trapFocusIn() {
 /**********************/
 
 // Evènement sur les boutons, en fonction de l'id
-function addFilterEvent(mediaData) {
+function addFilterEvent(mediaArray) {
     filterBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             switch (btn.id) {
                 case 'btnPopularity':
-                    sortByPopularity(mediaData);
+                    sortByPopularity(mediaArray);
                     break;
                 case 'btnDate':
-                    sortByDate(mediaData);
+                    sortByDate(mediaArray);
                     break;
                 case 'btnTitle':
-                    sortByTitle(mediaData);
+                    sortByTitle(mediaArray);
                     break;
                 default:
                     console.log("Erreur, aucune fonction trie disponible");
@@ -118,26 +120,35 @@ function addFilterEvent(mediaData) {
 }
 
 
-function sortByPopularity(mediaData) {
-    console.log("trie par popularité");
-
-    const mediaArray = mediaData.map(media => new MediaFactory(media));
-    console.log(mediaArray);
+function sortByPopularity(mediaArray) {
+    
+    mediaArray.sort((a, b) => {
+        if (a._likes > b._likes) {
+            return -1;
+        } else {
+            return 1;
+        }
+    });
+    
+    displayGallery(mediaArray);
+    closeFilterMenu();
 }
 
-function sortByDate(mediaData) {
-    console.log("trie par date");
+function sortByDate(mediaArray) {
+    
+    mediaArray.sort((a, b) => {
+        if (a._date > b._date) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
 
-    const mediaArray = mediaData.map(media => new MediaFactory(media));
-    console.log(mediaArray);
+    displayGallery(mediaArray);
+    closeFilterMenu();
 }
 
-function sortByTitle(mediaData) {
-    console.log("trie par titre");
-
-    const mediaArray = mediaData.map(media => new MediaFactory(media));
-    console.log("Tableau avant sort()");
-    console.log(mediaArray);
+function sortByTitle(mediaArray) {
 
     mediaArray.sort((a, b) => {
         if (a._title > b._title) {
@@ -146,28 +157,7 @@ function sortByTitle(mediaData) {
             return -1;
         }
     });
-    
-    console.log("Tableau après sort()");
-    console.log(mediaArray);
 
-    const newMediaData = Object.assign({}, mediaArray);
-    console.log(newMediaData);
-
-    displayGallery(newMediaData);
+    displayGallery(mediaArray);
+    closeFilterMenu();
 }
-
-
-
-// Exemple de fonction trie
-/*
-function triAlphabetique() {
-    medias.sort((a, b) => {
-        if (a.nom > b.nom)
-        return 1
-        else
-        return -1
-    });
-    
-    displayAllMedia(medias)
-}
-*/

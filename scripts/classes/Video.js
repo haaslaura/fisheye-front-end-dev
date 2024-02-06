@@ -19,8 +19,11 @@ export class Video extends Media {
         lightboxLink.dataset.id = `${this._id}`;
 
         const elementMedia = document.createElement("video");
-        elementMedia.setAttribute("src", `./assets/photographersmedia/${this._photographerId}/${this._video}`);
-        elementMedia.setAttribute("type", "video/mp4");
+
+        const sourceElement = document.createElement("source");
+        sourceElement.setAttribute("src", `./assets/photographersmedia/${this._photographerId}/${this._video}`);
+        sourceElement.setAttribute("type", "video/mp4");
+        elementMedia.appendChild(sourceElement);
         
         const infoMediaInsert = document.createElement("div");
         infoMediaInsert.className = "info-media";

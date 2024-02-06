@@ -5,7 +5,7 @@ This file contains the functions for increment or decrement like on media
 ************************************************************/
 
 
-export function addNewLike() {
+export function addNewLike(mediaArray) {
 
     // Retrieve heart item & number element
     const heartBtn = document.querySelectorAll(".info-media .fa-heart");
@@ -33,6 +33,8 @@ export function addNewLike() {
             }
         });
     }
+
+    displayNumberTotalOfLike(mediaArray);
 }
 
 
@@ -75,4 +77,24 @@ function decrement(i, heartBtn) {
     let pageTotalLike = document.getElementById("total-likes");
     let numberPageTotalLike = parseInt(pageTotalLike.innerText);
     pageTotalLike.innerHTML = numberPageTotalLike - 1;
+}
+
+
+function displayNumberTotalOfLike (mediaArray) {
+    // Prepare to add up the likes
+	const emptyLikesArray = [];
+	
+	mediaArray.forEach(media => {
+		emptyLikesArray.push(media._likes);
+	})
+	
+	// Add likes & Install the total in the DOM
+	const totalLikes = emptyLikesArray.reduce(function(accumulator, currentValue) {
+		return accumulator + currentValue;
+	});
+	
+	const insertPrice = document.getElementById("photographer-price");
+	const priceLikes = document.createElement("p");
+	priceLikes.innerHTML = `<span id="total-likes">${totalLikes}</span><span><i class="fa-solid fa-heart"></i></span>`;
+	insertPrice.appendChild(priceLikes);
 }
