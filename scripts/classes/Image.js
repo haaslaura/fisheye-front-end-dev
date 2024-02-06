@@ -20,7 +20,7 @@ export class Image extends Media {
 
 		const elementMedia = document.createElement("img");
 		elementMedia.setAttribute("src", `./assets/photographersmedia/${this._photographerId}/${this._image}`);
-		elementMedia.setAttribute("alt", this._title);
+		elementMedia.setAttribute("alt", `${this._title}`);
 
 		const infoMediaInsert = document.createElement("div");
 		infoMediaInsert.className = "info-media";

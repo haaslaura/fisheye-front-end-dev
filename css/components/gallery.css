@@ -61,9 +61,9 @@
     border-radius: 3px;
 }
 
-#lightbox img {
+#lightbox img, #lightbox video {
     display: block;
-    width: 100%;
+    max-width: 80vw;
     max-height: 80vh;
     object-fit: cover;
     object-position: center center; 

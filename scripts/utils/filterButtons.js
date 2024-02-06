@@ -15,9 +15,12 @@ const dropdownContent = document.querySelector(".dropdown_content"); // liste ul
 const filterBtns = document.querySelectorAll("ul button"); // Tous les boutons de la liste ul
 
 
+/*********************/
+/**** INIT FILTER ****/
+/*********************/
 export function displayFilter(mediaArray) {
    
-    dropBtn.addEventListener("click", () => openDropdownContent(mediaArray));
+    dropBtn.addEventListener("click", () => openDropdownContent());
 
     // Close filter at click outside
     document.addEventListener("click", (event) => {
@@ -43,7 +46,7 @@ export function displayFilter(mediaArray) {
 /**********************/
 
 // Faire disparaitre le bouton et apparaitre le menu
-function openDropdownContent(mediaArray) {   
+function openDropdownContent() {   
     dropBtn.style.display = "none";
     dropBtn.setAttribute("aria-hidden", "true");
     dropdownContent.style.maxHeight = "100%";
