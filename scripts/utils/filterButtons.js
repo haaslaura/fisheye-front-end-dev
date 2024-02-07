@@ -21,7 +21,9 @@ const filterBtns = document.querySelectorAll("ul button"); // Tous les boutons d
 export function displayFilter(mediaArray) {
     
 	dropBtn.addEventListener("click", () => openDropdownContent());
-    
+    trapFocusIn();
+	addFilterEvent(mediaArray);
+
 	// Close filter at click outside
 	document.addEventListener("click", (event) => {
 		if (!dropdown.contains(event.target)) {
@@ -34,10 +36,7 @@ export function displayFilter(mediaArray) {
 		if (event.key === "Escape" && dropdownContent.style.maxHeight !== "0") {
 			closeFilterMenu();
 		}
-	});
-    
-	trapFocusIn();
-	addFilterEvent(mediaArray);
+	});	
 }
 
 
@@ -58,6 +57,7 @@ function openDropdownContent() {
 function closeFilterMenu() {
 	dropdownContent.style.maxHeight = "0";
 	dropdownContent.setAttribute("aria-hidden", "true");
+	dropdownContent.setAttribute("aria-expanded", "false");
 	dropBtn.style.display = "flex";
 	dropBtn.setAttribute("aria-hidden", "false");
 }
