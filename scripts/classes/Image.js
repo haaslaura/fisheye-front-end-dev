@@ -13,7 +13,6 @@ export class Image extends Media {
 
 		// Creating elements to include in 'article' & attributes
 		const lightboxLink = document.createElement("a");
-		//lightboxLink.setAttribute("href", `../../assets/photographersmedia/${this._photographerId}/${this._image}`);
 		lightboxLink.setAttribute("role", "button");
 		lightboxLink.setAttribute("aria-label", "Opens the lightbox view");
 		lightboxLink.dataset.id = `${this._id}`;
