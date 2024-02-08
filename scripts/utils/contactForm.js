@@ -120,15 +120,15 @@ function displayErrorMessages() {
 		let valueInput = input.value.trim();
 		
 		switch (idInput) {
-			case "firstname":
-			case "lastname":
+		case "firstname":
+		case "lastname":
 			if (!valueInput) {
 				correct = false;
 				addErrorMessage(input, `Merci de remplir votre ${idInput === "firstname" ? "prénom" : "nom"}.`);
 			}
 			break;
 			
-			case "email":
+		case "email":
 			if (!valueInput) {
 				correct = false;
 				addErrorMessage(input, "Merci de remplir votre email.");
@@ -138,7 +138,7 @@ function displayErrorMessages() {
 			}
 			break;
 			
-			default:
+		default:
 			correct = false;
 			alert("Il y a une erreur dans le formulaire.");
 			console.log("Un champ du formulaire n'est peut-être pas pris en compte.");

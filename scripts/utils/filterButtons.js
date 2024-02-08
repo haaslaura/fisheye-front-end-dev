@@ -74,6 +74,7 @@ function trapFocusIn() {
 		if (!isTabPressed) return;
 		
 		let focusableElement = dropdownContent.querySelectorAll("li");
+		console.log(focusableElement);
 		let firstFocusableElement = focusableElement[0];
 		let lastFocusableElement = focusableElement[focusableElement.length - 1];
 		
@@ -104,16 +105,16 @@ function addFilterEvent(mediaArray) {
 	filterBtns.forEach(btn => {
 		btn.addEventListener("click", () => {
 			switch (btn.id) {
-				case "btnPopularity":
+			case "btnPopularity":
 				sortByPopularity(mediaArray);
 				break;
-				case "btnDate":
+			case "btnDate":
 				sortByDate(mediaArray);
 				break;
-				case "btnTitle":
+			case "btnTitle":
 				sortByTitle(mediaArray);
 				break;
-				default:
+			default:
 				console.log("Erreur, aucune fonction trie disponible");
 			}
 		});

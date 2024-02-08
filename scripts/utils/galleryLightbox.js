@@ -30,38 +30,38 @@ export function initLightbox(mediaArray) {
 function openingLightbox(mediaArray) {
 	
 	document.querySelectorAll("article a")
-	.forEach((link, index, links) => {
+		.forEach((link, index, links) => {
 		
-		link.addEventListener("click", (e) => {
-			try {
-				e.preventDefault();
-				currentIndex = index; // Index update
+			link.addEventListener("click", (e) => {
+				try {
+					e.preventDefault();
+					currentIndex = index; // Index update
 				
-				lightbox.showModal();
-				displayMedia(link.dataset.id, mediaArray);
-				trapFocusIn(lightbox);
+					lightbox.showModal();
+					displayMedia(link.dataset.id, mediaArray);
+					trapFocusIn(lightbox);
 				
-				// Add arrow buttons
-				nextLightBoxBtn.addEventListener("click", () => {
+					// Add arrow buttons
+					nextLightBoxBtn.addEventListener("click", () => {
 					
-					currentIndex = (currentIndex + 1) % links.length;
-					const nextLink = links[currentIndex];
-					displayMedia(nextLink.dataset.id, mediaArray);
+						currentIndex = (currentIndex + 1) % links.length;
+						const nextLink = links[currentIndex];
+						displayMedia(nextLink.dataset.id, mediaArray);
 					
-				});
+					});
 				
-				prevLightBoxBtn.addEventListener("click", () => {
+					prevLightBoxBtn.addEventListener("click", () => {
 					
-					currentIndex = (currentIndex - 1 + links.length) % links.length;
-					const prevLink = links[currentIndex];
-					displayMedia(prevLink.dataset.id, mediaArray);
+						currentIndex = (currentIndex - 1 + links.length) % links.length;
+						const prevLink = links[currentIndex];
+						displayMedia(prevLink.dataset.id, mediaArray);
 					
-				});
-			} catch (error) {
-				console.error("Une erreur est survenue :", error);
-			}
+					});
+				} catch (error) {
+					console.error("Une erreur est survenue :", error);
+				}
+			});
 		});
-	});
 }
 
 

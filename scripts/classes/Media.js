@@ -27,5 +27,5 @@ export class Media {
 	/** Reminder that the function needs to be added,
 	* particularly for future classes
 	*/
-	getMediaDOM(){};
+	getMediaDOM(){}
 }

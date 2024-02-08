@@ -6,8 +6,6 @@ This file contains the template function for display photographer's informations
 
 export function photographerIdentityTemplate(photographersData) {
 	
-	console.log("Fichier relié");
-	
 	// Destructures the photographersData object and creates as many constants as necessary
 	const { name, id, portrait, city, country, tagline, price } = photographersData;
 	
