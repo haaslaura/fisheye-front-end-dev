@@ -4,12 +4,12 @@ This JavaScript code is linked to the index.html page
 
 **********************************************************************/
 
-// 0 - Importing data and functions
-import { photographerTemplate } from "../templates/photographerInfo.js";
+// Importing data and functions
+import { photographersTemplate } from "../templates/photographersInfo.js";
 import { getData } from "../utils/getData.js";
 
 
-// 1 - Only retrieve data from photographers
+// Only retrieve data from photographers
 async function getPhotographers() {
 	try {
 		// Retrieve data
@@ -19,7 +19,6 @@ async function getPhotographers() {
 		// Use facultative chaining to check if data is correctly loaded.
 		// If it isn't loaded, data is undefined and the check returns undefined
 		if (data?.photographers) {
-			/*const photographersArray = data.photographers;*/
 			return data.photographers;
 		}
         
@@ -31,14 +30,14 @@ async function getPhotographers() {
 }
 
 
-// 2 - Design patterns
+
 function displayData(photographersArray) {
     
 	// Recovery of the photographers' divide
 	const photographersSection = document.querySelector(".photographer_section");
     
 	photographersArray.forEach((photographer) => {
-		const photographerModel = photographerTemplate(photographer);
+		const photographerModel = photographersTemplate(photographer);
 		const userCardDOM = photographerModel.createUserCardDOM();
 		photographersSection.appendChild(userCardDOM);
 	});

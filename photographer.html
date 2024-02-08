@@ -29,11 +29,11 @@
     </section>
     
     <!-- Media display section -->
-    <section class="media-section" aria-label="The photographer's work">
+    <section class="media-section" aria-label="Images et vidéos du photographe">
       
       <!-- Filter -->
       <div class="menu-dropdown">
-        <h3 id="title3">Trier par</h3>
+        <p>Trier par</p>
         
         <!-- Dropdown menu -->
         <div class="filter_section">
@@ -43,22 +43,13 @@
               <span>Popularité</span>
               <span class="fa-solid fa-chevron-up"></span>
             </button>
-            
-            <ul id="filter-list" role="menu" tabindex="-1" class="dropdown_content"  aria-activedescendant="mi1">
-              <li id="popularity" role="menuitem">
-                <button id="btnPopularity" aria-label="Sort by popularity">
-                  <span>Popularité</span>
-                  <span class="fa-solid fa-chevron-down"></span>
-                </button>
-                <span class="line"></span>
-              </li>
-              <li id="date" role="menuitem">
-                <button id="btnDate" aria-label="Sort by date">Date</button>
-                <span class="line"></span>
-              </li>
-              <li id="title" role="menuitem">
-                <button id="btnTitle" aria-label="Sort by title">Titre</button>
-              </li>
+
+            <ul id="filter-list" role="menu" class="dropdown_content" aria-activedescendant="btnPopularity">
+              <li id="btnPopularity" role="menuitem">Popularité <span class="fa-solid fa-chevron-down"></span></li>
+              <span class="line" aria-hidden="true"></span>
+              <li id="btnDate" role="menuitem">Date</li>
+              <span class="line" aria-hidden="true"></span>
+              <li id="btnTitle" role="menuitem">Titre</li>
             </ul>
             
           </div>
@@ -70,21 +61,21 @@
       </div>
       
       <!-- Lightbox -->
-      <dialog id="lightbox" aria-label="Image closeup view">
-        <button class="lightbox__close" aria-label="Close dialog">Fermer</button>
-        <button class="lightbox__next" aria-label="Next image">Suivant</button>
-        <button class="lightbox__prev" aria-label="Previous image">Précédent</button>
-        <div aria-label="Media and title"></div>
+      <dialog id="lightbox" aria-label="Fermer la lightbox">
+        <button class="lightbox__close" aria-label="Fermer la modale">Fermer</button>
+        <button class="lightbox__next" aria-label="Image suivante">Suivant</button>
+        <button class="lightbox__prev" aria-label="Image précédente">Précédent</button>
+        <div></div>
       </dialog>
       
     </section>
     
     <!-- Photographer price -->
-    <div id="photographer-price" aria-label="Photographer's price">
+    <div id="photographer-price" aria-label="Tarif journalier du photographe">
     </div>
     
     <!-- Contact modal -->
-    <dialog id="contact_modal" aria-label="Contact me">
+    <dialog id="contact_modal" aria-label="Contacter le photographe">
       <header>
         <h2 id="modal-title">Contactez-moi</h2>
       </header>
@@ -132,7 +123,7 @@
         
         <button type="submit" class="btn contact_button focusable">Envoyer</button>
         
-        <img tabindex="0" role="button" id="close-modal-btn" class="focusable" src="assets/icons/close.svg" />   
+        <img tabindex="0" role="button" aria-label="Fermer la modale" id="close-modal-btn" class="focusable" src="assets/icons/close.svg" alt="" />   
       </form>
       
     </dialog>

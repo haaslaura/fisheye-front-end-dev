@@ -5,7 +5,7 @@ This JavaScript code is linked to the photographer.html page
 **********************************************************************/
 
 // Importing data, functions & classes
-import { photographerTemplate } from "../templates/photographerInfo.js";
+import { photographerIdentityTemplate } from "../templates/photographerCard.js";
 
 import { getData } from "../utils/getData.js";
 import { addNewLike } from "../utils/addNewLike.js";
@@ -52,15 +52,13 @@ function displayData(photographer) {
 	const priceInsert = document.getElementById("photographer-price");
 	
 	// Using the template
-	const photographerModel = photographerTemplate(photographer);
-	const items = photographerModel.createItems();
+	const photographerModel = photographerIdentityTemplate(photographer);
+	const infoPhotographer = photographerModel.getPhotographerIdentity();
 	
-	// Add content in DOM
-	headerCol1.appendChild(items.namePhotographer);
-	headerCol1.appendChild(items.locationText);
-	headerCol1.appendChild(items.sloganText);
-	headerCol3.appendChild(items.imagePhotographer);
-	priceInsert.appendChild(items.priceText);
+	headerCol1.appendChild(infoPhotographer);
+	headerCol3.appendChild(photographerModel.imagePhotographer);
+	priceInsert.appendChild(photographerModel.priceText);
+	
 }
 
 // Initialise the page
