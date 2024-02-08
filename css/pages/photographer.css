@@ -40,7 +40,7 @@
 #photograph-header-col1 h2 {
     font-weight: 400;
     color: var(--color-main);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     line-height: 1.95rem;
     margin: 10px 0
 }
@@ -48,7 +48,7 @@
 #photograph-header-col1 h3 {
     font-weight: 400;
     color: var(--color-dark-grey);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     line-height: 1.4rem;
     margin: 10px 0;
 }
@@ -118,7 +118,7 @@
     height: 50px;
 }
 
-.filter_section{
+#filter-navigation {
     position: relative;
     height: 100%;
 }
@@ -130,7 +130,9 @@
     overflow: hidden;
 }
 
-#filter-list { /*ul*/
+/* css version 1 */
+/*
+#filter-list {
     max-height: 0;
     background-color: var(--color-main);
     padding: 0;
@@ -168,14 +170,6 @@
     margin-left: 10px;
 }
 
-#filter-list li + span {
-    display: block;
-    margin: 0 auto 0 auto;
-    width: 85%;
-    height: 1px;
-    background-color: white;
-}
-
 #btnPopularity .fa-solid {
     margin-left: 10px;
 }
@@ -184,6 +178,68 @@
     background-color: var(--color-second);
     color: black;
 }
+*/
+
+/* css version 2 */
+#filter-list {
+    max-height: 0;
+    background-color: var(--color-main);
+    padding: 0;
+    margin: 0;
+}
+
+#filter-list li button {
+    font-family: "DM Sans", sans-serif;
+    color:white ;
+    font-weight: 700;
+    background-color: var(--color-main);
+    font-size: 1.13rem;
+    border: none;
+
+    position: relative;
+}
+
+.line {
+    display: block;
+    position: absolute;
+    top: 49px;
+    width: 86%;
+    height: 1px;
+    background-color: white;
+}
+
+#filter-list button, .btn_drop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.btn_drop {
+    background-color: var(--color-main);
+    border: none;
+    font-family: "DM Sans", sans-serif;
+    color:white ;
+    font-weight: 700;
+    background-color: var(--color-main);
+    font-size: 1.13rem;
+}
+
+.btn_drop .fa-solid {
+    margin-left: 10px;
+}
+
+#btnPopularity .fa-solid {
+    margin-left: 10px;
+}
+
+#filter-list button:hover, #filter-list button:focus {
+    background-color: var(--color-second);
+    color: black;
+}
+
 
 
 /*********************/

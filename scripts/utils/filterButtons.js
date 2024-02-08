@@ -9,10 +9,10 @@ import { displayGallery } from "../pages/photographer.js";
 /***********************/
 /** GLOABAL VARIABLES **/
 /***********************/
-const dropBtn = document.querySelector(".btn_drop"); // btn principal
-const dropdown = document.querySelector(".dropdown"); // tout le menu, btn + ul
-const dropdownContent = document.querySelector(".dropdown_content"); // liste ul
-const filterBtns = document.querySelectorAll("ul li"); // Tous les boutons de la liste ul
+const dropBtn = document.querySelector(".btn_drop"); // Main button
+const dropdown = document.querySelector(".dropdown"); // All menu, btn + ul
+const dropdownContent = document.querySelector(".dropdown_content"); // ul list
+const filterBtns = document.querySelectorAll("ul button"); // All button of ul list
 
 
 /*********************/
@@ -48,6 +48,8 @@ export function displayFilter(mediaArray) {
 function openDropdownContent() {   
 	dropBtn.style.display = "none";
 	dropBtn.setAttribute("aria-hidden", "true");
+	dropBtn.setAttribute("aria-expanded", "true");
+
 	dropdownContent.style.maxHeight = "100%";
 	dropdownContent.setAttribute("aria-hidden", "false");
 	dropdownContent.setAttribute("aria-expanded", "true"); 
@@ -60,6 +62,9 @@ function closeFilterMenu() {
 	dropdownContent.setAttribute("aria-expanded", "false");
 	dropBtn.style.display = "flex";
 	dropBtn.setAttribute("aria-hidden", "false");
+
+	// Reset focus to the main button after closing the menu
+	//dropBtn.focus();
 }
 
 
@@ -68,27 +73,26 @@ function closeFilterMenu() {
 /*********************/
 
 function trapFocusIn() {
-	dropdownContent.addEventListener("keydown", function(e) {
+	dropdownContent.addEventListener("keydown", function (e) {
 		
 		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
 		if (!isTabPressed) return;
 		
-		let focusableElement = dropdownContent.querySelectorAll("li");
-		console.log(focusableElement);
+		let focusableElement = dropdownContent.querySelectorAll("button");
 		let firstFocusableElement = focusableElement[0];
 		let lastFocusableElement = focusableElement[focusableElement.length - 1];
 		
 		if (e.shiftKey) {
 			// If the Shift key is held down, moves the focus to the previous element
 			if (document.activeElement === firstFocusableElement) {
-				lastFocusableElement.focus();
 				e.preventDefault();
+				lastFocusableElement.focus();
 			}
 		} else {
 			// Otherwise, moves the focus to the next element
 			if (document.activeElement === lastFocusableElement) {
-				firstFocusableElement.focus();
 				e.preventDefault();
+				firstFocusableElement.focus();
 			}
 		}
 	});
@@ -134,6 +138,10 @@ function sortByPopularity(mediaArray) {
 	
 	displayGallery(mediaArray);
 	closeFilterMenu();
+	
+	// Retrieve span main button and replace the contents with the name of the current filter
+	const dropBtnSpanText = document.getElementById("current_filter");
+	dropBtnSpanText.innerHTML = "Popularité";
 }
 
 function sortByDate(mediaArray) {
@@ -148,6 +156,10 @@ function sortByDate(mediaArray) {
 	
 	displayGallery(mediaArray);
 	closeFilterMenu();
+
+	// Retrieve span main button and replace the contents with the name of the current filter
+	const dropBtnSpanText = document.getElementById("current_filter");
+	dropBtnSpanText.innerHTML = "Date";
 }
 
 function sortByTitle(mediaArray) {
@@ -162,4 +174,8 @@ function sortByTitle(mediaArray) {
 	
 	displayGallery(mediaArray);
 	closeFilterMenu();
+
+	// Retrieve span main button and replace the contents with the name of the current filter
+	const dropBtnSpanText = document.getElementById("current_filter");
+	dropBtnSpanText.innerHTML = "Titre";
 }

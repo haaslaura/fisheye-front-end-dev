@@ -103,6 +103,7 @@ function displayMedia(mediaId, mediaArray) {
 			const lightboxMedia = document.createElement("video");
 			lightboxMedia.setAttribute("controls", true);
 			lightboxMedia.setAttribute("aria-labelledby", "mediaTitle");
+			lightboxMedia.classList.add("focusable");
 			
 			const sourceElement = document.createElement("source");
 			sourceElement.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._video}`);
@@ -137,7 +138,7 @@ function trapFocusIn(lightbox) {
 		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
 		if (!isTabPressed) return;
 		
-		let focusableElement = lightbox.querySelectorAll("button");
+		let focusableElement = lightbox.querySelectorAll(".focusable");
 		let firstFocusableElement = focusableElement[0];
 		let lastFocusableElement = focusableElement[focusableElement.length - 1];
 		

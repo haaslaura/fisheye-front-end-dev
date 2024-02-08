@@ -36,21 +36,48 @@
         <p>Trier par</p>
         
         <!-- Dropdown menu -->
-        <div class="filter_section">
+        <div id="filter-navigation">
           <div class="dropdown">
-
-            <button class="btn btn_drop" aria-haspopup="true" aria-expanded="false" aria-controls="filter-list">
-              <span>Popularité</span>
-              <span class="fa-solid fa-chevron-up"></span>
+            
+            <button
+            class="btn btn_drop"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="filter-list">
+              <span id="current_filter">Popularité</span>
+              <span class="fa-solid fa-chevron-down"></span>
             </button>
+            
+            <!-- VERSION 1
+              <ul id="filter-list" role="menu" class="dropdown_content" aria-activedescendant="btnPopularity">
+                <li id="btnPopularity" class="line" role="menuitem">Popularité <span class="fa-solid fa-chevron-down"></span></li>
+                <span class="line" aria-hidden="true"></span>
+                <li id="btnDate" class="line" role="menuitem">Date</li>
+                <span class="line" aria-hidden="true"></span>
+                <li id="btnTitle" role="menuitem">Titre</li>
+              </ul>
+            -->
 
-            <ul id="filter-list" role="menu" class="dropdown_content" aria-activedescendant="btnPopularity">
-              <li id="btnPopularity" role="menuitem">Popularité <span class="fa-solid fa-chevron-down"></span></li>
-              <span class="line" aria-hidden="true"></span>
-              <li id="btnDate" role="menuitem">Date</li>
-              <span class="line" aria-hidden="true"></span>
-              <li id="btnTitle" role="menuitem">Titre</li>
+            <!-- VERSION 2 -->
+            <ul id="filter-list" class="dropdown_content" aria-hidden="true">
+              <li role="option">
+                <button id="btnPopularity" aria-label="Sort by popularity">
+                  Popularité
+                  <span class="fa-solid fa-chevron-up"></span>
+                  <span class="line"></span>
+                </button>
+              </li>
+              <li role="option">
+                <button id="btnDate" aria-label="Sort by date">
+                  Date
+                  <span class="line"></span>
+                </button>
+              </li>
+              <li role="option">
+                <button id="btnTitle" aria-label="Sort by title">Titre</button>
+              </li>
             </ul>
+            
             
           </div>
         </div>
@@ -62,9 +89,9 @@
       
       <!-- Lightbox -->
       <dialog id="lightbox" aria-label="Fermer la lightbox">
-        <button class="lightbox__close" aria-label="Fermer la modale">Fermer</button>
-        <button class="lightbox__next" aria-label="Image suivante">Suivant</button>
-        <button class="lightbox__prev" aria-label="Image précédente">Précédent</button>
+        <button class="lightbox__close focusable" aria-label="Fermer la modale">Fermer</button>
+        <button class="lightbox__next focusable" aria-label="Image suivante">Suivant</button>
+        <button class="lightbox__prev focusable" aria-label="Image précédente">Précédent</button>
         <div></div>
       </dialog>
       
