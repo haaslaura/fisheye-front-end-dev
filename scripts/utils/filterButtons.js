@@ -12,25 +12,25 @@ import { displayGallery } from "../pages/photographer.js";
 const dropBtn = document.querySelector(".btn_drop"); // btn principal
 const dropdown = document.querySelector(".dropdown"); // tout le menu, btn + ul
 const dropdownContent = document.querySelector(".dropdown_content"); // liste ul
-const filterBtns = document.querySelectorAll("ul button"); // Tous les boutons de la liste ul
+const filterBtns = document.querySelectorAll("ul li"); // Tous les boutons de la liste ul
 
 
 /*********************/
 /**** INIT FILTER ****/
 /*********************/
 export function displayFilter(mediaArray) {
-    
+	
 	dropBtn.addEventListener("click", () => openDropdownContent());
-    trapFocusIn();
+	trapFocusIn();
 	addFilterEvent(mediaArray);
-
+	
 	// Close filter at click outside
 	document.addEventListener("click", (event) => {
 		if (!dropdown.contains(event.target)) {
 			closeFilterMenu();
 		}
 	});
-    
+	
 	// Close filter when escape key is pressed
 	document.addEventListener("keydown", (event) => {
 		if (event.key === "Escape" && dropdownContent.style.maxHeight !== "0") {
@@ -44,7 +44,7 @@ export function displayFilter(mediaArray) {
 /** OPENING & CLOSE ***/
 /**********************/
 
-// Faire disparaitre le bouton et apparaitre le menu
+// Make the button disappear and the menu appear
 function openDropdownContent() {   
 	dropBtn.style.display = "none";
 	dropBtn.setAttribute("aria-hidden", "true");
@@ -53,7 +53,7 @@ function openDropdownContent() {
 	dropdownContent.setAttribute("aria-expanded", "true"); 
 }
 
-// Faire disparaitre le menu et remettre le bouton
+// Clear the menu and press the button again
 function closeFilterMenu() {
 	dropdownContent.style.maxHeight = "0";
 	dropdownContent.setAttribute("aria-hidden", "true");
@@ -69,14 +69,14 @@ function closeFilterMenu() {
 
 function trapFocusIn() {
 	dropdownContent.addEventListener("keydown", function(e) {
-        
+		
 		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
 		if (!isTabPressed) return;
-        
-		let focusableElement = filterBtns;
+		
+		let focusableElement = dropdownContent.querySelectorAll("li");
 		let firstFocusableElement = focusableElement[0];
 		let lastFocusableElement = focusableElement[focusableElement.length - 1];
-        
+		
 		if (e.shiftKey) {
 			// If the Shift key is held down, moves the focus to the previous element
 			if (document.activeElement === firstFocusableElement) {
@@ -94,25 +94,26 @@ function trapFocusIn() {
 }
 
 
+
 /**********************/
 /** FILTER FUNCTIONS **/
 /**********************/
 
-// Evènement sur les boutons, en fonction de l'id
+// Button events, based on id
 function addFilterEvent(mediaArray) {
 	filterBtns.forEach(btn => {
 		btn.addEventListener("click", () => {
 			switch (btn.id) {
-			case "btnPopularity":
+				case "btnPopularity":
 				sortByPopularity(mediaArray);
 				break;
-			case "btnDate":
+				case "btnDate":
 				sortByDate(mediaArray);
 				break;
-			case "btnTitle":
+				case "btnTitle":
 				sortByTitle(mediaArray);
 				break;
-			default:
+				default:
 				console.log("Erreur, aucune fonction trie disponible");
 			}
 		});
@@ -121,7 +122,7 @@ function addFilterEvent(mediaArray) {
 
 
 function sortByPopularity(mediaArray) {
-    
+	
 	mediaArray.sort((a, b) => {
 		if (a._likes > b._likes) {
 			return -1;
@@ -129,13 +130,13 @@ function sortByPopularity(mediaArray) {
 			return 1;
 		}
 	});
-    
+	
 	displayGallery(mediaArray);
 	closeFilterMenu();
 }
 
 function sortByDate(mediaArray) {
-    
+	
 	mediaArray.sort((a, b) => {
 		if (a._date > b._date) {
 			return 1;
@@ -143,13 +144,13 @@ function sortByDate(mediaArray) {
 			return -1;
 		}
 	});
-    
+	
 	displayGallery(mediaArray);
 	closeFilterMenu();
 }
 
 function sortByTitle(mediaArray) {
-    
+	
 	mediaArray.sort((a, b) => {
 		if (a._title > b._title) {
 			return 1;
@@ -157,7 +158,7 @@ function sortByTitle(mediaArray) {
 			return -1;
 		}
 	});
-    
+	
 	displayGallery(mediaArray);
 	closeFilterMenu();
 }

@@ -71,12 +71,11 @@
     animation: lightboxIn 0.5s;
 }
 
-#lightbox h5 {
-    color: var(--color-main);
-    font-size: 1.6rem;
+#lightbox p {
     font-weight: 400;
-    margin-top: 20px;
-    margin-bottom: 0;
+    font-size: 1.5rem;
+    color: var(--color-main);
+    margin: 10px 0 0 0;
 }
 
 
@@ -89,7 +88,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     row-gap: 2%;
     column-gap: 10%;
-    margin-top: 20px;
+    margin-top: 40px;
     height: auto;
 }
 
@@ -111,18 +110,19 @@
 /*********************/
 /*** HEART CHECKBOX **/
 /*********************/
+
 .info-media {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    
+
     color: var(--color-main);
-    font-size: 1.4rem;
 }
 
-.info-media h5 {
+.info-media h4 {
+    font-size: 1.4rem;
     font-weight: 400;
 }
 
@@ -131,12 +131,16 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 
-.info-media h5, .info-media p {
+
+.info-media h4,
+.info-media p {
     margin: 10px 0 5px 0;
 }
+
 
 .info-media .fa-heart {
     margin-left: 5px;

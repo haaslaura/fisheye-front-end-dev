@@ -1,18 +1,18 @@
 /**
- * @abstract
- */
+* @abstract
+*/
 export class Media {
 	/**
-	 * @typedef MediaDef
-	 * @property {Number} id
-	 * @property {Number} photographerId
-	 * @property {String} title
-	 * @property {Number} likes
-	 * @property {String} date
-	 * @property {Number} price
-	 * 
-	 * @param {MediaDef} data 
-	 */
+	* @typedef MediaDef
+	* @property {Number} id
+	* @property {Number} photographerId
+	* @property {String} title
+	* @property {Number} likes
+	* @property {String} date
+	* @property {Number} price
+	* 
+	* @param {MediaDef} data 
+	*/
 	constructor(data) {
 		
 		// Duplicate elements for the Image and Video classes
@@ -25,7 +25,7 @@ export class Media {
 	}
 	
 	/** Reminder that the function needs to be added,
-	 * particularly for future classes
-	 */
+	* particularly for future classes
+	*/
 	getMediaDOM(){};
 }

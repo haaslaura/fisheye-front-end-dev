@@ -19,9 +19,9 @@ export function photographersTemplate(photographersData) {
 		linkPhotographerPage.setAttribute("href", `/photographer.html?id=${id}`);
 		linkPhotographerPage.setAttribute("role", "button");
 		linkPhotographerPage.setAttribute("aria-label", `Lien vers la page de ${name}`);
-
+		
 		const portraitPhotographer = document.createElement("div");
-
+		
 		const imagePhotographer = document.createElement("img");
 		imagePhotographer.setAttribute("src", picture);
 		imagePhotographer.setAttribute("alt", "");

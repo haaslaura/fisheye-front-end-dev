@@ -5,24 +5,23 @@ This file contains the template function for display photographer's informations
 **********************************************************************/
 
 export function photographerIdentityTemplate(photographersData) {
-
+	
 	console.log("Fichier relié");
-
+	
 	// Destructures the photographersData object and creates as many constants as necessary
 	const { name, id, portrait, city, country, tagline, price } = photographersData;
 	
 	const imagePhotographer = document.createElement("img");
 	imagePhotographer.setAttribute("src", `../assets/photographers/${portrait}`);
 	imagePhotographer.setAttribute("alt", "");
-
+	
 	const priceText = document.createElement("p");
 	priceText.textContent = price ? `${price}€/jour` : "Aucune information pour le moment";
-
-	// Utilisé dans la page photographer
+	
 	function getPhotographerIdentity() {
-
+		
 		const infoPhotographer = document.createElement("p");
-
+		
 		const namePhotographer = document.createElement("h1");
 		namePhotographer.textContent = name;
 		
@@ -38,6 +37,6 @@ export function photographerIdentityTemplate(photographersData) {
 		
 		return (infoPhotographer);
 	}
-		
+	
 	return { id, imagePhotographer, priceText, getPhotographerIdentity };
 }
