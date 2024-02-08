@@ -33,30 +33,33 @@ function openingLightbox(mediaArray) {
 		.forEach((link, index, links) => {
         
 			link.addEventListener("click", (e) => {
-				e.preventDefault();
-				currentIndex = index; // Mise à jour de l'indice
+				try {
+					e.preventDefault();
+					currentIndex = index; // Mise à jour de l'indice
 
-				lightbox.showModal();
-				displayMedia(link.dataset.id, mediaArray);
-				trapFocusIn(lightbox);
+					lightbox.showModal();
+					displayMedia(link.dataset.id, mediaArray);
+					trapFocusIn(lightbox);
             
-				// Ajouter la logique pour les boutons fléchés
-				nextLightBoxBtn.addEventListener("click", () => {
-                
-					currentIndex = (currentIndex + 1) % links.length;
-					const nextLink = links[currentIndex];
-					displayMedia(nextLink.dataset.id, mediaArray);
-                
-				});
+					// Ajouter la logique pour les boutons fléchés
+					nextLightBoxBtn.addEventListener("click", () => {
+					
+						currentIndex = (currentIndex + 1) % links.length;
+						const nextLink = links[currentIndex];
+						displayMedia(nextLink.dataset.id, mediaArray);
+					
+					});
             
-				prevLightBoxBtn.addEventListener("click", () => {
+					prevLightBoxBtn.addEventListener("click", () => {
+					
+						currentIndex = (currentIndex - 1 + links.length) % links.length;
+						const prevLink = links[currentIndex];
+						displayMedia(prevLink.dataset.id, mediaArray);
                 
-					currentIndex = (currentIndex - 1 + links.length) % links.length;
-					const prevLink = links[currentIndex];
-					displayMedia(prevLink.dataset.id, mediaArray);
-                
-				});
-            
+					});
+				} catch (error) {
+					console.error("Une erreur est survenue :", error);
+				}
 			});
 		});
 }
@@ -82,9 +85,11 @@ function displayMedia(mediaId, mediaArray) {
 			// Display the image
 			const lightboxMedia = document.createElement("img");
 			lightboxMedia.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._image}`);
-			lightboxMedia.setAttribute("alt", `${selectedMedia._title}`);
+			lightboxMedia.setAttribute("alt", "");
+			lightboxMedia.setAttribute("aria-labelledby", "mediaTitle");
             
-			const lightboxMediaTitle = document.createElement("h5");
+			const lightboxMediaTitle = document.createElement("p");
+			lightboxMediaTitle.setAttribute("id", "mediaTitle");
 			lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
             
 			// Integrating elements into the DOM
@@ -97,13 +102,15 @@ function displayMedia(mediaId, mediaArray) {
 			// Display the video
 			const lightboxMedia = document.createElement("video");
 			lightboxMedia.setAttribute("controls", true);
+			lightboxMedia.setAttribute("aria-labelledby", "mediaTitle");
             
 			const sourceElement = document.createElement("source");
 			sourceElement.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._video}`);
 			sourceElement.setAttribute("type", "video/mp4");
 			lightboxMedia.appendChild(sourceElement);
             
-			const lightboxMediaTitle = document.createElement("h5");
+			const lightboxMediaTitle = document.createElement("p");
+			lightboxMediaTitle.setAttribute("id", "mediaTitle");
 			lightboxMediaTitle.innerHTML = `${selectedMedia._title}`;
             
 			// Integrating elements into the DOM
@@ -168,55 +175,3 @@ function closeLightbox() {
 		}
 	});
 }
-
-/*********************/
-/** PREV & NEXT BTN **/
-/*********************/
-
-/*
-// Fonction pour trouver l'index d'un élément dans un tableau
-function findIndexById(id, array) {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i]._id === id) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-// Fonction pour passer à l'élément suivant dans le tableau
-function getNextElement(mediaId, mediaArray) {
-    
-    console.log(mediaArray);
-    console.log(mediaId);
-    
-    const currentIndex = findIndexById(mediaArray, mediaId);
-    if (currentIndex !== -1 && currentIndex < mediaArray.length - 1) {
-        return mediaArray[currentIndex + 1];
-    }
-    // Si l'élément actuel est le dernier, retournez le premier
-    return mediaArray[0];
-}
-
-// Fonction pour passer à l'élément précédent dans le tableau
-function getPreviousElement(mediaArray, mediaId) {
-    const currentIndex = findIndexById(mediaArray, mediaId);
-    if (currentIndex > 0) {
-        return mediaArray[currentIndex - 1];
-    }
-    // Si l'élément actuel est le premier, retournez le dernier
-    return mediaArray[mediaArray.length - 1];
-}
-*/
-
-/*
-nextLightBoxBtn.addEventListener("click", () => {
-    const nextMedia = getNextElement(mediaArray, mediaId);
-    displayMedia(nextMedia, mediaArray);
-});
-
-prevLightBoxBtn.addEventListener("click", () => {
-    const prevMedia = getPreviousElement(mediaArray, mediaId);
-    displayMedia(prevMedia, mediaArray);
-});
-*/
