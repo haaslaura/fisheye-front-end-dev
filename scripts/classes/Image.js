@@ -1,7 +1,12 @@
 import { Media } from "./Media.js";
 
 export class Image extends Media {
-	
+	/**
+	* @typedef ImageDef
+	* @property {String} image
+	* 
+	* @param {ImageDef} data
+	*/
 	constructor (data) {
 		super(data); // pass parameters to the Media class
 		this._image = data.image;

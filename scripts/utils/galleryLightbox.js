@@ -81,7 +81,7 @@ function displayMedia(mediaId, mediaArray) {
 	// If the id is found, create the DOM elements
 	if (selectedMedia) {
 		
-		if (selectedMedia._image) {
+		if (selectedMedia?._image) {
 			// Display the image
 			const lightboxMedia = document.createElement("img");
 			lightboxMedia.setAttribute("src", `../../assets/photographersmedia/${selectedMedia._photographerId}/${selectedMedia._image}`);

@@ -9,15 +9,19 @@
     --color-main: #901C1C;
     --color-second: #D3573C;
     --color-grey: #FAFAFA;
-    --color-dark-grey: #525252; 
-  }
+    --color-dark-grey: #525252;
+    
+    /* Font */
+    --main-font: "DM Sans", sans-serif;
+    --normal-weight: 400;
+}
 
 
 /*********************/
 /****** GLOBAL *******/
 /*********************/
 body {
-    font-family: "DM Sans", sans-serif;
+    font-family: var(--main-font);
     max-width: 1240px;
     margin-top: 10px;
     margin-right: auto;
@@ -42,9 +46,3 @@ header {
 dialog {
     border: none;
 }
-
-/*
-main {
-    position: relative;
-}
-*/

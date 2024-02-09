@@ -19,49 +19,51 @@
 }
 
 #photograph-header-col1 {
-    display: flex;
-    flex-direction: column;
     justify-content: flex-start;
     padding-left: 10%;
 }
 
-#photograph-header-col1 {
+#photograph-header-col2 {
+    justify-content: center;
+}
+
+#photograph-header-col3 {
+    justify-content: flex-end;
+    padding-right: 10%;
+}
+
+#photograph-header-col1,
+#photograph-header-col2,
+#photograph-header-col3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0;
 }
 
 #photograph-header-col1 h1 {
     font-size: 3.4rem;
-    font-weight: 400;
     color: var(--color-second);
     line-height: 5rem;
-    margin: 10px 0
 }
 
 #photograph-header-col1 h2 {
-    font-weight: 400;
-    color: var(--color-main);
     font-size: 1.4rem;
+    color: var(--color-main);
     line-height: 1.95rem;
-    margin: 10px 0
 }
 
 #photograph-header-col1 h3 {
-    font-weight: 400;
-    color: var(--color-dark-grey);
     font-size: 1.2rem;
-    line-height: 1.4rem;
+    color: var(--color-dark-grey);
+    line-height: 1.4rem; 
+}
+
+#photograph-header-col1 h1,
+#photograph-header-col1 h2,
+#photograph-header-col1 h3 {
+    font-weight: var(--normal-weight);
     margin: 10px 0;
-}
-
-#photograph-header-col2 {
-    display: flex;
-    justify-content: center;
-}
-
-#photograph-header-col3 {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 10%;
 }
 
 #photograph-header-col3 img {
@@ -85,6 +87,7 @@
 .btn:focus {
     background-color: var(--color-second);
     color: black;
+    outline: 3px black solid;
 }
 
 .contact_button {
@@ -96,7 +99,7 @@
 
 
 /**********************/
-/* FILTERS & PICTURES */
+/****** FILTERS *******/
 /**********************/
 
 .media-section {
@@ -130,73 +133,45 @@
     overflow: hidden;
 }
 
-/* css version 1 */
-/*
 #filter-list {
     max-height: 0;
-    background-color: var(--color-main);
-    padding: 0;
-    margin: 0;
-}
-
-#filter-list li {
-    font-family: "DM Sans", sans-serif;
-    color:white ;
-    font-weight: 700;
-    background-color: var(--color-main);
-    font-size: 1.13rem;
-}
-
-#filter-list li, .btn_drop {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    height: 50px;
-    cursor: pointer;
-}
-
-.btn_drop {
-    background-color: var(--color-main);
-    border: none;
-    font-family: "DM Sans", sans-serif;
-    color:white ;
-    font-weight: 700;
-    background-color: var(--color-main);
-    font-size: 1.13rem;
-}
-
-.btn_drop .fa-solid {
-    margin-left: 10px;
-}
-
-#btnPopularity .fa-solid {
-    margin-left: 10px;
-}
-
-#filter-list li:hover, #filter-list li:focus {
-    background-color: var(--color-second);
-    color: black;
-}
-*/
-
-/* css version 2 */
-#filter-list {
-    max-height: 0;
-    background-color: var(--color-main);
     padding: 0;
     margin: 0;
 }
 
 #filter-list li button {
-    font-family: "DM Sans", sans-serif;
-    color:white ;
-    font-weight: 700;
-    background-color: var(--color-main);
+    font-family: var(--main-font);
     font-size: 1.13rem;
+    font-weight: 700;
+    color:white ;
+    background-color: var(--color-main);
     border: none;
-
     position: relative;
+    cursor: pointer;
+}
+
+.btn_drop, #filter-list button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 50px;
+}
+
+.btn_drop {
+    font-family: var(--main-font);
+    font-size: 1.13rem;
+    font-weight: 700;
+}
+
+.btn_drop .fa-solid,
+#btnPopularity .fa-solid {
+    margin-left: 10px;
+}
+
+#filter-list button:hover, #filter-list button:focus {
+    background-color: var(--color-second);
+    color: black;
 }
 
 .line {
@@ -208,40 +183,6 @@
     background-color: white;
 }
 
-#filter-list button, .btn_drop {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    height: 50px;
-    cursor: pointer;
-}
-
-.btn_drop {
-    background-color: var(--color-main);
-    border: none;
-    font-family: "DM Sans", sans-serif;
-    color:white ;
-    font-weight: 700;
-    background-color: var(--color-main);
-    font-size: 1.13rem;
-}
-
-.btn_drop .fa-solid {
-    margin-left: 10px;
-}
-
-#btnPopularity .fa-solid {
-    margin-left: 10px;
-}
-
-#filter-list button:hover, #filter-list button:focus {
-    background-color: var(--color-second);
-    color: black;
-}
-
-
-
 /*********************/
 /*** PRICE INSERT ****/
 /*********************/
@@ -252,13 +193,13 @@
     right: 10%;
     width: auto;
     z-index: 2;
-
+    
     display: flex;
     flex-direction: row-reverse;
     gap: 60px;
     justify-content: space-around;
     align-items: center;
-      
+    
     padding: 20px 25px 15px 25px;
     border-radius: 5px 5px 0 0;
     background-color: #DB8876;

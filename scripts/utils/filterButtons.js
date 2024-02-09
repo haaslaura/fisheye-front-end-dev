@@ -49,22 +49,23 @@ function openDropdownContent() {
 	dropBtn.style.display = "none";
 	dropBtn.setAttribute("aria-hidden", "true");
 	dropBtn.setAttribute("aria-expanded", "true");
-
+	
 	dropdownContent.style.maxHeight = "100%";
 	dropdownContent.setAttribute("aria-hidden", "false");
 	dropdownContent.setAttribute("aria-expanded", "true"); 
+	dropdownContent.style.display = "block";
 }
 
 // Clear the menu and press the button again
 function closeFilterMenu() {
+	
 	dropdownContent.style.maxHeight = "0";
 	dropdownContent.setAttribute("aria-hidden", "true");
 	dropdownContent.setAttribute("aria-expanded", "false");
+	dropdownContent.style.display = "none";
+	
 	dropBtn.style.display = "flex";
 	dropBtn.setAttribute("aria-hidden", "false");
-
-	// Reset focus to the main button after closing the menu
-	//dropBtn.focus();
 }
 
 
@@ -109,16 +110,16 @@ function addFilterEvent(mediaArray) {
 	filterBtns.forEach(btn => {
 		btn.addEventListener("click", () => {
 			switch (btn.id) {
-			case "btnPopularity":
+				case "btnPopularity":
 				sortByPopularity(mediaArray);
 				break;
-			case "btnDate":
+				case "btnDate":
 				sortByDate(mediaArray);
 				break;
-			case "btnTitle":
+				case "btnTitle":
 				sortByTitle(mediaArray);
 				break;
-			default:
+				default:
 				console.log("Erreur, aucune fonction trie disponible");
 			}
 		});
@@ -140,8 +141,7 @@ function sortByPopularity(mediaArray) {
 	closeFilterMenu();
 	
 	// Retrieve span main button and replace the contents with the name of the current filter
-	const dropBtnSpanText = document.getElementById("current_filter");
-	dropBtnSpanText.innerHTML = "Popularité";
+	document.getElementById("current_filter").innerHTML = "Popularité";
 }
 
 function sortByDate(mediaArray) {
@@ -156,10 +156,9 @@ function sortByDate(mediaArray) {
 	
 	displayGallery(mediaArray);
 	closeFilterMenu();
-
+	
 	// Retrieve span main button and replace the contents with the name of the current filter
-	const dropBtnSpanText = document.getElementById("current_filter");
-	dropBtnSpanText.innerHTML = "Date";
+	document.getElementById("current_filter").innerHTML = "Date";
 }
 
 function sortByTitle(mediaArray) {
@@ -174,8 +173,7 @@ function sortByTitle(mediaArray) {
 	
 	displayGallery(mediaArray);
 	closeFilterMenu();
-
+	
 	// Retrieve span main button and replace the contents with the name of the current filter
-	const dropBtnSpanText = document.getElementById("current_filter");
-	dropBtnSpanText.innerHTML = "Titre";
+	document.getElementById("current_filter").innerHTML = "Titre";
 }

@@ -21,8 +21,11 @@
     position: fixed;
     border: 0;
     opacity: 0.8;
-    cursor: pointer;
     text-indent: 3000px;
+}
+
+#lightbox .focusable {
+    cursor: pointer;
 }
 
 .lightbox__next,
@@ -45,18 +48,18 @@
 .lightbox__close {
     background: url(../../assets/icons/close-red.svg) center center / 100% 100% no-repeat;
     width: 42px;
-    height: 42px; 
+    height: 42px;
     z-index: 6;
     top: 2%;
     right: 2%;
 }
 
-#lightbox button:hover {
+#lightbox button:hover,
+#lightbox button:focus {
     opacity: 1;
 }
 
 #lightbox button:focus {
-    opacity: 1;
     outline: 4px var(--color-second) solid;
     border-radius: 3px;
 }
@@ -72,7 +75,7 @@
 }
 
 #lightbox p {
-    font-weight: 400;
+    font-weight: var(--normal-weight);
     font-size: 1.5rem;
     color: var(--color-main);
     margin: 10px 0 0 0;
@@ -96,6 +99,16 @@
     cursor: pointer;    
 }
 
+article a:focus > img,
+article a:focus > video {
+    outline: 4px var(--color-second) solid;
+    border-radius: 3px;
+}
+
+article a:hover > img,
+article a:hover > video {
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);
+}
 
 .media-section__media-card img,
 .media-section__media-card video {
@@ -111,40 +124,40 @@
 /*** HEART CHECKBOX **/
 /*********************/
 
-.info-media {
+.info-media, .info-media p {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
     align-items: center;
+}
 
+.info-media {
+    justify-content: space-between;
     color: var(--color-main);
+}
+
+.info-media p {
+    font-size: 1.5rem;
 }
 
 .info-media h4 {
     font-size: 1.4rem;
-    font-weight: 400;
 }
-
-.info-media p {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 400;
-}
-
 
 .info-media h4,
 .info-media p {
+    font-weight: var(--normal-weight);
     margin: 10px 0 5px 0;
 }
-
 
 .info-media .fa-heart {
     margin-left: 5px;
     cursor: pointer;
+}
+
+.info-media .fa-heart:focus {
+    outline: 4px var(--color-second) solid;
+    border-radius: 3px;
 }
 
 

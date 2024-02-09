@@ -1,6 +1,12 @@
 import { Media } from "./Media.js";
 
 export class Video extends Media {
+	/**
+	* @typedef VideoDef
+	* @property {String} video
+	* 
+	* @param {VideoDef} data
+	*/
 	constructor (data) {
 		super(data); // pass parameters to the Media class
 		this._video = data.video;

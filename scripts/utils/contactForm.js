@@ -10,11 +10,9 @@ This file contains the functions for the modal
 
 // For the modal
 const modalDialog = document.getElementById("contact_modal");
-const openModalBtn = document.getElementById("open-modal-btn");
 const closeModalBtn = document.getElementById("close-modal-btn");
 
 // For the form
-const form = document.querySelector("form");
 const formData = document.querySelectorAll("form input");
 const messageArea = document.querySelector("textarea");
 
@@ -26,7 +24,7 @@ let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i")
 /*** OPENING MODAL ***/
 /*********************/
 
-openModalBtn.addEventListener("click", () => {
+document.getElementById("open-modal-btn").addEventListener("click", () => {
 	modalDialog.showModal();
 	trapFocusIn(modalDialog);
 });
@@ -120,15 +118,15 @@ function displayErrorMessages() {
 		let valueInput = input.value.trim();
 		
 		switch (idInput) {
-		case "firstname":
-		case "lastname":
+			case "firstname":
+			case "lastname":
 			if (!valueInput) {
 				correct = false;
 				addErrorMessage(input, `Merci de remplir votre ${idInput === "firstname" ? "prénom" : "nom"}.`);
 			}
 			break;
 			
-		case "email":
+			case "email":
 			if (!valueInput) {
 				correct = false;
 				addErrorMessage(input, "Merci de remplir votre email.");
@@ -138,7 +136,7 @@ function displayErrorMessages() {
 			}
 			break;
 			
-		default:
+			default:
 			correct = false;
 			alert("Il y a une erreur dans le formulaire.");
 			console.log("Un champ du formulaire n'est peut-être pas pris en compte.");
@@ -161,7 +159,7 @@ function displayErrorMessages() {
 /*** SUBMIT EVENT ****/
 /*********************/
 
-form.addEventListener("submit", (event) => { 
+document.querySelector("form").addEventListener("submit", (event) => { 
 	event.preventDefault();
 	displayErrorMessages();
 	

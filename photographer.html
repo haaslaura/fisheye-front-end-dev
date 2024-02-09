@@ -44,121 +44,107 @@
             aria-haspopup="listbox"
             aria-expanded="false"
             aria-controls="filter-list">
-              <span id="current_filter">Popularité</span>
-              <span class="fa-solid fa-chevron-down"></span>
-            </button>
-            
-            <!-- VERSION 1
-              <ul id="filter-list" role="menu" class="dropdown_content" aria-activedescendant="btnPopularity">
-                <li id="btnPopularity" class="line" role="menuitem">Popularité <span class="fa-solid fa-chevron-down"></span></li>
-                <span class="line" aria-hidden="true"></span>
-                <li id="btnDate" class="line" role="menuitem">Date</li>
-                <span class="line" aria-hidden="true"></span>
-                <li id="btnTitle" role="menuitem">Titre</li>
-              </ul>
-            -->
-
-            <!-- VERSION 2 -->
-            <ul id="filter-list" class="dropdown_content" aria-hidden="true">
-              <li role="option">
-                <button id="btnPopularity" aria-label="Sort by popularity">
-                  Popularité
-                  <span class="fa-solid fa-chevron-up"></span>
-                  <span class="line"></span>
-                </button>
-              </li>
-              <li role="option">
-                <button id="btnDate" aria-label="Sort by date">
-                  Date
-                  <span class="line"></span>
-                </button>
-              </li>
-              <li role="option">
-                <button id="btnTitle" aria-label="Sort by title">Titre</button>
-              </li>
-            </ul>
-            
-            
-          </div>
+            <span id="current_filter">Popularité</span>
+            <span class="fa-solid fa-chevron-down"></span>
+          </button>           
+          <ul id="filter-list" class="dropdown_content" aria-hidden="true">
+            <li role="option">
+              <button id="btnPopularity" aria-label="Sort by popularity">
+                Popularité
+                <span class="fa-solid fa-chevron-up"></span>
+                <span class="line"></span>
+              </button>
+            </li>
+            <li role="option">
+              <button id="btnDate" aria-label="Sort by date">
+                Date
+                <span class="line"></span>
+              </button>
+            </li>
+            <li role="option">
+              <button id="btnTitle" aria-label="Sort by title">Titre</button>
+            </li>
+          </ul>
         </div>
       </div>
-      
-      <!-- Pictures & Videos -->
-      <div class="media-section__media-card">
-      </div>
-      
-      <!-- Lightbox -->
-      <dialog id="lightbox" aria-label="Fermer la lightbox">
-        <button class="lightbox__close focusable" aria-label="Fermer la modale">Fermer</button>
-        <button class="lightbox__next focusable" aria-label="Image suivante">Suivant</button>
-        <button class="lightbox__prev focusable" aria-label="Image précédente">Précédent</button>
-        <div></div>
-      </dialog>
-      
-    </section>
-    
-    <!-- Photographer price -->
-    <div id="photographer-price" aria-label="Tarif journalier du photographe">
     </div>
     
-    <!-- Contact modal -->
-    <dialog id="contact_modal" aria-label="Contacter le photographe">
-      <header>
-        <h2 id="modal-title">Contactez-moi</h2>
-      </header>
-      
-      <form action="#" method="get">
-        <fieldset>
-          <legend>Vos coordonnées</legend>
-          
-          <label id="labelFirstname" for="firstname">Prénom</label>
-          <input
-          type="text"
-          name="firstname"
-          id="firstname"
-          class="focusable"
-          aria-labelledby="labelFirstname"
-          
-          aria-required="true">
-          
-          <label id="labelLastname" for="lastname">Nom</label>
-          <input
-          type="text"
-          name="lastname"
-          id="lastname"
-          class="focusable"
-          aria-labelledby="labelLastname"
-          
-          aria-required="true">
-          
-          <label id="labelEmail" for="email">Email</label>
-          <input
-          type="email"
-          name="email"
-          id="email"
-          class="focusable"
-          aria-labelledby="labelEmail"
-          
-          aria-required="true">
-        </fieldset>
-        
-        <fieldset>
-          <legend>Votre message</legend>
-          <label for="message">Votre message</label>
-          <textarea id="message" class="focusable" name="message"></textarea>
-        </fieldset>
-        
-        <button type="submit" class="btn contact_button focusable">Envoyer</button>
-        
-        <img tabindex="0" role="button" aria-label="Fermer la modale" id="close-modal-btn" class="focusable" src="assets/icons/close.svg" alt="" />   
-      </form>
-      
+    <!-- Pictures & Videos -->
+    <div class="media-section__media-card">
+    </div>
+    
+    <!-- Lightbox -->
+    <dialog id="lightbox" aria-label="Fermer la lightbox">
+      <button class="lightbox__close focusable" aria-label="Fermer la modale">Fermer</button>
+      <button class="lightbox__next focusable" aria-label="Image suivante">Suivant</button>
+      <button class="lightbox__prev focusable" aria-label="Image précédente">Précédent</button>
+      <div></div>
     </dialog>
     
-  </main>
+  </section>
   
-  <!-- Utils -->
-  <script src="/scripts/utils/contactForm.js"></script>
+  <!-- Photographer price -->
+  <div id="photographer-price" aria-label="Tarif journalier du photographe">
+  </div>
   
+  <!-- Contact modal -->
+  <dialog id="contact_modal" aria-label="Contacter le photographe">
+    <header>
+      <h2 id="modal-title">Contactez-moi</h2>
+    </header>
+    
+    <form action="#" method="get">
+      <fieldset>
+        <legend>Vos coordonnées</legend>
+        
+        <label id="labelFirstname" for="firstname">Prénom</label>
+        <input
+        type="text"
+        name="firstname"
+        id="firstname"
+        class="focusable"
+        aria-labelledby="labelFirstname"
+        
+        aria-required="true">
+        
+        <label id="labelLastname" for="lastname">Nom</label>
+        <input
+        type="text"
+        name="lastname"
+        id="lastname"
+        class="focusable"
+        aria-labelledby="labelLastname"
+        
+        aria-required="true">
+        
+        <label id="labelEmail" for="email">Email</label>
+        <input
+        type="email"
+        name="email"
+        id="email"
+        class="focusable"
+        aria-labelledby="labelEmail"
+        
+        aria-required="true">
+      </fieldset>
+      
+      <fieldset>
+        <legend>Votre message</legend>
+        <label for="message">Votre message</label>
+        <textarea id="message" class="focusable" name="message"></textarea>
+      </fieldset>
+      
+      <button type="submit" class="btn contact_button focusable">Envoyer</button>
+      
+      <img tabindex="0" role="button" aria-label="Fermer la modale" id="close-modal-btn" class="focusable" src="assets/icons/close.svg" alt="" />   
+    </form>
+    
+  </dialog>
+  
+</main>
+
+<!-- Utils -->
+<script src="/scripts/utils/contactForm.js"></script>
+
 </body>
 </html>

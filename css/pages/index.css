@@ -30,7 +30,7 @@ h1,
 .photographer_section article h3,
 .photographer_section article h4,
 .photographer_section article p{
-    font-weight: 400;
+    font-weight: var(--normal-weight);
     margin: 0;
 }
 
@@ -63,7 +63,6 @@ h1,
 /*********************/
 /*** PHOTOGRAPHERS ***/
 /*********************/
-
 
 a:has(> .logo):focus {
     outline: 4px var(--color-second) solid;

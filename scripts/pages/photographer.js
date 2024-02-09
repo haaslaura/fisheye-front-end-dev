@@ -109,9 +109,7 @@ export async function displayGallery(mediaArray) {
 	
 	// Displaying the gallery using the template
 	mediaArray.forEach(media => {
-		
-		const mediaSection = document.querySelector(".media-section__media-card");
-		mediaSection.appendChild(media.getMediaDOM());
+		document.querySelector(".media-section__media-card").appendChild(media.getMediaDOM());
 	});
 	
 	addNewLike();
