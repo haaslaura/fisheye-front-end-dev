@@ -29,7 +29,8 @@ export function initLightbox(mediaArray) {
 /**********************/
 function openingLightbox(mediaArray) {
 	
-	document.querySelectorAll("article a")
+	/*document.querySelectorAll("article a")*/
+	document.querySelectorAll("article button")
 		.forEach((link, index, links) => {
 		
 			link.addEventListener("click", (e) => {
