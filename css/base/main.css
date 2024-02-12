@@ -46,3 +46,7 @@ header {
 dialog {
     border: none;
 }
+
+:focus-visible {
+    outline: none;
+}

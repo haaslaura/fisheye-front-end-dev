@@ -17,11 +17,8 @@ export class Video extends Media {
 		const articleMedia = document.createElement("article");
 		
 		// Creating elements to include in 'article' & attributes
-		/*const lightboxLink = document.createElement("a");
-		lightboxLink.setAttribute("href", `../../assets/photographersmedia/${this._photographerId}/${this._video}`);
-		lightboxLink.setAttribute("role", "button");*/
 		const lightboxLink = document.createElement("button");
-		
+
 		lightboxLink.setAttribute("aria-label", "Ouvrir la vue lightbox");
 		lightboxLink.dataset.id = `${this._id}`;
 		

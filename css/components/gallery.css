@@ -103,7 +103,9 @@
 }
 
 article button:focus > img,
-article button:focus > video {
+article button:focus > video,
+article button:focus-visible > img,
+article button:focus-visible > video {
     outline: 4px var(--color-second) solid;
     border-radius: 3px;
     border: none;
