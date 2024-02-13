@@ -27,6 +27,22 @@ export function initLightbox(mediaArray) {
 /**********************/
 /** OPENING LIGHTBOX **/
 /**********************/
+
+// Function to move on to the next media
+function nextMedia(links, mediaArray) {
+	currentIndex = (currentIndex + 1) % links.length;
+	const nextLink = links[currentIndex];
+	displayMedia(nextLink.dataset.id, mediaArray);
+}
+
+// Function to move on to the prev media
+function prevMedia(links, mediaArray) {
+	currentIndex = (currentIndex - 1 + links.length) % links.length;
+	const prevLink = links[currentIndex];
+	displayMedia(prevLink.dataset.id, mediaArray);
+}
+
+// Function to open the lightbox and play the events
 function openingLightbox(mediaArray) {
 	
 	/*document.querySelectorAll("article a")*/
@@ -42,28 +58,33 @@ function openingLightbox(mediaArray) {
 					displayMedia(link.dataset.id, mediaArray);
 					trapFocusIn(lightbox);
 				
-					// Add arrow buttons
+					// Arrow buttons event
 					nextLightBoxBtn.addEventListener("click", () => {
-					
-						currentIndex = (currentIndex + 1) % links.length;
-						const nextLink = links[currentIndex];
-						displayMedia(nextLink.dataset.id, mediaArray);
-					
+						nextMedia(links, mediaArray);
 					});
 				
 					prevLightBoxBtn.addEventListener("click", () => {
-					
-						currentIndex = (currentIndex - 1 + links.length) % links.length;
-						const prevLink = links[currentIndex];
-						displayMedia(prevLink.dataset.id, mediaArray);
-					
+						prevMedia(links, mediaArray);
 					});
+
+					// The lightbox must be able to be used with the left and right arrows on the keyboard
+					lightbox.addEventListener("keydown", (event) => {
+						if (event.key === "ArrowLeft") {
+							prevMedia(links, mediaArray);
+
+						} else if (event.key === "ArrowRight") {
+							nextMedia(links, mediaArray);
+						}
+					});
+
 				} catch (error) {
 					console.error("Une erreur est survenue :", error);
 				}
 			});
 		});
 }
+
+
 
 
 /*********************/
