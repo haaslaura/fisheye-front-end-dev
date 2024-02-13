@@ -121,5 +121,6 @@ export async function displayGallery(mediaArray) {
 		document.querySelector(".media-section__media-card").appendChild(media.getMediaDOM());
 	});
 	
+	initLightbox(mediaArray);
 	addNewLike();
 }

@@ -78,6 +78,7 @@ function trapFocusIn() {
 	dropdownContent.addEventListener("keydown", function (e) {
 		
 		let isTabPressed = e.key === "Tab" || e.keyCode === 9;
+
 		if (!isTabPressed) return;
 		
 		let focusableElement = dropdownContent.querySelectorAll("button");
@@ -137,10 +138,8 @@ function sortByPopularity(mediaArray) {
 		}
 	});
 	
-	// Reset gallery & lightbox
+	// Reset gallery
 	displayGallery(mediaArray);	
-	initLightbox(mediaArray);
-
 	closeFilterMenu();
 	
 	// Retrieve span main button and replace the contents with the name of the current filter
@@ -157,10 +156,8 @@ function sortByDate(mediaArray) {
 		}
 	});
 
-	// Reset gallery & lightbox
+	// Reset gallery
 	displayGallery(mediaArray);	
-	initLightbox(mediaArray);
-
 	closeFilterMenu();
 	
 	// Retrieve span main button and replace the contents with the name of the current filter
@@ -177,10 +174,8 @@ function sortByTitle(mediaArray) {
 		}
 	});
 	
-	// Reset gallery & lightbox
+	// Reset gallery
 	displayGallery(mediaArray);	
-	initLightbox(mediaArray);
-
 	closeFilterMenu();
 	
 	// Retrieve span main button and replace the contents with the name of the current filter
