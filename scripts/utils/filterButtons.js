@@ -5,6 +5,7 @@ This file contains the functions for the filters buttons
 *******************************************************/
 
 import { displayGallery } from "../pages/photographer.js";
+import { initLightbox } from "./galleryLightbox.js";
 
 /***********************/
 /** GLOABAL VARIABLES **/
@@ -100,7 +101,6 @@ function trapFocusIn() {
 }
 
 
-
 /**********************/
 /** FILTER FUNCTIONS **/
 /**********************/
@@ -137,7 +137,10 @@ function sortByPopularity(mediaArray) {
 		}
 	});
 	
-	displayGallery(mediaArray);
+	// Reset gallery & lightbox
+	displayGallery(mediaArray);	
+	initLightbox(mediaArray);
+
 	closeFilterMenu();
 	
 	// Retrieve span main button and replace the contents with the name of the current filter
@@ -153,8 +156,11 @@ function sortByDate(mediaArray) {
 			return -1;
 		}
 	});
-	
-	displayGallery(mediaArray);
+
+	// Reset gallery & lightbox
+	displayGallery(mediaArray);	
+	initLightbox(mediaArray);
+
 	closeFilterMenu();
 	
 	// Retrieve span main button and replace the contents with the name of the current filter
@@ -171,7 +177,10 @@ function sortByTitle(mediaArray) {
 		}
 	});
 	
-	displayGallery(mediaArray);
+	// Reset gallery & lightbox
+	displayGallery(mediaArray);	
+	initLightbox(mediaArray);
+
 	closeFilterMenu();
 	
 	// Retrieve span main button and replace the contents with the name of the current filter

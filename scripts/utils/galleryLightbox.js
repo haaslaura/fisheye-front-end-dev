@@ -58,7 +58,7 @@ function openingLightbox(mediaArray) {
 					displayMedia(link.dataset.id, mediaArray);
 					trapFocusIn(lightbox);
 				
-					// Arrow buttons event
+					// Add arrow buttons event
 					nextLightBoxBtn.addEventListener("click", () => {
 						nextMedia(links, mediaArray);
 					});

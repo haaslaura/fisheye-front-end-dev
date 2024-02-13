@@ -74,6 +74,15 @@ async function initPage() {
 	// Sorting data using the factory
 	const mediaArray = mediaData.map(media => new MediaFactory(media));
 	
+	// First media sort to ensure consistency with the sort button
+	mediaArray.sort((a, b) => {
+		if (a._date > b._date) {
+			return 1;
+		} else {
+			return -1;
+		}
+	});
+
 	displayGallery(mediaArray);
 	displayNumberTotalOfLike(mediaArray);
 	displayFilter(mediaArray);
@@ -106,7 +115,7 @@ export async function displayGallery(mediaArray) {
 	
 	// Clean the block call up the filter function
 	document.querySelector(".media-section__media-card").innerHTML = "";
-	
+
 	// Displaying the gallery using the template
 	mediaArray.forEach(media => {
 		document.querySelector(".media-section__media-card").appendChild(media.getMediaDOM());
