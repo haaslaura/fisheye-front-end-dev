@@ -25,6 +25,9 @@ let regexMail = new RegExp("^[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]{2,}$", "i")
 /*********************/
 
 document.getElementById("open-modal-btn").addEventListener("click", () => {
+	// Reset the form
+	document.querySelector("form").reset();
+	
 	modalDialog.showModal();
 	trapFocusIn(modalDialog);
 });
@@ -39,6 +42,7 @@ closeModalBtn.addEventListener("click", () => {
 	modalDialog.close();
 });
 
+// ??
 closeModalBtn.addEventListener("keypress", () => {
 	modalDialog.close();
 });
@@ -171,7 +175,33 @@ document.querySelector("form").addEventListener("submit", (event) => {
 		});
 		
 		console.log(messageArea.value.trim());
+		modalDialog.close();
 		
-		modalDialog.innerHTML = "Merci pour votre message !</br>Le photographe reviendra vers vous sous peu.";
+		// Post a thank-you message
+		displayThankYouMessage();
 	}
 });
+
+
+function displayThankYouMessage() {
+	// Create a <dialog> and add it to the dom
+	const noteOfThanks = document.createElement("dialog");
+	noteOfThanks.classList.add("thanks-note");
+	
+	const thanksMessage = document.createElement("p");
+	thanksMessage.textContent = "Merci pour votre message ! Le photographe reviendra vers vous sous peu.";
+	
+	noteOfThanks.appendChild(thanksMessage);
+	document.querySelector("main").appendChild(noteOfThanks);
+	
+	// Show the message
+	noteOfThanks.showModal();
+	
+	// Close message at click outside the modal
+	noteOfThanks.addEventListener("click", (event) => {
+		if (event.target === noteOfThanks) {
+			noteOfThanks.close();
+		}
+	});
+}
+

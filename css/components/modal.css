@@ -114,3 +114,18 @@ form .contact_button:focus {
 p.data-tag::before {
     margin-right: 5px;
 }
+
+/*** Thanks note ***/
+.thanks-note {
+    background-color: var(--color-second);
+    color: #000;
+    border-radius: 5px;
+}
+
+.thanks-note p {
+    text-wrap: balance;
+}
+
+.thanks-note::backdrop {
+    background-color: rgba(196, 196, 196, 0.4);
+}
