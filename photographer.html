@@ -43,12 +43,13 @@
             class="btn btn_drop"
             aria-haspopup="listbox"
             aria-expanded="false"
-            aria-controls="filter-list">
+            aria-controls="filter-list"
+            aria-hidden="false">
             <span id="current_filter">Date</span>
             <span class="fa-solid fa-chevron-down"></span>
           </button>           
           
-          <ul id="filter-list" class="dropdown_content" aria-hidden="true">
+          <ul id="filter-list" class="dropdown_content" aria-hidden="true" aria-expanded="false">
             <li role="option">
               <button id="btnDate" aria-label="Sort by date">
                 Date

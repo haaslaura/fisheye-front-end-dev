@@ -5,7 +5,6 @@ This file contains the functions for the filters buttons
 *******************************************************/
 
 import { displayGallery } from "../pages/photographer.js";
-import { initLightbox } from "./galleryLightbox.js";
 
 /***********************/
 /** GLOABAL VARIABLES **/
@@ -22,6 +21,7 @@ const filterBtns = document.querySelectorAll("ul button"); // All button of ul l
 export function displayFilter(mediaArray) {
 	
 	dropBtn.addEventListener("click", () => openDropdownContent());
+
 	trapFocusIn();
 	addFilterEvent(mediaArray);
 	
@@ -81,9 +81,8 @@ function trapFocusIn() {
 
 		if (!isTabPressed) return;
 		
-		let focusableElement = dropdownContent.querySelectorAll("button");
-		let firstFocusableElement = focusableElement[0];
-		let lastFocusableElement = focusableElement[focusableElement.length - 1];
+		let firstFocusableElement = filterBtns[0]; // filterBtns is all button of ul list
+		let lastFocusableElement = filterBtns[filterBtns.length - 1];
 		
 		if (e.shiftKey) {
 			// If the Shift key is held down, moves the focus to the previous element
@@ -111,16 +110,16 @@ function addFilterEvent(mediaArray) {
 	filterBtns.forEach(btn => {
 		btn.addEventListener("click", () => {
 			switch (btn.id) {
-				case "btnPopularity":
+			case "btnPopularity":
 				sortByPopularity(mediaArray);
 				break;
-				case "btnDate":
+			case "btnDate":
 				sortByDate(mediaArray);
 				break;
-				case "btnTitle":
+			case "btnTitle":
 				sortByTitle(mediaArray);
 				break;
-				default:
+			default:
 				console.log("Erreur, aucune fonction trie disponible");
 			}
 		});
